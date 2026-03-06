@@ -40,6 +40,7 @@ export interface ExperienceItem {
   period: string;
   location: string;
   description: string[];
+  linkedinUrl?: string;
 }
 
 export interface GalleryItem {
@@ -150,7 +151,7 @@ export interface CaseStudyContent {
   heroImage?: string;
   overview: string;
   context?: string;
-  
+
   // New Detailed Sections
   marketContext?: MarketContext;
   competitorAnalysis?: CompetitorAnalysis;
@@ -166,7 +167,7 @@ export interface CaseStudyContent {
   challenges?: { title: string; description: string }[];
   strategies?: { title: string; description: string }[];
   futureWork?: { title: string; description: string }[]; // New Section
-  
+
   wireframeGallery?: GalleryItem[]; // Added for wireframe row
   uiGallery?: GalleryItem[];
 

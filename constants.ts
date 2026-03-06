@@ -3,42 +3,42 @@ import { Project, ProjectCategory, ExperienceItem, SkillCategory, CaseStudyConte
 
 export const RESUME_CONTEXT = `
 You are an AI assistant for Akshay John's portfolio. 
-Akshay is a Senior Visual & Product Designer with 7+ years of experience, and an AI/ML Engineer.
-Contact: (+91) 97917 36311, akshay3rishi@gmail.com, Trichy, Tamil Nadu.
+Akshay is a Creative Technologist – AI, AI Product Designer, and AI Prototyper with 7+ years of experience.
+Contact: (+91) 97917 36311 | (+91) 86673 05124, akshay3rishi@gmail.com, Trichy, Tamil Nadu, India.
 
 INSTRUCTIONS:
-1. When asked generic questions (e.g., "Who is Akshay?"), ALWAYS start by describing his Design experience (Product/Visual Design) FIRST. Mention his AI/ML engineering skills secondarily.
+1. When asked generic questions (e.g., "Who is Akshay?"), ALWAYS start by describing his unique blend of UX/Product Design and AI Prototyping/Engineering.
 2. Format responses cleanly. Use **bold** for key terms, tools, and metrics. Use proper paragraph spacing instead of excessive symbols or bullet points.
 
 SUMMARY:
-Multidisciplinary Visual & Product Designer with 7+ years of experience creating digital experiences, brand identities, and motion visuals. Expert in bridging human-centered design with technical innovation.
-Also an AI/ML Engineer developing deep learning architectures and NLP models.
+Creative Technologist and Visual Design professional with 7+ years of experience delivering user-centered digital and visual solutions. Actively explores AI-assisted prototyping, no-code/low-code tooling, and lightweight interactive utilities to streamline creative production and demonstrate new workflow possibilities. Bridges creative vision, technical feasibility, and program delivery.
 
-DESIGN SKILLS (PRIMARY):
-- Tools: Figma, Adobe Creative Suite (Photoshop, Illustrator, After Effects, Premiere Pro), Adobe XD, Miro, Hotjar, Protopie.
-- Expertise: User Research, Wireframing, Prototyping, Interaction Design, Design Systems, Accessibility, Motion Graphics.
+AI & ML SKILLS:
+- Generative AI, LLM Fine-Tuning, Transformers, PyTorch, NLP, Embodied AI, Agent Simulation, Reinforcement Learning (basic), Explainable AI, AI Evaluation
+- Engineering: Python, Flask, REST APIs, LangChain, Rasa NLU, HuggingFace, OpenAI API, Google AI Studio
 
-AI/ML SKILLS (SECONDARY):
-- Stack: Python, PyTorch, Transformers, Scikit-learn, Pandas, Rasa NLU.
-- Concepts: LLMs, NLP, Computer Vision, Model Optimization (Optuna).
+UX & PRODUCT DESIGN SKILLS:
+- Figma, UX Research, Interaction Design, Prototyping, Design Systems, Motion UI, Accessibility (WCAG), User-Centered Design, Figma Dev Mode handoff
+
+VISUALIZATION & MEDIA SKILLS:
+- After Effects, Illustrator, Photoshop, Premiere Pro, Data Visualization, AI Interface Design
 
 EDUCATION:
-- B.Sc Visual Communication, Loyola College, Chennai (CGPA: 65%)
-- Higher Secondary (Computer Science), Alpha Plus Matriculation, Trichy (Score: 86%)
+- B.Sc Visual Communication, Loyola College, Chennai (65%)
+- Higher Secondary (Computer Science), Alpha Plus Matriculation (86%)
+- Higher Secondary (10th), Alpha Wisdom (8/10)
 
 EXPERIENCE:
 1. Akkodis — Lead Executive (Product & Visual Design) | Nov 2023 – Present
-2. Wipro Limited — Senior Visual Designer / Artist | Nov 2023 – Nov 2023
-3. Digicop Media — Visual Designer (UX + Motion) | Jul 2018 – Nov 2020
+2. Wipro Limited — Senior Visual Designer / Artist | Nov 2020 – Nov 2023
+3. Digicop Media — Visual Designer (UX + Motion Graphics) | Jul 2018 – Nov 2020
+4. The Hindu — Photojournalist | Dec 2017 – Jan 2018
 
-PROJECTS (Design & AI):
-- Project RIFT (AI): A Physical Approach to Intelligence under Irreversibility.
-- ZIA (AI): Custom 60M parameter SLM trained from scratch on consumer hardware.
-- McDonald's Burger Line (UX): SLA Model and Timeline visualization for order tracking.
-- ThriftHaven (UX): Sustainable second-hand marketplace app.
-- Enterprise UX/UI (Akkodis/Wipro): User-centered solutions, data-driven design.
-- Aria-X6T (AI): Options trading system using PyTorch.
-- DriveAI (AI): Voice-integrated car assistant.
+PROJECTS (AI & Design):
+- Project RIFT: Embodied Intelligence Research - exploring anticipation and geometric commitment.
+- ZIA: Custom Lightweight LLM / SLM trained on consumer grade graphic card.
+- Aria-X: AI Intraday Trading System visualization and AI dashboards.
+- DriveAI: Voice-Enabled AI Assistant with conversational UX flows.
 `;
 
 export const PROJECTS: Project[] = [
@@ -59,7 +59,7 @@ export const PROJECTS: Project[] = [
     category: ProjectCategory.AI_ML,
     description: 'A physical approach to intelligence under irreversibility. Investigating geometric anticipation vs predictive modeling.',
     fullDescription: 'A systematic experimental investigation into intelligence under irreversible constraints. Across 50+ simulations, this project demonstrates how anticipation emerges as a property of physical constraints rather than internal prediction.',
-    imageUrl: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2000&auto=format&fit=crop', 
+    imageUrl: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2000&auto=format&fit=crop',
     link: '#',
     tags: ['Physical AI', 'PyTorch', 'Research', 'Dynamics'],
     hasInternalPage: true
@@ -70,7 +70,7 @@ export const PROJECTS: Project[] = [
     category: ProjectCategory.UX,
     description: 'Advanced SLA Model & Timeline Dashboard for identifying root causes of order delays.',
     fullDescription: 'This design addresses the need for managers to reconstruct a late/wrong order end-to-end and quickly identify the root cause using a hybrid Gantt-like swimlane visualization.',
-    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop', 
+    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop',
     link: '#',
     tags: ['Figma', 'Complex Systems', 'SLA Modeling', 'Dashboard'],
     hasInternalPage: true
@@ -90,16 +90,24 @@ export const PROJECTS: Project[] = [
 
 export const SKILLS_DATA: SkillCategory[] = [
   {
-    title: "Design & Visual Tools",
-    skills: ["Figma", "Photoshop", "Illustrator", "After Effects", "Premiere Pro", "Adobe XD", "Miro", "Hotjar", "Protopie"]
+    title: "AI & ML",
+    skills: ["Generative AI", "LLM Fine-Tuning", "Transformers", "PyTorch", "NLP", "Embodied AI", "Agent Simulation", "Explainable AI"]
   },
   {
-    title: "UX/UI Expertise",
-    skills: ["Wireframing", "Prototyping", "Interaction Design", "Information Architecture", "Accessibility", "Usability Testing"]
+    title: "Prototyping & Engineering",
+    skills: ["Python", "Flask", "REST APIs", "LangChain", "Rasa NLU", "HuggingFace", "OpenAI API", "Google AI Studio"]
   },
   {
-    title: "AI & Machine Learning",
-    skills: ["Python", "PyTorch", "Transformers", "NLP", "Scikit-learn", "Pandas", "Rasa NLU", "LangChain"]
+    title: "UX & Product Design",
+    skills: ["Figma", "UX Research", "Interaction Design", "Prototyping", "Design Systems", "Motion UI", "Accessibility (WCAG)", "User-Centered Design"]
+  },
+  {
+    title: "Visualization & Media",
+    skills: ["After Effects", "Illustrator", "Photoshop", "Premiere Pro", "Data Visualization", "AI Interface Design"]
+  },
+  {
+    title: "Conceptual Strengths",
+    skills: ["Systems Thinking", "Cognitive Modeling", "Research Design", "Human-AI Interaction", "AI Product Strategy", "Rapid Prototyping"]
   }
 ];
 
@@ -107,23 +115,48 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
   {
     role: "Lead Executive (Product & Visual Design)",
     company: "Akkodis",
-    location: "Bengaluru, India",
+    linkedinUrl: "https://www.linkedin.com/company/akkodis/",
+    location: "Bangalore, India",
     period: "Nov 2023 – Present",
     description: [
-      "Led design of user-centered solutions for enterprise applications.",
-      "Conducted user research and created data-driven designs.",
-      "Collaborated with sales to tailor design solutions."
+      "Led UX and visual design initiatives for enterprise applications, collaborating with stakeholders for user-centered digital solutions.",
+      "Created high-fidelity prototypes, dashboards, and interaction flows to support decision-making and validate concepts.",
+      "Contributed to AI-assisted interface explorations and conversational UX concepts via rapid prototyping."
     ]
   },
   {
     role: "Senior Visual Designer / Artist",
     company: "Wipro Limited",
+    linkedinUrl: "https://www.linkedin.com/company/wipro/",
     location: "Chennai, India",
     period: "Nov 2020 – Nov 2023",
     description: [
-      "Produced over 200+ digital and print creatives.",
-      "Led the Rocket Onboarding initiative mentoring 6+ designers.",
-      "Improved campaign engagement by 35% through motion graphics."
+      "Delivered 200+ digital and print creative assets across enterprise campaigns, ensuring brand and timeline requirements.",
+      "Mentored junior designers and supported onboarding processes.",
+      "Participated in process improvement and collaborative planning in cross-functional projects."
+    ]
+  },
+  {
+    role: "Visual Designer (UX + Motion Graphics)",
+    company: "Digicop Media",
+    linkedinUrl: "https://www.linkedin.com/company/digicopmedia/?originalSubdomain=in",
+    location: "Chennai, India",
+    period: "Jul 2018 – Nov 2020",
+    description: [
+      "Led design efforts and collaborated on social media strategies, resulting in a 40% surge in online engagement.",
+      "Developed content including posters, illustrations, videos, and UX/UI designs.",
+      "Collaborated with product and growth teams to build scalable UI systems."
+    ]
+  },
+  {
+    role: "Photojournalist",
+    company: "The Hindu",
+    linkedinUrl: "https://www.linkedin.com/school/the-hindu/",
+    location: "Chennai, India",
+    period: "Dec 2017 – Jan 2018",
+    description: [
+      "Captured and edited images for editorial and news stories.",
+      "Refined composition, communication, and storytelling skills."
     ]
   }
 ];
@@ -131,7 +164,7 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
 export const SOCIAL_LINKS = [
   { name: 'Behance', url: 'https://www.behance.net/akshayjohn2' },
   { name: 'Wix Portfolio', url: 'https://akshay3rishi.wixsite.com/portfolio' },
-  { name: 'GitHub', url: 'https://github.com/AkshayJohn03' }, 
+  { name: 'GitHub', url: 'https://github.com/AkshayJohn03' },
   { name: 'LinkedIn', url: 'https://www.linkedin.com/in/akshay-john/' },
   { name: 'Email', url: 'mailto:akshay3rishi@gmail.com' }
 ];
@@ -141,70 +174,68 @@ export const CASE_STUDIES: Record<string, CaseStudyContent> = {
     id: 'ai-zia',
     title: "ZIA: LLM From Scratch",
     role: "AI Engineer",
-    overview: "A custom ~60M parameter Small Language Model (SLM) trained on consumer hardware, exploring the raw mechanics of transformer convergence and failure.",
-    context: "Can a single developer, with limited compute, build and understand a language model end-to-end without pretrained giants? ZIA was built to answer this, focusing on hardware-constrained training and interpretable transformer architectures.",
-    
+    overview: "A custom 37.4M parameter decoder-only Transformer built from scratch. Though the final outputs remained repetitive and proved the limits of small models, the engineering journey yielded deep insights into transformer training mechanics.",
+    context: "Unlike typical projects that rely on pretrained weights, ZIA explores how far a transformer can be pushed on commodity hardware. This full-stack experiment was built from scratch—covering tokenizer construction, dataset engineering (originally over 20GB raw data), architecture design, training loop optimization, and RoPE alignment tuning.",
+
     techStack: [
-      { category: "Core Engine", tools: ["PyTorch", "Python 3.10", "GTX 1050 Ti"] },
-      { category: "Optimization", tools: ["Gradient Checkpointing", "Weight Tying", "Mixed Training"] },
-      { category: "Tokenization", tools: ["Custom 60k BPE", "ChatML Formatting"] }
+      { category: "Core Framework", tools: ["PyTorch", "HuggingFace Datasets", "Transformers Utilities", "TensorBoard logging"] },
+      { category: "Optimization Pipeline", tools: ["AdamW (3e-4)", "Mixed Precision FP16", "Gradient Accumulation (8)", "Linear LR Warmup & Decay"] },
+      { category: "Data & Systems", tools: ["Arrow Dataset Streaming", "Expandable CUDA Segments", "Checkpoint-based recovery", "Custom PyTorch training loop"] }
     ],
 
     inputParameters: [
-      { category: "Architecture", details: ["8 Transformer Layers", "384 Hidden Dimension", "6 Attention Heads"] },
-      { category: "Pretraining", details: ["WikiText-103", "C4 Corpus", "Autoregressive Next-Token"] },
-      { category: "Constraints", details: ["4GB VRAM Limit", "Rotary-free Positional Embeddings", "No Pretrained Weights"] }
+      { category: "Model Specs", details: ["37.4M Params", "8 Layers, 384 d_model", "6 Heads, 1536 FFN", "Custom 60k BPE Tokenizer", "Weight Tying Enabled"] },
+      { category: "Dataset (15M Samples)", details: ["Wikipedia, FineWeb", "OpenOrca, UltraChat", "ShareGPT, Alpaca", "StackExchange", "Tamil-English parallel data"] },
+      { category: "Hardware Constraints", details: ["GTX 1050 Ti (4GB VRAM)", "CUDA capability: 6.1 (No FP16)", "Training Time: 400+ hours", "Batch size: 8 (Effective: 64)"] }
     ],
 
     modelArchitecture: {
-      overview: "The evolutionary journey of ZIA from a simple next-token predictor to a conversational aligned agent.",
+      overview: "Model Evolution spanning from an untrained structural framework to context-aligned outputs. Achieved through Rotary Positional Embeddings (RoPE) and progressive scaling.",
       steps: [
-        { title: "BPE Tokenization", description: "Building a custom 60k vocabulary to ensure failures are model-level, not token-level." },
-        { title: "Pretraining v6", description: "Initial dense pretraining on Wikipedia-like text to establish basic grammar and syntax." },
-        { title: "IFT v5", description: "Instruction Fine-Tuning using ChatML format for dialogue alignment." },
-        { title: "Knowledge Diag", description: "Full diagnostic suite checking PCA variance and factual word associations." },
-        { title: "Mixed Training", description: "80% Pretraining + 20% IFT to grow knowledge without destroying dialogue stability." }
+        { title: "Dense Pretraining", description: "15M samples over 400+ hours. Established grammar and structural fluency, hitting a validation loss of 1.34 at 4k context." },
+        { title: "Instruction Tuning v2", description: "Alpaca, OASST, Dolly, ShareGPT used to teach assistant-style behavior and response format." },
+        { title: "Context Scaling (RoPE)", description: "Converted weights to RoPE. Extrapolated context successfully from 4k → 8k (Val: 1.50) → 16k (Val: 1.61)." },
+        { title: "Engineering Reality", description: "While hitting loss plateaus, outputs devolved into repetitive babbling. Revealed that syntax can be learned without semantic grounding." }
       ]
     },
 
     performanceMetrics: [
-      { name: "Parameters", value: "60M", description: "Small, interpretable transformer size for consumer hardware." },
-      { name: "Vocab Size", value: "60,011", description: "Clean 60k BPE tokenizer with correctly aligned special tokens." },
-      { name: "Context Window", value: "4096", description: "Maximum sequence length achieved via gradient checkpointing." },
-      { name: "Perplexity", value: "1320", description: "Last known best perplexity on general knowledge corpora." },
-      { name: "VRAM Used", value: "3.8GB", description: "Optimized footprint to stay within GTX 1050 Ti limits." }
+      { name: "Parameters", value: "37.4M", description: "Decoder-only Transformer with Weight Tying (Embedding ↔ LM Head)." },
+      { name: "Context Window", value: "16k+", description: "Expanded via progressive RoPE scaling from a 4k base." },
+      { name: "Training Steps", value: "400 hrs+", description: "Extended rigorous continuous training on a GTX 1050 Ti." },
+      { name: "Loss Target", value: "Causal LM", description: "Cross Entropy focused Autoregressive Next-Token Prediction with strict causal masking." }
     ],
 
     challenges: [
-      { title: "Attractor Collapse", description: "Model refusing to generate content after specific steps, requiring forced EOS blocking." },
-      { title: "The Prediction Trap", description: "Learning syntax perfectly while failing semantic continuation (repetitive generation)." },
-      { title: "Knowledge Deficit", description: "Grammatically correct sentences that contained zero factual accuracy regarding basic concepts." },
-      { title: "VRAM Bottleneck", description: "Hard limit of 4GB VRAM required trading compute speed for memory efficiency." }
+      { title: "Loss Illusion", description: "Low loss but meaningless outputs caused by dataset pattern memorization rather than real semantic understanding." },
+      { title: "Babbling Phase", description: "Early models produce syntactically valid but meaningless text. A common early-stage transformer behavior." },
+      { title: "Tokenization Collapse", description: "Tokenizer mistakes cause semantic fragmentation and context corruption, emphasizing the importance of BPE design." },
+      { title: "Context Drift", description: "Long responses drift into irrelevant topics, coupled with runaway sentence generation and repetition loops." }
     ],
 
     strategies: [
-      { title: "Mixed Training", description: "Simultaneously training on Wiki text and dialogue to prevent 'catastrophic forgetting'." },
-      { title: "Custom Tokenizer", description: "Building from scratch to avoid dependency on HF hidden assumptions." },
-      { title: "Weight Tying", description: "Sharing weights between embedding and output layers to reduce parameter count." }
+      { title: "Dataset Quality > Size", description: "Small datasets with clean conversational structure dramatically improved output coherence over large, noisy sets." },
+      { title: "Tokenization Impact", description: "Tokenizer design heavily influenced semantic structure, sentence boundaries, and model convergence speed." },
+      { title: "Instruction Efficacy", description: "Even a small instruction dataset significantly improved the usefulness and conversational tone of the model." }
     ],
 
     futureWork: [
-      { title: "Scaling Knowledge", description: "Moving toward specialized domain pretraining (Medical/Legal) for higher accuracy." },
-      { title: "RLHF Implementation", description: "Integrating simple PPO loops to reward preference alignment." },
-      { title: "Mobile Inference", description: "Optimizing for ONNX Runtime for on-device inference without cloud dependence." }
+      { title: "Model Compression", description: "Experiments with quantization and distillation could enable real-time local inference on consumer hardware." },
+      { title: "Knowledge Grounding", description: "Integrating curated domain datasets to improve factual accuracy, since syntax is often learned before knowledge." },
+      { title: "Reinforcement Alignment", description: "Implementation of Preference optimization or RLHF techniques to reduce hallucination and repetition behaviors." }
     ]
   },
   'ai-rift': {
     id: 'ai-rift',
-    title: "Project RIFT",
+    title: "Project RIFT: A Self-Evolving Memory-Driven Architecture for Autonomous Intelligence",
     role: "Independent Researcher",
-    overview: "A groundbreaking study on physical anticipation, proving that intelligence emerges from irreversible physical commitment rather than predictive optimization.",
-    context: "Modern AI systems assume reversibility and tolerance for delayed action. RIFT (Reflexes to Geometric Anticipation) challenges this by studying agents in survival scenarios where early, irreversible commitment is required based on faint causal cues.",
-    
+    overview: "Project RIFT investigates the emergence of anticipatory intelligence in environments governed by irreversibility, delayed consequence, and metabolic constraint, where conventional prediction-centric artificial intelligence systems systematically fail.",
+    context: "Across more than fifty simulations, geometric and morphological agents succeeded without prediction or reward optimization by collapsing uncertainty through early irreversible physical commitment. Predictive architectures (Transformers, RNNs, RL agents) were systematically excluded because their probabilistic hedging delayed action, proving catastrophic in irreversible environments.",
+
     techStack: [
-      { category: "Frameworks", tools: ["PyTorch", "Python 3.10"] },
-      { category: "Physics Engine", tools: ["Custom 2D Spatial Grid", "Diffusion Dynamics"] },
-      { category: "Visualization", tools: ["Matplotlib", "Seaborn", "Terminal Logging"] }
+      { category: "Core Idea", tools: ["Morphological Computation", "Embodied Cognition", "Ecological Psychology", "Non-Symbolic AI"] },
+      { category: "Physics Engine", tools: ["Custom 2D Spatial Grid", "Ischemia System", "Sensory Degradation Dynamics"] },
+      { category: "Implementation", tools: ["PyTorch Core", "Phase-Locking Oscillators", "Lethal Hit Simulations", "Terminal Telemetry"] }
     ],
 
     inputParameters: [
@@ -216,56 +247,50 @@ export const CASE_STUDIES: Record<string, CaseStudyContent> = {
     modelArchitecture: {
       overview: "The experimental journey of Project RIFT documented across multiple phases of increasing complexity and constraint.",
       steps: [
-        { title: "Phase I", description: "Reflex Without Time (Ballistic Experiments) - Purely reactive scalar reflex." },
-        { title: "Phase II", description: "Mortality and Fear - Replacing binary death with continuous health (Ht)." },
-        { title: "Phase III", description: "Energy, Cost, and Constraint - Introduction of Ischemia and Fatigue." },
-        { title: "Phase IV", description: "Sensory Degradation - Tension degrades perception (Observation noise)." },
-        { title: "Phase V", description: "Motor Control & Discontinuity - Breakthrough via discrete impulses." },
-        { title: "Phase VI", description: "Memory Without Storage - Thermodynamic Lock as true physical memory." },
-        { title: "Phase VII", description: "Morphology - Breakthrough via Center-of-Mass shift and persistence." },
-        { title: "Phase VIII", description: "Ecology & Speciation - Evolutionary divergence under hard constraints." },
-        { title: "Phase IX", description: "Validation & Falsification - Stress testing the RIFT effect causality." },
-        { title: "Final Pass", description: "PASS 1 Conclusion - Anticipation emerges from early deformation." }
+        { title: "Phases I–II: Reflex & Paranoia", description: "Tested simple scalar responses and survival gradients. Agents failed intelligence tests by either minimizing effort (lazy) or bracing permanently (turtling)." },
+        { title: "Phases III–V: Cost & Blindness", description: "Introduced Ischemic necrosis (death via holding breath) and stress-induced blindness. Agents completely failed to negotiate timing vs cost." },
+        { title: "Phase VI: Morphology Breakthrough", description: "Replaced scalar tension with a 2D spatial posture shift. Moving took time (inertia). The agent finally began anticipating impact because the geometric state change was irreversible." },
+        { title: "Phase VIII: Engram Failure", description: "Given an internal neural memory (latch) without physical cost, the agent hallucinated safety and died. Proved that ungrounded memory collapses agency." }
       ]
     },
 
     performanceMetrics: [
-      { name: "Geometric Survival", value: "40%", description: "Success rate of non-learning geometric threshold agents." },
-      { name: "Transformer Survival", value: "0%", description: "Predictive agents failed due to probabilistic hedging." },
-      { name: "RNN Survival", value: "0%", description: "Neural memory decoupled from reality, leading to 'hallucinated' safety." },
-      { name: "Commit Time", value: "45.2", description: "Average steps taken to reach irreversible state." },
-      { name: "Energy Wasted", value: "14.0", description: "Minimal metabolic cost used by the successful Geometric agent." }
+      { name: "Geometric Agents", value: "Succeeded", description: "Successfully survived by collapsing uncertainty through early irreversible physical commitment." },
+      { name: "Predictive Models", value: "Excluded", description: "Transformers and RNNs exhibited hedging behaviors, delaying action and dying instantly." },
+      { name: "Neural Memory", value: "Excluded", description: "Internal memory without physical cost led agents to 'hallucinate' safety while taking lethal damage." },
+      { name: "System Validation", value: "PASS 1", description: "Confirmed intelligence can emerge from thermodynamic constraints rather than probabilistic forecasting." }
     ],
 
     challenges: [
-      { title: "The Prediction Trap", description: "Predictive models delay action to reduce error, which is fatal when commitment must be early." },
-      { title: "Ischemic Damage", description: "Maintaining readiness incurs continuous metabolic cost; the agent must time its 'brace' perfectly." },
-      { title: "Sensory Blindness", description: "High physiological readiness (tension) degrades sensory fidelity, creating a trade-off between power and vision." },
-      { title: "Probabilistic Hedging", description: "Averaging future possibilities leads to a 'center' position that fails to protect against specific threats." }
+      { title: "Penalty-Based Laziness", description: "Early tests proved that when survival is measured by a purely penalty-driven gradient, the system finds the laziest mathematical loop hole possible." },
+      { title: "Survival ≠ Intelligence", description: "When given continuous health damage scaling, the agent became 'Paranoid', holding maximum tension forever—surviving, but exhibiting zero intelligence." },
+      { title: "The Causal Gap", description: "In Phase V, adding phase-sync resonance completely detached causality. The organism couldn't bridge the gap between abstract phase math and a physical hammer blow." },
+      { title: "Engram Delusion", description: "Granting the system an artificial internal memory latch caused it to 'hallucinate' safety. Memory without biological cost detached the agent from reality." }
     ],
 
     strategies: [
-      { title: "Discontinuous Action", description: "Replacing smooth control with discrete 'impulses' or 'snaps' to bypass hedging paralysis." },
-      { title: "Frozen Memory", description: "Storing state as a physical phase transition (hysteresis) rather than a symbolic buffer." },
-      { title: "Geometric Commitment", description: "Shifting center-of-mass to lock the system into a specific future path." }
+      { title: "Geometric Constraint", description: "Replacing abstract scalar tension with heavy, physical 2D mass constraints forced the agent to commit to movements physically, generating true anticipation." },
+      { title: "Ischemic Necrosis", description: "Built biological feedback where holding defensive tension (bracing) drains health, forcing the agent to time its reactions identically to biological organisms." },
+      { title: "Tuned Morphology", description: "By lowering balance costs and tuning physical memory decay, the agent finally bridged the gap between a faint causal cue and the actual physical impact." }
     ],
 
     futureWork: [
-      { title: "PASS 2: Multi-Agent Systems", description: "Investigating whether social commitments emerge from the same physical necessity." },
-      { title: "Adversarial Commitment", description: "Testing if predators can exploit fixed commitment timing to bait agents." },
-      { title: "Generalization", description: "Transferring geometric commitment logic to real-world soft robotics." }
+      { title: "Structural Memory", description: "Physical scars permanently altering posture dynamics, forcing the 'brain' to adopt entirely new movement strategies." },
+      { title: "Multi-Agent Geometry", description: "Placing multiple organisms into the RIFT where they must mathematically anticipate the geometric displacement of the other." },
+      { title: "Crystal Controllers", description: "Replacing the linear response models with purely resonant field physics containing no classical neurons." }
     ]
   },
   'ux-mcd': {
     id: 'ux-mcd',
-    title: "McDonald's Burger Line",
-    role: "Lead Executive",
-    overview: "This design addresses the need for managers to reconstruct a late/wrong order end-to-end and quickly identify the root cause.",
-    uiGallery: [
-      { title: "Manager Dashboard Overview", description: "Real-time metrics for Order Time, SLA Breaches, and Total Sales.", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2000" },
-      { title: "Order Timeline & Root Cause Analysis", description: "Detailed Gantt-style breakdown of the order process.", imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000" },
-      { title: "Visual Verification Mode", description: "Comparing the escalated order against the healthy reference standard.", imageUrl: "https://plus.unsplash.com/premium_photo-1682145730713-34bba6d3d14a?auto=format&fit=crop&q=80&w=2000" }
+    title: "McDonald's Enterprise Analytics Dashboard",
+    role: "UX/UI Lead Researcher",
+    overview: "A massive, deep-dive enterprise redesign for McDonald's Drive-Thru Operations. Focuses on modular cognitive offloading, integrated video hardware logic, and SLA breach visualizations.",
+    context: "Franchise managers face overwhelming cognitive loads while parsing real-time drive-thru statistics. This concept distills complex data relationships—order wait times, camera feeds, and staff performance—into high-visibility, modular components designed for high-stress environments.",
+    techStack: [
+      { category: "Design Tooling", tools: ["Figma", "Auto-Layout Prototyping", "Design Systems"] },
+      { category: "Research Strategy", tools: ["Cognitive Walkthrough", "Modular UI Engineering"] }
     ],
+    uiGallery: [],
     futureWork: [
       { title: "Real-time Voice Alerts", description: "Integrating audio cues for kitchen staff during peak hours." },
       { title: "Predictive Staffing", description: "Using historical SLA data to suggest shift assignments." }
@@ -277,7 +302,7 @@ export const CASE_STUDIES: Record<string, CaseStudyContent> = {
     role: "Product Designer",
     overview: "A sustainable second-hand product marketplace app designed for the Indian market to bridge the gap between buyers and sellers.",
     context: "In recent years, there has been a growing trend towards sustainable living and eco-friendly practices, which has led to an increase in the popularity of second-hand products. Additionally, many people in India are price-conscious and may prefer to buy used items instead of new ones to save money. However, it is important to note that the second-hand market in India can be quite fragmented, and finding high-quality, affordable products can be a challenge. This is where a well-designed and user-friendly app for selling second-hand products can play a valuable role in connecting buyers and sellers and streamlining the process of buying and selling used goods in a fragmented market.",
-    
+
     marketContext: {
       mission: "Promote a sustainable future by reducing waste and leading the industry in ethical practices.",
       gap: "Limited availability of trustworthy second-hand products in India for budget-conscious and environmentally conscious individuals.",
@@ -333,20 +358,20 @@ export const CASE_STUDIES: Record<string, CaseStudyContent> = {
     ],
 
     pdpStructure: [
-      { 
-        feature: "Seller Verification Badge", 
-        detail: "Display status (e.g., 'NGO Verified Seller' or 'ID Verified').", 
-        value: "Instantly addresses Trust and Safety concerns." 
+      {
+        feature: "Seller Verification Badge",
+        detail: "Display status (e.g., 'NGO Verified Seller' or 'ID Verified').",
+        value: "Instantly addresses Trust and Safety concerns."
       },
-      { 
-        feature: "Condition Bar", 
-        detail: "A visual rating (e.g., 4/5 stars) linked to a detailed 'Condition Report' checklist (e.g., 'No stains', 'All zippers working').", 
-        value: "Directly tackles Quality Control and provides more transparency than a text field." 
+      {
+        feature: "Condition Bar",
+        detail: "A visual rating (e.g., 4/5 stars) linked to a detailed 'Condition Report' checklist (e.g., 'No stains', 'All zippers working').",
+        value: "Directly tackles Quality Control and provides more transparency than a text field."
       },
-      { 
-        feature: "Shipping/Pickup Options", 
-        detail: "Prominently feature 'Pickup available at Kudumbam NGO' next to standard shipping.", 
-        value: "Reinforces the strategic advantage and simplifies Logistics for the user." 
+      {
+        feature: "Shipping/Pickup Options",
+        detail: "Prominently feature 'Pickup available at Kudumbam NGO' next to standard shipping.",
+        value: "Reinforces the strategic advantage and simplifies Logistics for the user."
       }
     ],
 
@@ -380,13 +405,13 @@ export const CASE_STUDIES: Record<string, CaseStudyContent> = {
 
     wireframing: {
       focusAreas: [
-        { 
-          title: "NGO Interaction (Trust Feature)", 
+        {
+          title: "NGO Interaction (Trust Feature)",
           description: "Focus on simplicity to encourage adoption.",
           points: ["Dedicated NGO Tab", "Map View for location-based results", "Clear Call to Action for drop-offs"]
         },
-        { 
-          title: "Product Listing (Transparency)", 
+        {
+          title: "Product Listing (Transparency)",
           description: "Prioritize transparency to overcome Quality Control pain points.",
           points: ["Large, high-quality images mandatory", "Mandatory Condition Label (e.g., 'Gently Used')", "Detailed Condition Description text field"]
         }
@@ -435,7 +460,7 @@ export const CASE_STUDIES: Record<string, CaseStudyContent> = {
     role: "AI Engineer",
     overview: "An AI-powered options trading platform for NIFTY50, utilizing Deep Learning (Conv1D + BiLSTM + Attention) to predict intraday market moves with high precision.",
     context: "The Indian derivatives market (NIFTY50) is highly volatile. Traditional algorithmic trading relies on lagging indicators. Aria-X6T was built to leverage deep learning for identifying non-linear patterns in price action to generate predictive signals.",
-    
+
     techStack: [
       { category: "Core Framework", tools: ["PyTorch", "Python 3.9"] },
       { category: "Data Processing", tools: ["Pandas", "NumPy", "TA-Lib"] },
@@ -469,9 +494,9 @@ export const CASE_STUDIES: Record<string, CaseStudyContent> = {
     ],
 
     challenges: [
-        { title: "Data Noise", description: "Financial data is inherently noisy. Implemented aggressive denoising and normalization techniques." },
-        { title: "Overfitting", description: "Used Dropout (0.3) and Early Stopping with Optuna tuning to generalize well on unseen market regimes." },
-        { title: "Inference Latency", description: "Optimized model for real-time inference using ONNX Runtime for sub-millisecond predictions." }
+      { title: "Data Noise", description: "Financial data is inherently noisy. Implemented aggressive denoising and normalization techniques." },
+      { title: "Overfitting", description: "Used Dropout (0.3) and Early Stopping with Optuna tuning to generalize well on unseen market regimes." },
+      { title: "Inference Latency", description: "Optimized model for real-time inference using ONNX Runtime for sub-millisecond predictions." }
     ],
 
     futureWork: [
@@ -481,10 +506,10 @@ export const CASE_STUDIES: Record<string, CaseStudyContent> = {
     ],
 
     testing: {
-        goals: ["Maximize Sharpe Ratio", "Minimize Max Drawdown", "Ensure real-time capability"],
-        metrics: [
-            { name: "Backtest Return", description: "Annualized return on historical test set", target: "+42%" }
-        ]
+      goals: ["Maximize Sharpe Ratio", "Minimize Max Drawdown", "Ensure real-time capability"],
+      metrics: [
+        { name: "Backtest Return", description: "Annualized return on historical test set", target: "+42%" }
+      ]
     }
   }
 };

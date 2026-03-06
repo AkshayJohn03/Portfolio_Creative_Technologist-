@@ -1,17 +1,21 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { 
-  ArrowLeft, CheckCircle2, AlertTriangle, Monitor, Layers, Clock, Brain, 
-  Lightbulb, ShieldCheck, Truck, Tag, BarChart3, ArrowRight, Activity, 
+import {
+  ArrowLeft, CheckCircle2, AlertTriangle, Monitor, Layers, Clock, Brain,
+  Lightbulb, ShieldCheck, Truck, Tag, BarChart3, ArrowRight, Activity,
   Database, Settings, HardDrive, Target, TrendingUp, Cpu
 } from 'lucide-react';
 import { PROJECTS, CASE_STUDIES } from '../constants';
 import ProjectCard from './ProjectCard';
+import { ZiaVisuals } from './ZiaVisuals';
+import { RiftVisuals } from './RiftVisuals';
+import { McdVisuals } from './McdVisuals';
+import { ThriftHavenVisuals } from './ThriftHavenVisuals';
 
 interface CaseStudyProps {
   onBack: () => void;
   projectId?: string;
-  isAiMode: boolean;
+
   onOpenCaseStudy: (projectId: string) => void;
 }
 
@@ -46,9 +50,8 @@ const RevealOnScroll: React.FC<RevealOnScrollProps> = ({ children, delay = 0 }) 
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 transform ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-      }`}
+      className={`transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+        }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -59,7 +62,7 @@ const RevealOnScroll: React.FC<RevealOnScrollProps> = ({ children, delay = 0 }) 
 const MetricVisual: React.FC<{ value: string; label: string; description: string }> = ({ value, label, description }) => {
   const numericValue = parseFloat(value.replace(/[^0-9.]/g, '')) || 0;
   const displayWidth = value.includes('%') ? numericValue : (numericValue / 10) * 100;
-  
+
   return (
     <div className="bg-white/5 border border-white/5 rounded-2xl p-6 hover:border-accent/40 transition-all group">
       <div className="flex justify-between items-end mb-4">
@@ -69,7 +72,7 @@ const MetricVisual: React.FC<{ value: string; label: string; description: string
         </div>
       </div>
       <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden mb-4">
-        <div 
+        <div
           className="h-full bg-accent transition-all duration-1000 ease-out delay-500"
           style={{ width: `${Math.min(displayWidth, 100)}%` }}
         ></div>
@@ -79,21 +82,23 @@ const MetricVisual: React.FC<{ value: string; label: string; description: string
   );
 };
 
-const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, isAiMode, onOpenCaseStudy }) => {
+const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, onOpenCaseStudy }) => {
   useEffect(() => {
     document.body.style.overflow = 'auto';
     window.scrollTo(0, 0);
     return () => {
-       document.body.style.overflow = 'unset';
+      document.body.style.overflow = 'unset';
     }
   }, [projectId]);
 
   const safeId = projectId && CASE_STUDIES[projectId] ? projectId : 'ux-mcd';
   const data = CASE_STUDIES[safeId];
 
-  const relatedProjects = PROJECTS.filter(p => 
-    p.id !== safeId && 
-    (isAiMode ? p.category.includes('AI') : !p.category.includes('AI'))
+  const currentProject = PROJECTS.find(p => p.id === safeId);
+
+  const relatedProjects = PROJECTS.filter(p =>
+    p.id !== safeId &&
+    (currentProject ? p.category === currentProject.category : true)
   ).slice(0, 3);
 
   // New Grid-based flow for phases, removing connecting lines
@@ -114,7 +119,7 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, isAiMode, onOp
   return (
     <div className="bg-white dark:bg-dark min-h-screen pt-32 pb-12 px-4 sm:px-6 transition-colors duration-500 overflow-x-hidden">
       <div className="container mx-auto max-w-7xl">
-         <button 
+        <button
           onClick={onBack}
           className="flex items-center gap-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors mb-8 group"
         >
@@ -128,18 +133,18 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, isAiMode, onOp
             {data.heroImage && (
               <div className="w-full lg:w-1/2 order-2 lg:order-1">
                 <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/5 group">
-                  <img 
-                    src={data.heroImage} 
-                    alt={data.title} 
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" 
+                  <img
+                    src={data.heroImage}
+                    alt={data.title}
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                   />
                 </div>
               </div>
             )}
-            
+
             <div className={`w-full ${data.heroImage ? 'lg:w-1/2' : 'max-w-4xl mx-auto text-center'} order-1 lg:order-2`}>
               <span className={`text-accent font-bold tracking-widest uppercase text-xs sm:text-sm mb-4 block ${!data.heroImage && 'text-center'}`}>Scientific Case Study</span>
-              <h1 className={`text-5xl sm:text-6xl md:text-8xl font-serif font-bold text-gray-900 dark:text-white mb-8 leading-tight ${!data.heroImage && 'text-center'}`}>
+              <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-gray-900 dark:text-white mb-8 leading-tight ${!data.heroImage && 'text-center'}`}>
                 {data.title}
               </h1>
               <p className={`text-xl sm:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed font-light ${!data.heroImage && 'text-center'} max-w-3xl mx-auto`}>
@@ -153,9 +158,9 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, isAiMode, onOp
             </div>
           </div>
         </header>
-        
+
         {/* Performance Metrics */}
-        {isAiMode && data.performanceMetrics && (
+        {data.performanceMetrics && (
           <RevealOnScroll>
             <section className="mb-32">
               <h2 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900 dark:text-white mb-10 text-center flex items-center justify-center gap-3">
@@ -163,11 +168,11 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, isAiMode, onOp
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
                 {data.performanceMetrics.map((metric, idx) => (
-                  <MetricVisual 
-                    key={idx} 
-                    label={metric.name} 
-                    value={metric.value} 
-                    description={metric.description} 
+                  <MetricVisual
+                    key={idx}
+                    label={metric.name}
+                    value={metric.value}
+                    description={metric.description}
                   />
                 ))}
               </div>
@@ -176,7 +181,7 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, isAiMode, onOp
         )}
 
         {/* Input Parameters & Preprocessing */}
-        {isAiMode && data.inputParameters && (
+        {data.inputParameters && (
           <RevealOnScroll delay={100}>
             <section className="mb-32">
               <h2 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900 dark:text-white mb-10 text-center flex items-center justify-center gap-3">
@@ -186,8 +191,8 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, isAiMode, onOp
                 {data.inputParameters.map((param, idx) => (
                   <div key={idx} className="bg-gray-50 dark:bg-white/5 p-8 rounded-3xl border border-gray-100 dark:border-white/10">
                     <h3 className="text-lg font-bold text-accent mb-6 flex items-center gap-2 uppercase tracking-wider">
-                       {idx === 0 ? <Database size={18}/> : idx === 1 ? <Activity size={18}/> : <HardDrive size={18}/>}
-                       {param.category}
+                      {idx === 0 ? <Database size={18} /> : idx === 1 ? <Activity size={18} /> : <HardDrive size={18} />}
+                      {param.category}
                     </h3>
                     <ul className="space-y-3">
                       {param.details.map((detail, dIdx) => (
@@ -205,21 +210,41 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, isAiMode, onOp
         )}
 
         {/* Updated Experimental Phases Flow */}
-        {isAiMode && data.modelArchitecture && (
+        {data.modelArchitecture && (
           <RevealOnScroll delay={200}>
             <section className="mb-32 bg-[#080B13] rounded-[40px] p-8 sm:p-16 text-white relative overflow-hidden border border-white/5">
-               <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full filter blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
-               <div className="relative z-10">
-                 <h2 className="text-3xl sm:text-4xl font-serif font-bold mb-6 flex items-center gap-3">
-                   <Brain className="text-accent" /> Experimental Evolution
-                 </h2>
-                 <p className="text-gray-400 mb-12 max-w-3xl leading-relaxed text-base sm:text-lg font-light">
-                   {data.modelArchitecture.overview}
-                 </p>
-                 <ArchitectureFlow steps={data.modelArchitecture.steps} />
-               </div>
+              <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full filter blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
+              <div className="relative z-10">
+                <h2 className="text-3xl sm:text-4xl font-serif font-bold mb-6 flex items-center gap-3">
+                  <Brain className="text-accent" /> Experimental Evolution
+                </h2>
+                <p className="text-gray-400 mb-12 max-w-3xl leading-relaxed text-base sm:text-lg font-light">
+                  {data.modelArchitecture.overview}
+                </p>
+                <ArchitectureFlow steps={data.modelArchitecture.steps} />
+              </div>
             </section>
           </RevealOnScroll>
+        )}
+
+        {/* Custom ZIA Architecture & Pipeline Visuals */}
+        {safeId === 'ai-zia' && (
+          <ZiaVisuals />
+        )}
+
+        {/* Custom RIFT Architecture Visuals */}
+        {safeId === 'ai-rift' && (
+          <RiftVisuals />
+        )}
+
+        {/* Custom McD UX Visuals */}
+        {safeId === 'ux-mcd' && (
+          <McdVisuals />
+        )}
+
+        {/* Custom ThriftHaven Visuals */}
+        {safeId === 'ux-2' && (
+          <ThriftHavenVisuals />
         )}
 
         {/* Tech Stack */}
@@ -248,22 +273,24 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, isAiMode, onOp
         )}
 
         {/* Challenges Grid */}
-        <RevealOnScroll delay={100}>
-          <section className="mb-32 px-2">
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900 dark:text-white mb-12 text-center">Pathological Failure Modes</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {data.challenges?.map((item, idx) => (
-                <div key={idx} className="bg-gray-50 dark:bg-white/5 p-8 rounded-3xl border border-gray-100 dark:border-white/10 hover:border-accent/30 transition-colors shadow-sm h-full flex flex-col">
-                  <div className="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent mb-6">
-                    {idx === 0 ? <ShieldCheck size={24} /> : idx === 1 ? <Activity size={24} /> : idx === 2 ? <Truck size={24} /> : <Tag size={24} />}
+        {data.challenges && data.challenges.length > 0 && (
+          <RevealOnScroll delay={100}>
+            <section className="mb-32 px-2">
+              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900 dark:text-white mb-12 text-center">Pathological Failure Modes</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                {data.challenges.map((item, idx) => (
+                  <div key={idx} className="bg-gray-50 dark:bg-white/5 p-8 rounded-3xl border border-gray-100 dark:border-white/10 hover:border-accent/30 transition-colors shadow-sm h-full flex flex-col">
+                    <div className="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent mb-6">
+                      {idx === 0 ? <ShieldCheck size={24} /> : idx === 1 ? <Activity size={24} /> : idx === 2 ? <Truck size={24} /> : <Tag size={24} />}
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{item.title}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-light flex-1">{item.description}</p>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{item.title}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-light flex-1">{item.description}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        </RevealOnScroll>
+                ))}
+              </div>
+            </section>
+          </RevealOnScroll>
+        )}
 
         {/* Gallery - Only show if there are images left */}
         {data.uiGallery && data.uiGallery.length > 0 && (
@@ -274,11 +301,11 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, isAiMode, onOp
                 {data.uiGallery.map((item, idx) => (
                   <div key={idx} className="min-w-[320px] sm:min-w-[400px] snap-center group">
                     <div className="bg-gray-100 dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl border border-black/5 dark:border-white/5 aspect-video relative mb-6 transition-all duration-500 hover:-translate-y-2">
-                       <img 
-                        src={item.imageUrl} 
-                        alt={item.title} 
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                       />
+                      <img
+                        src={item.imageUrl}
+                        alt={item.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
                     </div>
                     <div className="px-2">
                       <h4 className="text-lg font-bold text-accent mb-2">{item.title}</h4>
@@ -295,20 +322,20 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, isAiMode, onOp
         {data.futureWork && (
           <RevealOnScroll delay={350}>
             <section className="mb-32 px-2">
-               <h2 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900 dark:text-white mb-12 text-center flex items-center justify-center gap-3">
-                 <Lightbulb className="text-accent" /> Future Directions
-               </h2>
-               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {data.futureWork.map((work, idx) => (
-                    <div key={idx} className="bg-white/5 border border-white/5 rounded-3xl p-10 relative overflow-hidden group hover:border-accent/40 transition-all flex flex-col h-full">
-                       <div className="absolute -top-4 -right-4 w-32 h-32 bg-accent/10 rounded-full group-hover:bg-accent/20 transition-all filter blur-3xl"></div>
-                       <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3 relative z-10">
-                          <TrendingUp size={24} className="text-accent" /> {work.title}
-                       </h3>
-                       <p className="text-gray-400 text-base leading-relaxed font-light relative z-10 flex-1">{work.description}</p>
-                    </div>
-                  ))}
-               </div>
+              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900 dark:text-white mb-12 text-center flex items-center justify-center gap-3">
+                <Lightbulb className="text-accent" /> Future Directions
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {data.futureWork.map((work, idx) => (
+                  <div key={idx} className="bg-white/5 border border-white/5 rounded-3xl p-10 relative overflow-hidden group hover:border-accent/40 transition-all flex flex-col h-full">
+                    <div className="absolute -top-4 -right-4 w-32 h-32 bg-accent/10 rounded-full group-hover:bg-accent/20 transition-all filter blur-3xl"></div>
+                    <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3 relative z-10">
+                      <TrendingUp size={24} className="text-accent" /> {work.title}
+                    </h3>
+                    <p className="text-gray-400 text-base leading-relaxed font-light relative z-10 flex-1">{work.description}</p>
+                  </div>
+                ))}
+              </div>
             </section>
           </RevealOnScroll>
         )}
@@ -316,7 +343,7 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, isAiMode, onOp
         {/* Related Projects */}
         <RevealOnScroll delay={400}>
           <section className="mb-24 pt-20 border-t border-black/5 dark:border-white/5">
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900 dark:text-white mb-10">Related Investigations</h2>
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900 dark:text-white mb-10">Related Projects</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {relatedProjects.map(p => (
                 <ProjectCard key={p.id} project={p} onClick={() => onOpenCaseStudy(p.id)} />
@@ -326,8 +353,8 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, isAiMode, onOp
         </RevealOnScroll>
 
         <div className="pt-12 border-t border-gray-200 dark:border-gray-800 text-center animate-fade-in-up pb-12">
-            <h2 className="text-3xl font-serif font-bold text-gray-900 dark:text-white mb-4">Scientific Integrity & Necessity</h2>
-            <p className="text-xs sm:text-sm text-gray-500 uppercase tracking-widest">{data.title} Case Study • Akshay John • January 2026</p>
+          <h2 className="text-3xl font-serif font-bold text-gray-900 dark:text-white mb-4">Scientific Integrity & Necessity</h2>
+          <p className="text-xs sm:text-sm text-gray-500 uppercase tracking-widest">{data.title} Case Study • Akshay John • January 2026</p>
         </div>
       </div>
     </div>

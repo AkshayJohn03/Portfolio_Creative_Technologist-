@@ -11,7 +11,6 @@ import NeuralBackground from './components/NeuralBackground';
 import CaseStudy from './components/CaseStudy';
 
 const App: React.FC = () => {
-  const [isAiMode, setIsAiMode] = useState(false);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [activeView, setActiveView] = useState<'home' | 'case-study'>('home');
   const [currentCaseStudyId, setCurrentCaseStudyId] = useState<string | null>(null);
@@ -43,12 +42,6 @@ const App: React.FC = () => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark');
   };
 
-  const toggleMode = () => {
-    setIsAiMode(!isAiMode);
-    if (activeView === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
 
   const handleOpenCaseStudy = (projectId: string) => {
     // Immediate view switch
@@ -67,35 +60,34 @@ const App: React.FC = () => {
     <div className={`${theme}`}>
       <div className="bg-gray-50 dark:bg-dark min-h-screen text-gray-900 dark:text-white selection:bg-accent selection:text-white relative transition-all duration-500 ease-in-out">
         <NeuralBackground theme={theme} />
-        
-        <Navbar 
-          theme={theme} 
-          toggleTheme={toggleTheme} 
-          onHomeNavigate={handleBackToHome} 
-          isAtHome={activeView === 'home'} 
+
+        <Navbar
+          theme={theme}
+          toggleTheme={toggleTheme}
+          onHomeNavigate={handleBackToHome}
+          isAtHome={activeView === 'home'}
         />
 
         {activeView === 'home' ? (
           <div key="home-view" className="animate-fade-in-up">
             <main className="relative z-10">
-              <Hero isAiMode={isAiMode} toggleMode={toggleMode} />
-              <PortfolioSection isAiMode={isAiMode} onOpenCaseStudy={handleOpenCaseStudy} />
-              <Skills isAiMode={isAiMode} />
+              <Hero />
+              <PortfolioSection onOpenCaseStudy={handleOpenCaseStudy} />
+              <Skills />
               <About />
               <AIChat />
             </main>
           </div>
         ) : (
           <main key="case-study-view" className="relative z-10 animate-fade-in-up">
-            <CaseStudy 
-              onBack={handleBackToHome} 
-              projectId={currentCaseStudyId!} 
-              isAiMode={isAiMode} 
+            <CaseStudy
+              onBack={handleBackToHome}
+              projectId={currentCaseStudyId!}
               onOpenCaseStudy={handleOpenCaseStudy}
             />
           </main>
         )}
-        
+
         <Contact />
       </div>
     </div>

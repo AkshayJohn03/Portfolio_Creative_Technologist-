@@ -2,11 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { SKILLS_DATA } from '../constants';
 
-interface SkillsProps {
-  isAiMode: boolean;
-}
-
-const Skills: React.FC<SkillsProps> = ({ isAiMode }) => {
+const Skills: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -29,11 +25,7 @@ const Skills: React.FC<SkillsProps> = ({ isAiMode }) => {
     };
   }, []);
 
-  const displaySkills = isAiMode 
-    ? SKILLS_DATA.filter(cat => cat.title.includes('AI') || cat.title.includes('Data') || cat.title.includes('Machine'))
-    : SKILLS_DATA.filter(cat => !cat.title.includes('Machine'));
 
-  const finalSkills = displaySkills.length > 0 ? displaySkills : SKILLS_DATA;
 
   return (
     <section ref={sectionRef} className="py-20 sm:py-32 bg-gray-50/50 dark:bg-dark border-y border-black/5 dark:border-white/5 transition-colors duration-300">
@@ -48,8 +40,8 @@ const Skills: React.FC<SkillsProps> = ({ isAiMode }) => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
-          {finalSkills.map((category, catIdx) => (
-            <div 
+          {SKILLS_DATA.map((category, catIdx) => (
+            <div
               key={category.title}
               className={`transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
               style={{ transitionDelay: `${catIdx * 200}ms` }}
@@ -60,7 +52,7 @@ const Skills: React.FC<SkillsProps> = ({ isAiMode }) => {
               </h3>
               <div className="flex flex-wrap gap-2.5 sm:gap-3">
                 {category.skills.map((skill) => (
-                  <span 
+                  <span
                     key={skill}
                     className="px-4 py-2 sm:py-2.5 bg-white dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-xl text-gray-700 dark:text-gray-300 text-xs sm:text-sm hover:border-accent/40 hover:text-accent dark:hover:text-white transition-all duration-300 cursor-default shadow-sm"
                   >
