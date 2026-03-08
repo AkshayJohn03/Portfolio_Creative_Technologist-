@@ -11,6 +11,8 @@ import { ZiaVisuals } from './ZiaVisuals';
 import { RiftVisuals } from './RiftVisuals';
 import { McdVisuals } from './McdVisuals';
 import { ThriftHavenVisuals } from './ThriftHavenVisuals';
+import { GlobotelVisuals } from './GlobotelVisuals';
+import { NeuropodsVisuals } from './NeuropodsVisuals';
 
 interface CaseStudyProps {
   onBack: () => void;
@@ -245,6 +247,16 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, onOpenCaseStud
         {/* Custom ThriftHaven Visuals */}
         {safeId === 'ux-2' && (
           <ThriftHavenVisuals />
+        )}
+
+        {/* Custom GloboTel Visuals */}
+        {safeId === 'ux-globotel' && (
+          <GlobotelVisuals />
+        )}
+
+        {/* Custom NeuroPods Visuals */}
+        {safeId === 'ux-neuropods' && (
+          <NeuropodsVisuals />
         )}
 
         {/* Tech Stack */}

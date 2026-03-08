@@ -85,6 +85,28 @@ export const PROJECTS: Project[] = [
     link: '#',
     tags: ['User Research', 'Mobile App', 'E-Commerce', 'Sustainability'],
     hasInternalPage: true
+  },
+  {
+    id: 'ux-globotel',
+    title: 'GloboTel Service Blueprint',
+    category: ProjectCategory.UX,
+    description: 'End-to-end service blueprint for a travel-centric telecom provider targeting Indian international travelers.',
+    fullDescription: 'A comprehensive service design engagement for GloboTel — a hybrid eSIM + physical SIM provider for 190+ countries. Covers persona research, competitive positioning, journey mapping, and a full 6-phase service blueprint with automation opportunities.',
+    imageUrl: 'https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=2000&auto=format&fit=crop',
+    link: '#',
+    tags: ['Service Design', 'Blueprint', 'Telecom', 'EY', 'Journey Map'],
+    hasInternalPage: true
+  },
+  {
+    id: 'ux-neuropods',
+    title: 'NeuroPods Insight Tool',
+    category: ProjectCategory.UX,
+    description: 'A futuristic internal dashboard for a brainwave-adaptive wearable — monitoring emotional states, feature impact & system health.',
+    fullDescription: 'Designed three key deliverables for an EY engagement: Global Pulse View (CXO dashboard showing real-time emotional state distribution across 127 regions), Team & Tool Insight (developer/ops tool mapping feature emotional impact), and an animated Splash screen. Pure dark-mode, emotionally fluid, glowing UI.',
+    imageUrl: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000&auto=format&fit=crop',
+    link: '#',
+    tags: ['Interaction Design', 'Emotional UI', 'System Thinking', 'EY', 'Dashboard'],
+    hasInternalPage: true
   }
 ];
 
@@ -511,5 +533,43 @@ export const CASE_STUDIES: Record<string, CaseStudyContent> = {
         { name: "Backtest Return", description: "Annualized return on historical test set", target: "+42%" }
       ]
     }
+  },
+  'ux-globotel': {
+    id: 'ux-globotel',
+    title: 'GloboTel Service Blueprint',
+    role: 'Senior Staff Designer',
+    overview: 'A comprehensive end-to-end service blueprint for GloboTel — a travel-centric hybrid eSIM + physical SIM telecom provider designed to eliminate "Landing Anxiety" experienced by Indian international travelers.',
+    context: 'GloboTel fuses global connectivity (190+ countries) with a value-added travel ecosystem (lounges, cabs, hotel discounts). The primary challenge was addressing "Landing Anxiety" — the fear and cost-shock experienced by Indian travelers the moment they land in an international territory without reliable data connectivity.',
+    techStack: [
+      { category: 'Service Design Tools', tools: ['Service Blueprint', 'Journey Mapping', 'Persona Research', 'Competitor Analysis'] },
+      { category: 'Design & Delivery', tools: ['Figma', 'Microsoft PowerPoint', 'User Interviews', 'Affinity Mapping'] },
+      { category: 'Technical Ecosystem', tools: ['AI/OCR KYC', 'eSIM Provisioning', 'Global Carrier APIs', 'Aadhaar Integration', 'Multilingual Chatbot'] },
+    ],
+    challenges: [
+      { title: 'Landing Anxiety', description: 'Indian travelers experience acute fear and data cost-shock on landing internationally. Zero connectivity the first 10 minutes is the critical failure moment.' },
+      { title: 'KYC Friction', description: 'ID document rejection and slow verification cause drop-off. Designed AI-powered 30-second OCR verification with Video KYC fallback to resolve this.' },
+      { title: 'Roaming Cost Opacity', description: 'Competitors (Airtel Roaming) charge unpredictably. GloboTel offers prorated fair-use refunds and transparent bundle pricing to eliminate bill shock.' },
+      { title: 'Long-Haul Edge Cases', description: 'Seafarers and long-term travelers need 90–120 day validity SIMs. No current provider serves this segment well. GloboTel identified it as a differentiated opportunity.' },
+    ],
+    uiGallery: [],
+  },
+  'ux-neuropods': {
+    id: 'ux-neuropods',
+    title: 'NeuroPods Insight Tool',
+    role: 'UI/UX Designer · Interaction Design · System Thinking',
+    overview: 'A futuristic emotionally intelligent internal Insight Tool for the NeuroPods team — a brainwave-adaptive wearable that interprets neural activity to adapt audio environments based on a user\'s emotional and cognitive state.',
+    context: 'The tool is not for end-users but for developers, designers, operations, and leadership building the product. It needed to go beyond traditional dashboards — reflecting the soul of the product through emotional, beautiful, and meaningful interfaces.',
+    techStack: [
+      { category: 'Design Tools', tools: ['Figma', 'Figma Prototyping', 'Motion Design'] },
+      { category: 'Deliverables', tools: ['Global Pulse View', 'Team & Tool Insight', 'Splash Animation (MP4)'] },
+      { category: 'Design System', tools: ['Dark Mode', 'Bioluminescent Palette', 'Emotional Data Viz', 'Fluid Glows'] },
+    ],
+    challenges: [
+      { title: 'Emotional UI Without Being Gimmicky', description: 'The interface had to feel alive and emotionally connected — not just a regular dark dashboard. Used bioluminescent glows, floating orbs, and pulse animations to achieve this.' },
+      { title: 'Three Distinct Audiences', description: 'CXOs need global insight at a glance. Developers need feature-level emotional feedback. The Splash screen treats the tool itself as an empathetic AI persona.' },
+      { title: 'Ethical Alerting System', description: 'The Global Pulse View includes real-time ethical alerts (burnout risk, extended usage zones) presented empathetically rather than as alarm-style warnings.' },
+    ],
+    uiGallery: [],
   }
 };
+

@@ -170,7 +170,8 @@ const MiniPie: React.FC<{ data: { label: string; value: number; color: string }[
 /* ─── Survey Modal ────────────────────────────────────────────────────────── */
 const SurveyModal: React.FC<{ onClose: () => void }> = ({ onClose }) => (
     <div
-        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        className="fixed inset-0 z-[9999] flex items-start justify-center p-4 pt-16"
+        style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
         onClick={onClose}
     >
         <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
@@ -310,15 +311,49 @@ export const ThriftHavenVisuals: React.FC = () => {
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
                     <Target className="text-[#1C5D99]" size={20} /> Competitor Analysis
                 </h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Positioning ThriftHaven against OLX, Quikr, and Meesho</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Feature comparison: ThriftHaven vs. OLX, Quikr, Cashify & Facebook Marketplace</p>
+
                 <div className="rounded-3xl overflow-hidden border border-black/5 dark:border-white/10">
-                    <img src="/thrifthaven/competitors.jpg" alt="Competitor Analysis" className="w-full h-auto object-cover" />
+                    <div className="overflow-x-auto">
+                        <table className="w-full min-w-[700px] text-sm">
+                            <thead>
+                                <tr className="bg-[#1C5D99] text-white">
+                                    {["Feature", "ThriftHaven", "OLX", "Quikr", "Cashify", "Facebook Marketplace"].map((h, i) => (
+                                        <th key={i} className={`px-5 py-4 text-left font-bold text-xs uppercase tracking-wider ${i === 1 ? 'bg-white/15' : ''}`}>{h}</th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {[
+                                    ["Second-hand products", "✅", "✅", "✅", "✅", "✅"],
+                                    ["Online platform", "✅", "✅", "✅", "✅", "✅"],
+                                    ["Mobile application", "✅", "✅", "✅", "✅", "✅"],
+                                    ["Wide range of categories", "Niche (Clothing & Books)", "✅ 40+", "✅ 40+", "Electronics only", "✅"],
+                                    ["Chat functionality", "✅", "✅", "✅", "❌", "✅"],
+                                    ["Verification process", "✅ NGO-Verified", "✅ Basic", "✅ Basic", "✅ Device-check", "❌ Minimal"],
+                                    ["Online payment options", "✅ UPI/Card", "✅", "✅", "❌", "❌"],
+                                    ["Commission fee", "0–10% 🏆", "0–5%", "0–5%", "Varies", "Free"],
+                                    ["Brand recognition", "Growing 🚀", "High", "High", "High", "Massive"],
+                                    ["Customer base", "Growing", "Established", "Established", "Growing", "Largest"],
+                                    ["Buyer protection", "✅ NGO Model", "⚠️ Limited", "⚠️ Limited", "⚠️", "❌"],
+                                    ["Sustainability focus", "✅ Core USP", "❌", "❌", "❌", "❌"],
+                                ].map((row, ri) => (
+                                    <tr key={ri} className={`border-t border-black/5 dark:border-white/5 ${ri % 2 === 0 ? 'bg-white dark:bg-white/[0.03]' : 'bg-gray-50 dark:bg-white/[0.01]'}`}>
+                                        {row.map((cell, ci) => (
+                                            <td key={ci} className={`px-5 py-3.5 text-gray-700 dark:text-gray-300 ${ci === 0 ? 'font-medium text-gray-900 dark:text-white' : ''} ${ci === 1 ? 'font-semibold text-[#1C5D99] bg-[#1C5D99]/5' : ''}`}>{cell}</td>
+                                        ))}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
                     {[
                         { title: "Targeted Niche", icon: "🎯", desc: "Unlike OLX/Quikr with 40+ categories, ThriftHaven launches with Clothing & Books — enabling deep quality control in each vertical." },
-                        { title: "Weakness Opportunity", icon: "🔓", desc: "Competitors lack buyer protection. ThriftHaven's NGO Verified model directly solves the #1 competitor weakness." },
-                        { title: "Competitive Pricing", icon: "💰", desc: "Commission of 0-10% vs. competitors' 5-15%. Lower take-rate justified by enhanced trust infrastructure." },
+                        { title: "Weakness Opportunity", icon: "🔓", desc: "Competitors lack buyer protection. ThriftHaven's NGO Verified model directly solves the #1 competitor weakness across every platform surveyed." },
+                        { title: "Competitive Commission", icon: "💰", desc: "Commission of 0–10% is competitive vs. industry 5–15%. Lower take-rate justified by enhanced trust infrastructure that generates higher repeat purchase rates." },
                     ].map((c, i) => (
                         <div key={i} className="bg-gray-50 dark:bg-white/5 rounded-2xl p-6 border border-black/5 dark:border-white/10">
                             <span className="text-2xl mb-3 block">{c.icon}</span>
@@ -328,6 +363,7 @@ export const ThriftHavenVisuals: React.FC = () => {
                     ))}
                 </div>
             </section>
+
 
             {/* ── Survey CTA strip ──────────────────────────────────────────────── */}
             <section className="bg-[#639FAB]/10 dark:bg-[#1C5D99]/10 border border-[#1C5D99]/20 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
@@ -477,17 +513,17 @@ export const ThriftHavenVisuals: React.FC = () => {
                     <span className="text-sm font-normal text-gray-500 ml-1">({HIFI.length} screens)</span>
                 </h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Final polished UI screens using the ThriftHaven design system — deep blue + sustainable teal palette.</p>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-3">
                     {HIFI.map((s) => (
-                        <div key={s.file} className="group relative bg-gray-100 dark:bg-white/5 rounded-2xl overflow-hidden border border-black/5 dark:border-white/10 aspect-[9/16] hover:scale-[1.03] hover:shadow-2xl hover:border-[#1C5D99]/40 transition-all duration-300">
+                        <div key={s.file} className="group relative bg-gray-100 dark:bg-white/5 rounded-xl overflow-hidden border border-black/5 dark:border-white/10 aspect-[9/16] hover:scale-[1.04] hover:shadow-xl hover:border-[#1C5D99]/40 transition-all duration-300">
                             <img
                                 src={`/thrifthaven/hifi/${encodeURIComponent(s.file)}`}
                                 alt={s.label}
                                 className="w-full h-full object-cover"
                                 loading="lazy"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                                <span className="text-white text-xs font-bold">{s.label}</span>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
+                                <span className="text-white text-[9px] font-bold leading-tight">{s.label}</span>
                             </div>
                         </div>
                     ))}
@@ -520,6 +556,135 @@ export const ThriftHavenVisuals: React.FC = () => {
                             </div>
                         </div>
                     ))}
+                </div>
+            </section>
+
+            {/* ── Why the NGO Model ──────────────────────────────────────────────── */}
+            <section className="bg-[#1C5D99]/5 dark:bg-[#1C5D99]/10 border border-[#1C5D99]/20 rounded-3xl p-8 sm:p-12">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-[#1C5D99] block mb-2">Design Rationale · Senior Insight</span>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">🏛️ The "Why" Behind the NGO Model</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                            In India, <strong className="text-gray-900 dark:text-white">NGOs such as Kudumbam have vast local networks</strong> that span hundreds of villages and urban neighbourhoods — but they consistently lack digital revenue streams to fund their social mission.
+                        </p>
+                        <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                            ThriftHaven's NGO partnership was not designed as a marketing feature. It solves a structural problem: <strong className="text-[#1C5D99]">a digital-only startup cannot afford physical quality control at scale.</strong> The NGO hub becomes a decentralised inspection and fulfilment layer — eliminating the biggest barrier to trust in P2P commerce while simultaneously funding social causes.
+                        </p>
+                    </div>
+                    <div className="space-y-4">
+                        {[
+                            { icon: "🔍", title: "Physical QC at zero marginal cost", desc: "NGOs inspect and verify products at their centres before shipping, replacing expensive in-house verification teams." },
+                            { icon: "💼", title: "Employment + funding for social causes", desc: "A percentage of each NGO-routed transaction goes back to the NGO, creating a self-sustaining economic model." },
+                            { icon: "🏘️", title: "Hyperlocal trust signal", desc: "Buyers pick up from a known NGO in their neighbourhood — a physical trust anchor no purely digital competitor can replicate." },
+                        ].map((b, i) => (
+                            <div key={i} className="flex gap-4">
+                                <span className="text-2xl flex-shrink-0">{b.icon}</span>
+                                <div>
+                                    <p className="font-bold text-sm text-gray-900 dark:text-white mb-1">{b.title}</p>
+                                    <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">{b.desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ── Safi AI Feature ────────────────────────────────────────────────── */}
+            <section className="bg-gray-900 rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#639FAB]/20 rounded-full filter blur-[100px] -translate-y-1/2 translate-x-1/3" />
+                <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#639FAB] block mb-3">AI Feature Concept · Technical Edge</span>
+                        <h3 className="text-2xl font-bold text-white mb-4">✨ Meet Safi — The AI Thrift Assistant</h3>
+                        <p className="text-sm text-gray-300 leading-relaxed mb-6">
+                            Standard filters (Size, Price, Category) force users to know exactly what they want — breaking discovery for thrift shopping. <strong className="text-white">Safi</strong> replaces rigid filters with a natural-language intent engine, dramatically reducing the discovery friction identified in user journey research.
+                        </p>
+                        <div className="space-y-3">
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-[#639FAB]">Example Queries Safi Understands</p>
+                            {[
+                                '"Find me a sustainable dress for a Bangalore summer wedding under ₹2000"',
+                                '"Show books on productivity, gently used, near Koramangala NGO hub"',
+                                '"I need men\'s office wear, size M, NGO-verified seller only"',
+                            ].map((q, i) => (
+                                <div key={i} className="bg-white/10 border border-white/10 rounded-xl px-5 py-3 text-sm text-gray-200 italic font-light">{q}</div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="space-y-4">
+                        <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-[#639FAB] mb-3">Why It Matters</p>
+                            <div className="space-y-3">
+                                {[
+                                    { icon: "🔎", text: "Replaces 5-step filter flow with a single natural-language input" },
+                                    { icon: "🌱", text: "Understands sustainability preferences (eco-fabric, low-carbon shipping)" },
+                                    { icon: "🛡️", text: "Integrated with NGO-verified flag to prioritise trusted listings by default" },
+                                    { icon: "📊", text: "Learns from purchase history to personalise thrift recommendations over time" },
+                                ].map((p, i) => (
+                                    <div key={i} className="flex items-start gap-3 text-sm text-gray-300">
+                                        <span className="flex-shrink-0">{p.icon}</span><span>{p.text}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="bg-[#639FAB]/10 border border-[#639FAB]/30 rounded-2xl p-4 text-xs text-[#639FAB] leading-relaxed">
+                            <strong>Implementation note:</strong> Powered by Gemini API with a domain-specific system prompt pre-loaded with ThriftHaven's product taxonomy and NGO location data. Queries resolve to structured facet filters before hitting the product database.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ── Condition Scale ────────────────────────────────────────────────── */}
+            <section>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                    <ShieldCheck className="text-[#1C5D99]" size={20} /> The Condition Scale — Solving Quality Transparency
+                </h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">
+                    Survey data showed 72% of users cite Condition &amp; Originality as their #1 concern. Rather than a binary "Good / Bad" label, ThriftHaven implements a structured 1–10 Transparency Scale backed by AI photo verification.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="bg-gray-50 dark:bg-white/5 rounded-3xl p-8 border border-black/5 dark:border-white/10">
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#1C5D99] mb-6">Product Condition Scale (1–10)</p>
+                        <div className="space-y-3">
+                            {[
+                                { range: "9–10", label: "Like New / Unopened", color: "#22c55e" },
+                                { range: "7–8", label: "Excellent — Minor Signs of Use", color: "#84cc16" },
+                                { range: "5–6", label: "Good — Visible Wear, Fully Functional", color: "#eab308" },
+                                { range: "3–4", label: "Fair — Noticeable Flaws, Discounted", color: "#f97316" },
+                                { range: "1–2", label: "For Parts / Heavy Wear", color: "#ef4444" },
+                            ].map((s, i) => (
+                                <div key={i} className="flex items-center gap-4">
+                                    <div className="w-14 h-12 rounded-xl flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style={{ background: s.color }}>{s.range}</div>
+                                    <p className="font-semibold text-sm text-gray-900 dark:text-white">{s.label}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="space-y-6">
+                        <div className="bg-gray-50 dark:bg-white/5 rounded-3xl p-8 border border-black/5 dark:border-white/10">
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-[#1C5D99] mb-4">AI-Assisted Photo Verification</p>
+                            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+                                When a seller uploads product photos, a lightweight vision model scans for visible defects, fading, stains, or missing parts — then auto-suggests a condition score. The seller accepts, adjusts, or contests. NGO staff override with a physical inspection score for verified listings.
+                            </p>
+                            <div className="space-y-2">
+                                {[
+                                    "Auto-detects stains, tears, missing buttons",
+                                    "Compares to reference images from brand catalogue",
+                                    "Generates a natural-language Condition Report",
+                                    "NGO staff can override with physical inspection score",
+                                ].map((f, i) => (
+                                    <div key={i} className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-[#1C5D99] flex-shrink-0" />
+                                        {f}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-2xl p-5">
+                            <p className="text-xs font-bold uppercase tracking-widest text-amber-700 dark:text-amber-400 mb-2">Design Decision</p>
+                            <p className="text-xs text-amber-800 dark:text-amber-300 leading-relaxed">The 1–10 scale was chosen over binary "Good/Bad" because research showed buyers want granularity to price-shop across similar conditions — a feature no competitor currently provides.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
