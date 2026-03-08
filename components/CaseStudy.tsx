@@ -13,6 +13,8 @@ import { McdVisuals } from './McdVisuals';
 import { ThriftHavenVisuals } from './ThriftHavenVisuals';
 import { GlobotelVisuals } from './GlobotelVisuals';
 import { NeuropodsVisuals } from './NeuropodsVisuals';
+import { StoryboardVisuals } from './StoryboardVisuals';
+import { LifelinkVisuals } from './LifelinkVisuals';
 
 interface CaseStudyProps {
   onBack: () => void;
@@ -257,6 +259,16 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, onOpenCaseStud
         {/* Custom NeuroPods Visuals */}
         {safeId === 'ux-neuropods' && (
           <NeuropodsVisuals />
+        )}
+
+        {/* Custom Storyboard Visuals */}
+        {safeId === 'ux-storyboard' && (
+          <StoryboardVisuals />
+        )}
+
+        {/* Custom Lifelink Visuals */}
+        {safeId === 'ux-lifelink' && (
+          <LifelinkVisuals />
         )}
 
         {/* Tech Stack */}

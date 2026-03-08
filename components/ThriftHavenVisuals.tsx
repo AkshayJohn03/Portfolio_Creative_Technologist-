@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import {
-    X, ExternalLink, Users, BarChart2, Map, Leaf, ShieldCheck, BookOpen,
-    TrendingUp, ChevronRight, Star, AlertTriangle, CheckCircle, Target
-} from 'lucide-react';
+import { createPortal } from 'react-dom';
+import { ExternalLink, ShoppingBag, Eye, Shield, Leaf, TrendingUp, Users, Heart, Zap, Globe, Package, ChevronRight, BarChart2, CheckCircle2, Search, Filter, MessageSquare, Menu, BookOpen, X, AlertTriangle, CheckCircle, Target, Star, Map } from 'lucide-react';
 
 /* ─── Survey data ─────────────────────────────────────────────────────────── */
 const SURVEY_DATA = {
@@ -105,7 +103,7 @@ const HIFI = [
     { file: "Home Page.png", label: "Home" },
     { file: "Search.png", label: "Search" },
     { file: "Search Results.jpg", label: "Search Results" },
-    { file: "Product Page.jpg", label: "Product Page" },
+    { file: "product page Final.png", label: "Product Page" },
     { file: "Favourite.jpg", label: "Favourites" },
     { file: "Order History.jpg", label: "Order History" },
     { file: "Confirmation.jpg", label: "Confirmation" },
@@ -171,7 +169,6 @@ const MiniPie: React.FC<{ data: { label: string; value: number; color: string }[
 const SurveyModal: React.FC<{ onClose: () => void }> = ({ onClose }) => (
     <div
         className="fixed inset-0 z-[9999] flex items-start justify-center p-4 pt-16"
-        style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
         onClick={onClose}
     >
         <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
@@ -248,6 +245,16 @@ const SurveyModal: React.FC<{ onClose: () => void }> = ({ onClose }) => (
 /* ─── Main Component ──────────────────────────────────────────────────────── */
 export const ThriftHavenVisuals: React.FC = () => {
     const [showSurvey, setShowSurvey] = useState(false);
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+    React.useEffect(() => {
+        if (selectedImage || showSurvey) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => { document.body.style.overflow = ''; };
+    }, [selectedImage, showSurvey]);
 
     return (
         <div className="w-full flex flex-col gap-16 mb-24 animate-fade-in-up">
@@ -493,7 +500,8 @@ export const ThriftHavenVisuals: React.FC = () => {
                                 <img
                                     src={`/thrifthaven/wireframes/${encodeURIComponent(wf.file)}`}
                                     alt={wf.label}
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-cover cursor-pointer"
+                                    onClick={() => setSelectedImage(`/thrifthaven/wireframes/${encodeURIComponent(wf.file)}`)}
                                     loading="lazy"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
@@ -519,7 +527,8 @@ export const ThriftHavenVisuals: React.FC = () => {
                             <img
                                 src={`/thrifthaven/hifi/${encodeURIComponent(s.file)}`}
                                 alt={s.label}
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-cover cursor-pointer"
+                                onClick={() => setSelectedImage(`/thrifthaven/hifi/${encodeURIComponent(s.file)}`)}
                                 loading="lazy"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
@@ -527,6 +536,42 @@ export const ThriftHavenVisuals: React.FC = () => {
                             </div>
                         </div>
                     ))}
+                </div>
+            </section>
+
+            {/* ── Visual Attention Heatmap ───────────────────────────────────────── */}
+            <section className="bg-gray-50 dark:bg-[#111] border border-black/5 dark:border-white/10 rounded-3xl p-8 sm:p-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#639FAB] block mb-2">Eyetracking Simulation</span>
+                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Visual Attention Heatmap</h3>
+                        <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                            A predictive AI heatmap was run on the redesigned Product Page to validate visual hierarchy. The results demonstrate optimal gaze distribution across high-trust elements before proceeding to commerce actions.
+                        </p>
+                        <div className="space-y-4">
+                            {[
+                                { icon: "🔥", title: "NGO Trust Badge", desc: "The 'NGO Verified Quality' section commands strong secondary attention, validating our hypothesis that users actively seek out verification signals." },
+                                { icon: "📈", title: "Information Hierarchy", desc: "Attention flows naturally from the primary product image down to the pricing and condition scales without friction." },
+                                { icon: "🎯", title: "Conversion Optimization", desc: "The 'Add to Cart' and 'Buy Now' buttons retain isolated hot-spots, ensuring the primary conversion path remains visually distinct from educational content." }
+                            ].map((h, i) => (
+                                <div key={i} className="flex gap-4 p-4 bg-white dark:bg-black/20 rounded-2xl border border-black/5 dark:border-white/10">
+                                    <span className="text-xl flex-shrink-0">{h.icon}</span>
+                                    <div>
+                                        <h4 className="font-bold text-sm text-gray-900 dark:text-white mb-1">{h.title}</h4>
+                                        <p className="text-xs text-gray-600 dark:text-gray-400">{h.desc}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="flex justify-center group relative cursor-pointer" onClick={() => setSelectedImage('/thrifthaven/heatmap_product.png')}>
+                        <div className="relative rounded-2xl overflow-hidden border border-black/10 dark:border-white/20 shadow-2xl hover:scale-105 transition-transform duration-500">
+                            <img src="/thrifthaven/heatmap_product.png" alt="Product Page Heatmap" className="max-w-[280px] w-full h-auto" />
+                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span className="text-white bg-black/50 px-4 py-2 rounded-full font-bold text-sm backdrop-blur-md">View Fullscreen</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -539,7 +584,7 @@ export const ThriftHavenVisuals: React.FC = () => {
                     {[
                         { phase: "Short Term", color: "#1C5D99", icon: "🚀", items: ["Expand catalog to more cities", "Build loyalty rewards program", "Virtual try-on for clothing", "Personalized recommendations with AI"] },
                         { phase: "Mid Term", color: "#639FAB", icon: "📈", items: ["Diversify revenue via ads & subscriptions", "NGO supply chain partnerships", "In-app live chat support", "Expand to neighboring states"] },
-                        { phase: "Long Term", color: "#2d6a4f", icon: "🌍", items: ["AR/AI-powered product discovery", "International expansion", "Brick-and-mortar ThriftHaven stores", "Set industry standards for circular fashion"] },
+                        { phase: "Long Term", color: "rgb(45, 106, 79)", icon: "🌍", items: ["AR/AI-powered product discovery", "International expansion", "Brick-and-mortar ThriftHaven stores", "Set industry standards for circular fashion"] },
                     ].map((g, i) => (
                         <div key={i} className="rounded-2xl border overflow-hidden" style={{ borderColor: g.color + "30" }}>
                             <div className="px-6 py-4 flex items-center gap-3" style={{ background: g.color + "15" }}>
@@ -687,6 +732,30 @@ export const ThriftHavenVisuals: React.FC = () => {
                     </div>
                 </div>
             </section>
+            {/* Image Modal using Portal */}
+            {selectedImage && typeof document !== 'undefined' && createPortal(
+                <div
+                    style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 99999, backgroundColor: 'rgba(0,0,0,0.9)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', cursor: 'pointer' }}
+                    onClick={() => setSelectedImage(null)}
+                >
+                    <div className="relative max-w-7xl max-h-[95vh] w-full flex items-center justify-center">
+                        <img
+                            src={selectedImage}
+                            alt="Fullscreen view"
+                            style={{ maxHeight: '95vh', maxWidth: '100%', objectFit: 'contain', borderRadius: '0.75rem', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)' }}
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                        <button
+                            className="absolute top-4 right-4 bg-white/20 hover:bg-white/40 backdrop-blur-md text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold transition-all"
+                            style={{ zIndex: 100000 }}
+                            onClick={() => setSelectedImage(null)}
+                        >
+                            ×
+                        </button>
+                    </div>
+                </div>,
+                document.body
+            )}
         </div>
     );
 };

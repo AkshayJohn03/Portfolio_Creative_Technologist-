@@ -1,13 +1,18 @@
 
 import React from 'react';
 import { ArrowDown, Brain, Palette } from 'lucide-react';
+import { LiquidCanvas } from './Canvas';
 
 const Hero: React.FC = () => {
   return (
     <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden bg-gray-50/30 dark:bg-dark/50 px-5 transition-colors duration-500">
+      <div className="absolute inset-0 z-0">
+        <LiquidCanvas />
+      </div>
+
       {/* Background Blobs */}
-      <div className="absolute top-[10%] left-[5%] sm:left-[10%] w-64 sm:w-96 h-64 sm:h-96 bg-purple-500/10 dark:bg-purple-900/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[80px] sm:blur-[120px] animate-pulse"></div>
-      <div className="absolute bottom-[10%] right-[5%] sm:right-[10%] w-64 sm:w-96 h-64 sm:h-96 bg-indigo-500/10 dark:bg-indigo-900/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[80px] sm:blur-[120px] animate-pulse animation-delay-2000"></div>
+      <div className="absolute top-[10%] left-[5%] sm:left-[10%] w-64 sm:w-96 h-64 sm:h-96 bg-purple-500/10 dark:bg-purple-900/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[80px] sm:blur-[120px] animate-pulse pointer-events-none"></div>
+      <div className="absolute bottom-[10%] right-[5%] sm:right-[10%] w-64 sm:w-96 h-64 sm:h-96 bg-indigo-500/10 dark:bg-indigo-900/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[80px] sm:blur-[120px] animate-pulse animation-delay-2000 pointer-events-none"></div>
 
       <div className="z-10 text-center max-w-6xl mx-auto w-full pt-20 md:pt-0">
         <div className="mb-6 sm:mb-8 inline-block px-4 py-2 rounded-full border border-black/5 dark:border-white/10 bg-white/40 dark:bg-white/5 backdrop-blur-sm animate-fade-in-up">
