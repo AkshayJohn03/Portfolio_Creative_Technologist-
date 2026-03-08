@@ -264,7 +264,7 @@ export const ThriftHavenVisuals: React.FC = () => {
             <section className="bg-[#1C5D99] rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
                 <div className="absolute right-0 bottom-0 w-[350px] h-[350px] bg-white/5 rounded-full -translate-x-1/4 translate-y-1/4 filter blur-3xl" />
                 <div className="relative z-10">
-                    <img src="/thrifthaven/logo.png" alt="ThriftHaven Logo" className="h-14 mb-4 object-contain" />
+                    <img src="./thrifthaven/logo.png" alt="ThriftHaven Logo" className="h-14 mb-4 object-contain" />
                     <p className="text-white/80 max-w-lg leading-relaxed text-sm">
                         A sustainable second-hand marketplace connecting eco-conscious buyers and sellers in India — anchored by NGO-verified trust infrastructure.
                     </p>
@@ -282,7 +282,7 @@ export const ThriftHavenVisuals: React.FC = () => {
                         <BarChart2 size={16} /> View Research Survey
                     </button>
                     <a
-                        href="/thrifthaven/Research.pdf"
+                        href="./thrifthaven/Research.pdf"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-6 py-3 bg-white/15 border border-white/25 text-white font-bold text-sm rounded-xl hover:bg-white/25 transition-all flex items-center gap-2 justify-center"
@@ -498,10 +498,10 @@ export const ThriftHavenVisuals: React.FC = () => {
                         <div key={wf.file} className="flex-shrink-0 snap-center w-36 sm:w-44 group">
                             <div className="bg-gray-100 dark:bg-white/5 rounded-2xl overflow-hidden border border-black/5 dark:border-white/10 aspect-[9/16] relative hover:scale-105 transition-transform duration-300 hover:shadow-xl hover:border-[#1C5D99]/40">
                                 <img
-                                    src={`/thrifthaven/wireframes/${encodeURIComponent(wf.file)}`}
+                                    src={`./thrifthaven/wireframes/${encodeURIComponent(wf.file)}`}
                                     alt={wf.label}
                                     className="w-full h-full object-cover cursor-pointer"
-                                    onClick={() => setSelectedImage(`/thrifthaven/wireframes/${encodeURIComponent(wf.file)}`)}
+                                    onClick={() => setSelectedImage(`./thrifthaven/wireframes/${encodeURIComponent(wf.file)}`)}
                                     loading="lazy"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
@@ -525,10 +525,10 @@ export const ThriftHavenVisuals: React.FC = () => {
                     {HIFI.map((s) => (
                         <div key={s.file} className="group relative bg-gray-100 dark:bg-white/5 rounded-xl overflow-hidden border border-black/5 dark:border-white/10 aspect-[9/16] hover:scale-[1.04] hover:shadow-xl hover:border-[#1C5D99]/40 transition-all duration-300">
                             <img
-                                src={`/thrifthaven/hifi/${encodeURIComponent(s.file)}`}
+                                src={`./thrifthaven/hifi/${encodeURIComponent(s.file)}`}
                                 alt={s.label}
                                 className="w-full h-full object-cover cursor-pointer"
-                                onClick={() => setSelectedImage(`/thrifthaven/hifi/${encodeURIComponent(s.file)}`)}
+                                onClick={() => setSelectedImage(`./thrifthaven/hifi/${encodeURIComponent(s.file)}`)}
                                 loading="lazy"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
@@ -564,9 +564,9 @@ export const ThriftHavenVisuals: React.FC = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="flex justify-center group relative cursor-pointer" onClick={() => setSelectedImage('/thrifthaven/heatmap_product.png')}>
+                    <div className="flex justify-center group relative cursor-pointer" onClick={() => setSelectedImage('./thrifthaven/heatmap_product.png')}>
                         <div className="relative rounded-2xl overflow-hidden border border-black/10 dark:border-white/20 shadow-2xl hover:scale-105 transition-transform duration-500">
-                            <img src="/thrifthaven/heatmap_product.png" alt="Product Page Heatmap" className="max-w-[280px] w-full h-auto" />
+                            <img src="./thrifthaven/heatmap_product.png" alt="Product Page Heatmap" className="max-w-[280px] w-full h-auto" />
                             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <span className="text-white bg-black/50 px-4 py-2 rounded-full font-bold text-sm backdrop-blur-md">View Fullscreen</span>
                             </div>

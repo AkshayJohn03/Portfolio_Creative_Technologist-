@@ -98,7 +98,7 @@ export const McdVisuals: React.FC = () => {
                         <span className="text-xs font-bold text-gray-800 dark:text-white uppercase tracking-widest">Main Dashboard</span>
                     </div>
                     <img
-                        src="/mcd/Dashboard.jpg"
+                        src="./mcd/Dashboard.jpg"
                         alt="McDonald's Dashboard Interface"
                         className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                     />
@@ -112,7 +112,7 @@ export const McdVisuals: React.FC = () => {
                             <span className="text-xs font-bold text-gray-800 dark:text-white uppercase tracking-widest">Order Details Modular</span>
                         </div>
                         <img
-                            src="/mcd/Order_Details.jpg"
+                            src="./mcd/Order_Details.jpg"
                             alt="Order Details UI"
                             className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                         />
@@ -124,7 +124,7 @@ export const McdVisuals: React.FC = () => {
                             <span className="text-xs font-bold text-gray-800 dark:text-white uppercase tracking-widest">Integrated Camera Monitoring</span>
                         </div>
                         <img
-                            src="/mcd/VideoPlayer.jpg"
+                            src="./mcd/VideoPlayer.jpg"
                             alt="Drive-Thru Video Player UI"
                             className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                         />

@@ -97,11 +97,11 @@ export const LifelinkVisuals: React.FC = () => {
                         <div
                             key={index}
                             className="group cursor-pointer bg-gray-50 dark:bg-[#111] rounded-2xl overflow-hidden border border-gray-200 dark:border-white/10 hover:border-blue-400/50 hover:shadow-2xl hover:shadow-blue-900/20 transition-all duration-300"
-                            onClick={() => setSelectedImage(`/lifelink/App/${encodeURIComponent(scene)}`)}
+                            onClick={() => setSelectedImage(`./lifelink/App/${encodeURIComponent(scene)}`)}
                         >
                             <div className="aspect-[4/3] w-full relative overflow-hidden bg-white dark:bg-black p-4">
                                 <img
-                                    src={`/lifelink/App/${encodeURIComponent(scene)}`}
+                                    src={`./lifelink/App/${encodeURIComponent(scene)}`}
                                     alt={`Scene ${index + 1}`}
                                     className="w-full h-full object-contain group-hover:scale-[1.03] transition-transform duration-500 rounded-lg shadow-sm"
                                     loading="lazy"
@@ -139,11 +139,11 @@ export const LifelinkVisuals: React.FC = () => {
                         <div
                             key={index}
                             className="group cursor-pointer bg-gray-50 dark:bg-[#111] rounded-2xl overflow-hidden border border-gray-200 dark:border-white/10 hover:border-blue-400/50 hover:shadow-2xl hover:shadow-blue-900/20 transition-all duration-300"
-                            onClick={() => setSelectedImage(`/lifelink/${encodeURIComponent(scene)}`)}
+                            onClick={() => setSelectedImage(`./lifelink/${encodeURIComponent(scene)}`)}
                         >
                             <div className="aspect-[9/16] w-full relative overflow-hidden bg-white dark:bg-[#151515]">
                                 <img
-                                    src={`/lifelink/${encodeURIComponent(scene)}`}
+                                    src={`./lifelink/${encodeURIComponent(scene)}`}
                                     alt={`Mobile Scene ${index + 1}`}
                                     className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
                                     loading="lazy"

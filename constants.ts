@@ -48,7 +48,7 @@ export const PROJECTS: Project[] = [
     category: ProjectCategory.AI_ML,
     description: 'A 60M parameter Small Language Model (SLM) engineered from the ground up on consumer hardware.',
     fullDescription: 'Training a custom transformer locally to understand the end-to-end mechanics of LLMs. From custom BPE tokenizers to mixed-training regimes, ZIA explores how small models learn knowledge vs grammar.',
-    imageUrl: '/thumb_Ziallm.jpg',
+    imageUrl: './thumb_Ziallm.jpg',
     link: '#',
     tags: ['Transformers', 'PyTorch', 'NLP', 'Local Training'],
     hasInternalPage: true
@@ -59,7 +59,7 @@ export const PROJECTS: Project[] = [
     category: ProjectCategory.AI_ML,
     description: 'A physical approach to intelligence under irreversibility. Investigating geometric anticipation vs predictive modeling.',
     fullDescription: 'A systematic experimental investigation into intelligence under irreversible constraints. Across 50+ simulations, this project demonstrates how anticipation emerges as a property of physical constraints rather than internal prediction.',
-    imageUrl: '/thumb_rift.png',
+    imageUrl: './thumb_rift.png',
     link: '#',
     tags: ['Physical AI', 'PyTorch', 'Research', 'Dynamics'],
     hasInternalPage: true
@@ -70,7 +70,7 @@ export const PROJECTS: Project[] = [
     category: ProjectCategory.UX,
     description: 'Advanced SLA Model & Timeline Dashboard for identifying root causes of order delays.',
     fullDescription: 'This design addresses the need for managers to reconstruct a late/wrong order end-to-end and quickly identify the root cause using a hybrid Gantt-like swimlane visualization.',
-    imageUrl: '/thumb_mcdonalds.jpg',
+    imageUrl: './thumb_mcdonalds.jpg',
     link: '#',
     tags: ['Figma', 'Complex Systems', 'SLA Modeling', 'Dashboard'],
     hasInternalPage: true
@@ -81,7 +81,7 @@ export const PROJECTS: Project[] = [
     category: ProjectCategory.UX,
     description: 'A sustainable second-hand product marketplace app for the Indian market.',
     fullDescription: 'A well-designed and user-friendly app for selling second-hand products, connecting buyers and sellers and streamlining the process of buying and selling used goods in a fragmented market.',
-    imageUrl: '/thumb_thrifthaven_new.jpg',
+    imageUrl: './thumb_thrifthaven_new.jpg',
     link: '#',
     tags: ['User Research', 'Mobile App', 'E-Commerce', 'Sustainability'],
     hasInternalPage: true
@@ -92,7 +92,7 @@ export const PROJECTS: Project[] = [
     category: ProjectCategory.UX,
     description: 'End-to-end service blueprint for a travel-centric telecom provider targeting Indian international travelers.',
     fullDescription: 'A comprehensive service design engagement for GloboTel — a hybrid eSIM + physical SIM provider for 190+ countries. Covers persona research, competitive positioning, journey mapping, and a full 6-phase service blueprint with automation opportunities.',
-    imageUrl: '/thumb_globotel.jpg',
+    imageUrl: './thumb_globotel.jpg',
     link: '#',
     tags: ['Service Design', 'Blueprint', 'Telecom', 'EY', 'Journey Map'],
     hasInternalPage: true
@@ -103,7 +103,7 @@ export const PROJECTS: Project[] = [
     category: ProjectCategory.UX,
     description: 'A futuristic internal dashboard for a brainwave-adaptive wearable — monitoring emotional states, feature impact & system health.',
     fullDescription: 'Designed three key deliverables for an EY engagement: Global Pulse View (CXO dashboard showing real-time emotional state distribution across 127 regions), Team & Tool Insight (developer/ops tool mapping feature emotional impact), and an animated Splash screen. Pure dark-mode, emotionally fluid, glowing UI.',
-    imageUrl: '/thumb_neuropods.jpg',
+    imageUrl: './thumb_neuropods.jpg',
     link: '#',
     tags: ['Interaction Design', 'Emotional UI', 'System Thinking', 'EY', 'Dashboard'],
     hasInternalPage: true
@@ -114,7 +114,7 @@ export const PROJECTS: Project[] = [
     category: ProjectCategory.UX,
     description: 'Explaining a shadow to a blind person using sensory translation and empathy.',
     fullDescription: 'This storyboard outlines a calm, one-to-one thermal experimental session with a blind adult who has no visual memory of light or dark. It utilizes sensory mapping, translating the visual phenomenon of light blockage onto physical sensations of temperature and airflow.',
-    imageUrl: '/thumb_storyboard.jpg',
+    imageUrl: './thumb_storyboard.jpg',
     link: '#',
     tags: ['Storyboard', 'Sensory Translation', 'Empathy-Driven', 'Accessibility', 'UX Research'],
     hasInternalPage: true
@@ -125,7 +125,7 @@ export const PROJECTS: Project[] = [
     category: ProjectCategory.UX,
     description: 'A healthcare system application designed to streamline patient transfers and management.',
     fullDescription: 'This healthcare system application is designed to streamline and manage various aspects of patient transfers, communication among healthcare professionals, and overall patient management. The application consists of multiple modules, each catering to specific functions essential for efficient healthcare operations.',
-    imageUrl: '/lifelink/Artboard 1.jpg',
+    imageUrl: './lifelink/Artboard 1.jpg',
     link: '#',
     tags: ['Healthcare', 'Dashboard', 'Systems Design', 'UX/UI'],
     hasInternalPage: true

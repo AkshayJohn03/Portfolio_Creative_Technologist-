@@ -130,11 +130,11 @@ export const NeuropodsVisuals: React.FC = () => {
                         </div>
                     </div>
                     <div className="flex flex-col gap-3 min-w-[200px]">
-                        <a href="/neuropods/global-pulse.pdf" target="_blank" rel="noopener noreferrer"
+                        <a href="./neuropods/global-pulse.pdf" target="_blank" rel="noopener noreferrer"
                             className="px-5 py-3 bg-white text-[#0a0e27] font-bold text-sm rounded-xl hover:scale-105 transition-all flex items-center gap-2 justify-center">
                             <FileText size={14} /> Global Pulse PDF
                         </a>
-                        <a href="/neuropods/team-insight.pdf" target="_blank" rel="noopener noreferrer"
+                        <a href="./neuropods/team-insight.pdf" target="_blank" rel="noopener noreferrer"
                             className="px-5 py-3 bg-white/10 border border-white/20 text-white font-bold text-sm rounded-xl hover:bg-white/20 transition-all flex items-center gap-2 justify-center">
                             <FileText size={14} /> Team Insight PDF
                         </a>
@@ -165,7 +165,7 @@ export const NeuropodsVisuals: React.FC = () => {
                 {activeScreen === 'splash' && (
                     <div className="space-y-6">
                         <div className="relative rounded-3xl overflow-hidden border border-purple-500/20 bg-[#0a0e27] shadow-2xl shadow-purple-900/20 group">
-                            <img src="/neuropods/splash.jpg" alt="NeuroPods Splash Screen" className="w-full h-auto object-cover rounded-3xl" />
+                            <img src="./neuropods/splash.jpg" alt="NeuroPods Splash Screen" className="w-full h-auto object-cover rounded-3xl" />
                             {/* Video overlay button */}
                             <div className="absolute inset-0 flex items-end justify-center pb-8">
                                 <button onClick={toggleVideo}
@@ -176,11 +176,11 @@ export const NeuropodsVisuals: React.FC = () => {
                             </div>
                         </div>
                         {/* Hidden video — plays when button is clicked */}
-                        <video ref={videoRef} src="/neuropods/splash.mp4" className="w-full rounded-3xl border border-purple-500/20 hidden"
+                        <video ref={videoRef} src="./neuropods/splash.mp4" className="w-full rounded-3xl border border-purple-500/20 hidden"
                             onEnded={() => setVideoPlaying(false)} />
                         {videoPlaying && (
                             <div className="relative rounded-3xl overflow-hidden border border-purple-500/20 bg-[#0a0e27] shadow-2xl shadow-purple-900/20">
-                                <video ref={videoRef} src="/neuropods/splash.mp4" autoPlay className="w-full h-auto"
+                                <video ref={videoRef} src="./neuropods/splash.mp4" autoPlay className="w-full h-auto"
                                     onEnded={() => setVideoPlaying(false)} />
                             </div>
                         )}
@@ -203,7 +203,7 @@ export const NeuropodsVisuals: React.FC = () => {
                 {activeScreen === 'pulse' && (
                     <div className="space-y-6">
                         <div className="relative rounded-3xl overflow-hidden border border-cyan-500/20 shadow-2xl shadow-cyan-900/10">
-                            <img src="/neuropods/global-pulse.jpg" alt="Global Pulse View" className="w-full h-auto object-cover" />
+                            <img src="./neuropods/global-pulse.jpg" alt="Global Pulse View" className="w-full h-auto object-cover" />
                         </div>
                         {/* Live mock recreation */}
                         <div className="bg-[#0d1130] rounded-3xl p-6 border border-white/5 relative overflow-hidden">
@@ -305,7 +305,7 @@ export const NeuropodsVisuals: React.FC = () => {
                 {activeScreen === 'team' && (
                     <div className="space-y-6">
                         <div className="relative rounded-3xl overflow-hidden border border-purple-500/20 shadow-2xl shadow-purple-900/10">
-                            <img src="/neuropods/team-insight.jpg" alt="Team & Tool Insight" className="w-full h-auto object-cover" />
+                            <img src="./neuropods/team-insight.jpg" alt="Team & Tool Insight" className="w-full h-auto object-cover" />
                         </div>
                         {/* Live mock */}
                         <div className="bg-[#0d1130] rounded-3xl p-6 border border-white/5 relative overflow-hidden">

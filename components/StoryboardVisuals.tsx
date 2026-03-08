@@ -31,7 +31,7 @@ export const StoryboardVisuals: React.FC = () => {
         e.stopPropagation();
         if (selectedImage && selectedImage.index < STORYBOARD_SCENES.length - 1) {
             setSelectedImage({
-                src: `/storyboard/${encodeURIComponent(STORYBOARD_SCENES[selectedImage.index + 1])}`,
+                src: `./storyboard/${encodeURIComponent(STORYBOARD_SCENES[selectedImage.index + 1])}`,
                 index: selectedImage.index + 1
             });
         }
@@ -41,7 +41,7 @@ export const StoryboardVisuals: React.FC = () => {
         e.stopPropagation();
         if (selectedImage && selectedImage.index > 0) {
             setSelectedImage({
-                src: `/storyboard/${encodeURIComponent(STORYBOARD_SCENES[selectedImage.index - 1])}`,
+                src: `./storyboard/${encodeURIComponent(STORYBOARD_SCENES[selectedImage.index - 1])}`,
                 index: selectedImage.index - 1
             });
         }
@@ -69,8 +69,8 @@ export const StoryboardVisuals: React.FC = () => {
                     </p>
 
                     <div className="flex gap-4 mt-6 mb-8">
-                        <a href="/storyboard/Storyboard.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-orange-600 text-white px-4 py-2 rounded-xl text-sm font-bold shadow-lg hover:scale-105 transition-transform"><Download size={16} /> Concept PDF</a>
-                        <a href="/storyboard/StoryBoard - The Thermal Silhouette.pptx" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-white dark:bg-black/20 text-orange-600 dark:text-orange-400 border border-orange-200 dark:border-orange-900/50 px-4 py-2 rounded-xl text-sm font-bold shadow-sm hover:bg-orange-50 dark:hover:bg-orange-900/10 transition-colors"><Download size={16} /> Storyboard PPTX</a>
+                        <a href="./storyboard/Storyboard.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-orange-600 text-white px-4 py-2 rounded-xl text-sm font-bold shadow-lg hover:scale-105 transition-transform"><Download size={16} /> Concept PDF</a>
+                        <a href="./storyboard/StoryBoard - The Thermal Silhouette.pptx" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-white dark:bg-black/20 text-orange-600 dark:text-orange-400 border border-orange-200 dark:border-orange-900/50 px-4 py-2 rounded-xl text-sm font-bold shadow-sm hover:bg-orange-50 dark:hover:bg-orange-900/10 transition-colors"><Download size={16} /> Storyboard PPTX</a>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
@@ -112,11 +112,11 @@ export const StoryboardVisuals: React.FC = () => {
                         <div
                             key={index}
                             className="group cursor-pointer bg-gray-50 dark:bg-[#111] rounded-2xl overflow-hidden border border-gray-200 dark:border-white/10 hover:border-orange-400/50 hover:shadow-2xl hover:shadow-orange-900/20 transition-all duration-300"
-                            onClick={() => setSelectedImage({ src: `/storyboard/${encodeURIComponent(scene)}`, index })}
+                            onClick={() => setSelectedImage({ src: `./storyboard/${encodeURIComponent(scene)}`, index })}
                         >
                             <div className="aspect-[16/9] w-full relative overflow-hidden bg-white dark:bg-black">
                                 <img
-                                    src={`/storyboard/${encodeURIComponent(scene)}`}
+                                    src={`./storyboard/${encodeURIComponent(scene)}`}
                                     alt={`Storyboard Frame ${index + 1}`}
                                     className="w-full h-full object-contain group-hover:scale-[1.03] transition-transform duration-500"
                                     loading="lazy"

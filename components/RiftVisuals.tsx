@@ -26,7 +26,7 @@ export const RiftVisuals: React.FC = () => {
 
                         <div className="flex items-center gap-4">
                             <a
-                                href="/rift/Project_RIFT_Paper.pdf"
+                                href="./rift/Project_RIFT_Paper.pdf"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white rounded-xl font-bold text-sm shadow-lg shadow-accent/20 hover:scale-105 transition-all"
@@ -50,7 +50,7 @@ export const RiftVisuals: React.FC = () => {
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="bg-[#080B13] rounded-3xl overflow-hidden border border-accent/20 shadow-lg group relative">
                     <video
-                        src="/rift/Project_RIFT.mp4"
+                        src="./rift/Project_RIFT.mp4"
                         controls
                         autoPlay
                         loop
@@ -63,7 +63,7 @@ export const RiftVisuals: React.FC = () => {
                 </div>
                 <div className="bg-gray-100 dark:bg-[#080B13] rounded-3xl overflow-hidden border border-black/5 dark:border-accent/20 shadow-lg group relative">
                     <img
-                        src="/rift/3d_Model.png"
+                        src="./rift/3d_Model.png"
                         alt="RIFT 3D Model"
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />

@@ -178,7 +178,7 @@ export const GlobotelVisuals: React.FC = () => {
                     </div>
                     <div className="flex flex-col gap-3 min-w-[200px]">
                         <a
-                            href="/globotel/GloboTel_Service_Blueprint.pdf"
+                            href="./globotel/GloboTel_Service_Blueprint.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="px-6 py-3 bg-white text-[#0e1f4d] font-bold text-sm rounded-xl hover:scale-105 transition-all shadow-lg flex items-center gap-2 justify-center"
@@ -340,7 +340,7 @@ export const GlobotelVisuals: React.FC = () => {
                 {/* Blueprint image */}
                 <div className="mt-8 rounded-3xl overflow-hidden border border-black/5 dark:border-white/10 shadow-xl">
                     <p className="text-[10px] font-bold uppercase tracking-widest text-blue-500 px-6 pt-5 pb-2">Full Service Blueprint Document</p>
-                    <img src="/globotel/blueprint.jpg" alt="GloboTel Service Blueprint" className="w-full h-auto object-contain" />
+                    <img src="./globotel/blueprint.jpg" alt="GloboTel Service Blueprint" className="w-full h-auto object-contain" />
                 </div>
             </section>
 
