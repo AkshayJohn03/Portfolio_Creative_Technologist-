@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { Linkedin } from 'lucide-react';
 import { EXPERIENCE_DATA } from '../constants';
+import { SplineScene } from './SplineScene';
 
 const About: React.FC = () => {
   return (
@@ -11,14 +11,13 @@ const About: React.FC = () => {
           {/* Left Column: Image & Summary */}
           <div className="w-full lg:w-5/12 lg:sticky lg:top-32 order-2 lg:order-1">
             <div className="relative mb-10 sm:mb-12">
-              <div className="aspect-[4/5] sm:aspect-square lg:aspect-[4/5] rounded-3xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl group">
-                <img
-                  src="https://picsum.photos/id/1025/1200/1500"
-                  alt="Akshay John"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+              <div className="aspect-[4/5] sm:aspect-square lg:aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl relative bg-black/5 dark:bg-white/5">
+                <SplineScene
+                  scene="https://prod.spline.design/kZCBcrdsQ01EQM83/scene.splinecode"
+                  className="w-full h-full"
                 />
               </div>
-              <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-accent rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[80px] opacity-20"></div>
+              <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-accent rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[80px] opacity-20 pointer-events-none"></div>
               <div className="absolute -top-8 -left-8 w-40 h-40 bg-blue-500 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[80px] opacity-20"></div>
             </div>
 
