@@ -13,7 +13,7 @@ const About: React.FC = () => {
             <div className="relative mb-10 sm:mb-12">
               <div className="aspect-[4/5] sm:aspect-square lg:aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl relative bg-black/5 dark:bg-white/5">
                 <SplineScene
-                  scene="https://prod.spline.design/kZCBcrdsQ01EQM83/scene.splinecode"
+                  scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
                   className="w-full h-full"
                 />
               </div>
