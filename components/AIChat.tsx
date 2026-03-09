@@ -13,7 +13,12 @@ const AIChat: React.FC = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messagesEndRef.current && messagesEndRef.current.parentElement) {
+      messagesEndRef.current.parentElement.scrollTo({
+        top: messagesEndRef.current.parentElement.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
   };
 
   useEffect(() => {
@@ -23,7 +28,7 @@ const AIChat: React.FC = () => {
   const formatText = (text: string) => {
     return text.split('\n').map((str, i) => (
       <span key={i}>
-        {str.split('**').map((chunk, j) => 
+        {str.split('**').map((chunk, j) =>
           j % 2 === 1 ? <strong key={j} className="font-bold text-accent">{chunk}</strong> : chunk
         )}
         <br />
@@ -43,7 +48,7 @@ const AIChat: React.FC = () => {
     try {
       const history = messages.map(m => ({ role: m.role, text: m.text }));
       const responseText = await generateChatResponse(userMsg.text, history);
-      
+
       const botMsg: ChatMessage = { role: 'model', text: responseText, timestamp: new Date() };
       setMessages(prev => [...prev, botMsg]);
     } catch (error) {
@@ -57,7 +62,7 @@ const AIChat: React.FC = () => {
   return (
     <section id="chat" className="py-20 sm:py-32 bg-gray-50/50 dark:bg-dark relative overflow-hidden transition-colors duration-500">
       <div className="absolute inset-0 bg-gradient-to-b from-gray-100/30 via-accent/5 to-gray-100/30 dark:from-dark dark:via-accent/5 dark:to-dark pointer-events-none"></div>
-      
+
       <div className="container mx-auto px-5 sm:px-8 max-w-5xl relative z-10">
         <div className="text-center mb-12 sm:mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent border border-accent/20 mb-6 animate-pulse">
@@ -79,11 +84,10 @@ const AIChat: React.FC = () => {
                   <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center flex-shrink-0 shadow-md ${msg.role === 'user' ? 'bg-gray-900 dark:bg-white text-white dark:text-black' : 'bg-accent text-white'}`}>
                     {msg.role === 'user' ? <User size={16} /> : <Bot size={18} />}
                   </div>
-                  <div className={`p-4 sm:p-5 rounded-2xl sm:rounded-3xl text-sm sm:text-base leading-relaxed ${
-                    msg.role === 'user' 
-                      ? 'bg-gray-900 dark:bg-white text-white dark:text-black rounded-tr-none shadow-xl' 
+                  <div className={`p-4 sm:p-5 rounded-2xl sm:rounded-3xl text-sm sm:text-base leading-relaxed ${msg.role === 'user'
+                      ? 'bg-gray-900 dark:bg-white text-white dark:text-black rounded-tr-none shadow-xl'
                       : 'bg-white dark:bg-white/5 border border-black/5 dark:border-white/5 text-gray-700 dark:text-gray-300 rounded-tl-none shadow-sm'
-                  }`}>
+                    }`}>
                     {msg.role === 'model' ? formatText(msg.text) : msg.text}
                   </div>
                 </div>
@@ -91,7 +95,7 @@ const AIChat: React.FC = () => {
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                 <div className="flex gap-4 max-w-[80%]">
+                <div className="flex gap-4 max-w-[80%]">
                   <div className="w-10 h-10 rounded-full bg-accent text-white flex items-center justify-center flex-shrink-0 animate-pulse">
                     <Bot size={18} />
                   </div>
@@ -99,7 +103,7 @@ const AIChat: React.FC = () => {
                     <Loader2 size={18} className="animate-spin text-accent" />
                     <span className="text-gray-400 text-xs sm:text-sm font-medium">Assistant is thinking...</span>
                   </div>
-                 </div>
+                </div>
               </div>
             )}
             <div ref={messagesEndRef} />
@@ -116,14 +120,13 @@ const AIChat: React.FC = () => {
                 className="flex-1 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl px-5 py-4 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition-all text-sm sm:text-base"
                 disabled={isLoading}
               />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={isLoading || !input.trim()}
-                className={`p-4 sm:px-6 rounded-2xl transition-all duration-300 flex items-center justify-center shadow-lg ${
-                    isLoading || !input.trim()
+                className={`p-4 sm:px-6 rounded-2xl transition-all duration-300 flex items-center justify-center shadow-lg ${isLoading || !input.trim()
                     ? 'bg-gray-200 dark:bg-white/5 text-gray-400 cursor-not-allowed'
                     : 'bg-accent text-white hover:bg-indigo-500 hover:scale-105 active:scale-95'
-                }`}
+                  }`}
               >
                 <Send size={20} className={isLoading ? 'opacity-0' : 'opacity-100'} />
               </button>

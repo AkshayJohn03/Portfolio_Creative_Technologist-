@@ -1,0 +1,2 @@
+RESPONSE FAILED: 302 https://cdn.tailwindcss.com/
+RESPONSE FAILED: 404 http://localhost:3000/favicon.ico

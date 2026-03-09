@@ -32,16 +32,16 @@ const Hero: React.FC = () => {
           Bridging creative vision, technical feasibility, and AI innovation. Where aesthetic precision meets functional clarity.
         </p>
 
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 w-full max-w-md mx-auto sm:max-w-none">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-5 sm:gap-8 w-full max-w-[280px] sm:max-w-none mx-auto px-2 sm:px-0">
           <a
             href="#work"
-            className="w-full sm:w-auto px-10 py-4.5 bg-gray-900 dark:bg-white text-white dark:text-dark font-bold rounded-full hover:bg-gray-700 dark:hover:bg-gray-200 hover:scale-[1.03] active:scale-95 transition-all duration-300 text-center shadow-lg dark:shadow-white/10 min-w-[180px]"
+            className="w-full sm:w-auto px-12 py-5 sm:px-14 sm:py-6 bg-gray-900 dark:bg-white text-white dark:text-dark font-bold rounded-full hover:bg-gray-700 dark:hover:bg-gray-200 hover:scale-[1.03] active:scale-95 transition-all duration-300 text-center shadow-lg dark:shadow-white/10 min-w-[220px] sm:min-w-[240px]"
           >
             View Projects
           </a>
           <a
             href="#contact"
-            className="w-full sm:w-auto px-10 py-4.5 border border-black/10 dark:border-white/20 text-gray-900 dark:text-white rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 text-center min-w-[180px]"
+            className="w-full sm:w-auto px-12 py-5 sm:px-14 sm:py-6 border border-black/15 dark:border-white/20 text-gray-900 dark:text-white font-medium rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 text-center min-w-[220px] sm:min-w-[240px]"
           >
             Contact Me
           </a>
