@@ -65,6 +65,39 @@ export const PROJECTS: Project[] = [
     hasInternalPage: true
   },
   {
+    id: 'ai-1',
+    title: "Aria-X6T: AI Trading System",
+    category: ProjectCategory.AI_ML,
+    description: 'An AI-powered options trading platform for NIFTY50, utilizing Deep Learning.',
+    fullDescription: 'Hybrid Deep Learning: Conv1D layers for localized micro-trends, Stacked LSTM for long-term sequential dependencies.',
+    imageUrl: './thumb_ariaxat.jpg',
+    link: '#',
+    tags: ['Trading', 'PyTorch', 'TimeSeries', 'Deep Learning'],
+    hasInternalPage: true
+  },
+  {
+    id: 'ai-zia-image',
+    title: "ZIA-Image",
+    category: ProjectCategory.AI_ML,
+    description: 'Experimental Image Generation Model built on custom diffusion paths.',
+    fullDescription: 'Focusing on recursive latent patch painting and constrained generative paths for optimized image generation.',
+    imageUrl: './thumb_ziaimage.png',
+    link: '#',
+    tags: ['Generative AI', 'Diffusion', 'PyTorch'],
+    hasInternalPage: true
+  },
+  {
+    id: 'ai-driveai',
+    title: "DriveAI",
+    category: ProjectCategory.AI_ML,
+    description: 'AI Automotive Assistant engineered for low-latency conversational queries.',
+    fullDescription: 'Voice-Enabled AI Assistant featuring conversational UX flows optimized for automotive use cases.',
+    imageUrl: './thumb_driveai.png',
+    link: '#',
+    tags: ['Conversational AI', 'Automotive', 'Voice UX'],
+    hasInternalPage: true
+  },
+  {
     id: 'ux-mcd',
     title: "McDonald's Burger Line",
     category: ProjectCategory.UX,
@@ -221,6 +254,15 @@ export const CASE_STUDIES: Record<string, CaseStudyContent> = {
     overview: "A custom 37.4M parameter decoder-only Transformer built from scratch. Though the final outputs remained repetitive and proved the limits of small models, the engineering journey yielded deep insights into transformer training mechanics.",
     context: "Unlike typical projects that rely on pretrained weights, ZIA explores how far a transformer can be pushed on commodity hardware. This full-stack experiment was built from scratch—covering tokenizer construction, dataset engineering (originally over 20GB raw data), architecture design, training loop optimization, and RoPE alignment tuning.",
 
+    aiStructure: {
+      problem: "Heavy reliance on pre-trained models limits fundamental understanding of LLM architecture mechanics and their baseline behavior before instruction tuning.",
+      approach: "Engineer a lightweight 60M parameter SLM from scratch on a completely local environment using consumer-grade hardware (GTX 1050 Ti), manually implementing tokenization, model blocks, and training loops.",
+      architecture: "37.4M parameter decoder-only Transformer with 8 layers, 384 d_model dimension, and 6 heads. Weight tying enabled between Embedding and LM head. Custom 60k BPE tokenizer.",
+      experiment: "Trained using 15M samples (Wikipedia, FineWeb, ShareGPT) over 400+ hours. Implemented progressive context scaling using RoPE embeddings from 4k to 16k context windows.",
+      results: "Achieved validation loss of 1.34 at 4k context and 1.61 at 16k context. Successfully learned syntactic structures and proper grammar formatting.",
+      whatFailed: "While loss was technically low, the model fell into severe repetition loops ('babbling phase'). Proved that syntax can be learned independently of semantic grounding and factual reasoning."
+    },
+
     techStack: [
       { category: "Core Framework", tools: ["PyTorch", "HuggingFace Datasets", "Transformers Utilities", "TensorBoard logging"] },
       { category: "Optimization Pipeline", tools: ["AdamW (3e-4)", "Mixed Precision FP16", "Gradient Accumulation (8)", "Linear LR Warmup & Decay"] },
@@ -275,6 +317,15 @@ export const CASE_STUDIES: Record<string, CaseStudyContent> = {
     role: "Independent Researcher",
     overview: "Project RIFT investigates the emergence of anticipatory intelligence in environments governed by irreversibility, delayed consequence, and metabolic constraint, where conventional prediction-centric artificial intelligence systems systematically fail.",
     context: "Across more than fifty simulations, geometric and morphological agents succeeded without prediction or reward optimization by collapsing uncertainty through early irreversible physical commitment. Predictive architectures (Transformers, RNNs, RL agents) were systematically excluded because their probabilistic hedging delayed action, proving catastrophic in irreversible environments.",
+
+    aiStructure: {
+      problem: "Existing AI architectures rely heavily on prediction instead of physical anticipation, causing them to hesitate and fail in environments with irreversible, catastrophic physics.",
+      approach: "Build a physics engine testing metabolic and thermodynamic constraints against organism survival. Test neural predictability against physical geometric commitment.",
+      architecture: "Phase-locking oscillator networks mixed with morphological mass constraints, rather than classical reward-based prediction.",
+      experiment: "Subjected abstract agents to physical hammer blows across 50+ stages, giving them metabolic limits (ischemia) and testing if they anticipate impact.",
+      results: "Agents without predictive memory, but with heavy physical morphological constraints, developed 'anticipation' to brace safely before a physical collision.",
+      whatFailed: "When isolated an artificial memory 'engram' (without physical cost), the agents hallucinated safety and let themselves die, completely disconnecting from reality."
+    },
 
     techStack: [
       { category: "Core Idea", tools: ["Morphological Computation", "Embodied Cognition", "Ecological Psychology", "Non-Symbolic AI"] },
@@ -500,61 +551,67 @@ export const CASE_STUDIES: Record<string, CaseStudyContent> = {
   },
   'ai-1': {
     id: 'ai-1',
-    title: "Aria-X6T: AI Trading System",
+    title: "Aria-XaT: AI Trading System",
     role: "AI Engineer",
-    overview: "An AI-powered options trading platform for NIFTY50, utilizing Deep Learning (Conv1D + BiLSTM + Attention) to predict intraday market moves with high precision.",
-    context: "The Indian derivatives market (NIFTY50) is highly volatile. Traditional algorithmic trading relies on lagging indicators. Aria-X6T was built to leverage deep learning for identifying non-linear patterns in price action to generate predictive signals.",
+    overview: "Aria-XaT is an AI-driven quantitative trading platform designed to analyze and trade NIFTY50 index options using deep learning, financial modeling, and automated execution pipelines.",
+    context: "Intraday options trading in the Indian stock market is characterized by high volatility, noise, and rapid price movements. Retail traders struggle with identifying the correct strike price, emotional decision-making, and high-frequency fluctuations. Aria-XaT addresses these limitations by integrating artificial intelligence with quantitative financial modeling, predicting both market direction and near-future price levels to select optimal option strikes.",
+
+    aiStructure: {
+      problem: "Traditional trading tools focus primarily on charting and indicators but rarely incorporate predictive modeling or automated decision logic. Traders struggle with high-frequency price fluctuations that obscure patterns and difficulty identifying correct strike prices.",
+      approach: "Aria is designed as a modular AI trading infrastructure capable of continuous learning, strategy testing, and automated execution. It integrates machine learning models, option pricing analytics, conversational AI assistance (Aria-Qwen), and backtesting.",
+      architecture: "The core is the Aria-XaT engine: a hybrid deep learning architecture combining Conv1D layers, Stacked LSTM layers, and an Attention Mechanism leading to a Shared Feature Representation. It splits into two output heads: a Classification Head (BUY CALL, BUY PUT, HOLD) and a Regression Head (next expected price level).",
+      experiment: "Nightly backtesting pipeline replays historical market data through the model to simulate trading performance. Execution is currently integrated with the Zerodha API and Yahoo Finance as fallback.",
+      results: "Validation F1 score approximately 0.973 (reliably classifying signals). Validation RMSE approximately 0.2153 (predicting short-term forward price estimates for position sizing).",
+      whatFailed: "Certain datasets lacked detailed volume information. To compensate, proxy indicators such as ATR and Bollinger width were introduced."
+    },
 
     techStack: [
-      { category: "Core Framework", tools: ["PyTorch", "Python 3.9"] },
-      { category: "Data Processing", tools: ["Pandas", "NumPy", "TA-Lib"] },
-      { category: "Model Optimization", tools: ["Optuna (Hyperparameter Tuning)", "AMP (Mixed Precision)"] },
-      { category: "Visualization", tools: ["TensorBoard", "Matplotlib"] }
+      { category: "Core Framework", tools: ["Python", "PyTorch", "NumPy", "Pandas", "Scikit-learn"] },
+      { category: "Feature Engineering", tools: ["TA-Lib", "Cyclical Time Encodings", "One-hot Symbol Vectors"] },
+      { category: "Automation & Infrastructure", tools: ["Zerodha API", "Yahoo Finance API", "CUDA Acceleration", "Plotly"] },
+      { category: "Conversational AI", tools: ["Aria-Qwen (Qwen 2.5)", "Gemini", "LLM Interpretability"] }
     ],
 
     inputParameters: [
-      { category: "Input Data Format", details: ["Multi-variate Time Series", "Shape: (Batch, Sequence, Features)", "Normalized via RobustScaler"] },
-      { category: "Preprocessing Steps", details: ["Outlier clipping", "FFT-based Denoising", "Lagged-feature generation (1-5 min)"] },
-      { category: "Feature Engineering", details: ["Volume Profile analysis", "RSI/MACD calculations", "Greeks (Delta/Gamma) integration"] }
+      { category: "Financial Data", details: ["Minute-level NIFTY50 OHLC datasets", "Implied Volatility from NSE"] },
+      { category: "Technical Indicators", details: ["EMA, MACD, RSI", "ADX, ATR, Supertrend", "Bollinger Bands"] },
+      { category: "Option Greeks", details: ["Delta (price sensitivity)", "Theta (time decay)", "Gamma (rate of delta change)"] }
     ],
 
     modelArchitecture: {
-      overview: "The model employs a hybrid architecture designed to capture both local features and long-term temporal dependencies in time-series data.",
+      overview: "The architecture combines convolutional layers, recurrent layers, and attention mechanisms to process sequential financial data.",
       steps: [
-        { title: "Input Tensor", description: "OHLCV + 15 indicators (Batch x 60 x 20)." },
-        { title: "Conv1D Block", description: "Extraction of short-term spatial patterns." },
-        { title: "BiLSTM Stack", description: "Capture of long-term bi-directional memory." },
-        { title: "Dot-Product Attention", description: "Weighting critical market event time-steps." },
-        { title: "Dual Multi-Head", description: "Regression (Price) and Classification (Signal)." }
+        { title: "Input Features", description: "Raw OHLC transformed into structured signals and cyclical time features (Hour of day, minute of hour)." },
+        { title: "Spatial & Temporal", description: "Conv1D Layers process to Stacked LSTM Layers, passed into an Attention Mechanism." },
+        { title: "Classification Head", description: "Predicts actionable trading signals (BUY CALL, BUY PUT, HOLD)." },
+        { title: "Regression Head", description: "Predicts the next expected price level for the index to determine movement magnitude and stop-loss planning." },
+        { title: "Conversational Layer", description: "Aria-Qwen acts as the natural language interface to explain trade signals and provide reasoning behind predicted price movements." }
       ]
     },
 
     performanceMetrics: [
-      { name: "F1-Score", value: "0.88", description: "Balance of Precision and Recall for Buy/Sell signals." },
-      { name: "Directional Accuracy", value: "68%", description: "Percentage of correctly predicted trend directions." },
-      { name: "Precision", value: "0.86", description: "Reliability of 'Buy' signals generated by the model." },
-      { name: "Sharpe Ratio", value: "2.4", description: "Risk-adjusted return measured during backtesting." },
-      { name: "Max Drawdown", value: "4.2%", description: "Maximum peak-to-trough decline during test regime." }
+      { name: "Validation F1", value: "0.973", description: "Excellent performance in classifying BUY CALL, BUY PUT, and HOLD signals." },
+      { name: "Validation RMSE", value: "0.2153", description: "High accuracy in predicting the short-term forward price estimates." },
+      { name: "Strike Selection", value: "Option Greeks", description: "Engine evaluates contracts using Black-Scholes Delta, Theta, and Gamma." }
     ],
 
     challenges: [
-      { title: "Data Noise", description: "Financial data is inherently noisy. Implemented aggressive denoising and normalization techniques." },
-      { title: "Overfitting", description: "Used Dropout (0.3) and Early Stopping with Optuna tuning to generalize well on unseen market regimes." },
-      { title: "Inference Latency", description: "Optimized model for real-time inference using ONNX Runtime for sub-millisecond predictions." }
+      { title: "Limited Volume Data", description: "Certain datasets lacked detailed volume. Compensated by using proxy indicators like ATR and Bollinger width." },
+      { title: "Hardware Constraints", description: "Trained on a consumer GPU (GTX 1050 Ti, 32GB RAM). Optimized using AMP, efficient batching, and custom memory loops." },
+      { title: "Model Explainability", description: "Addressed opaque AI predictions using Aria-Qwen to generate natural language explanations of model behavior." }
+    ],
+
+    strategies: [
+      { title: "Strike Selection Engine", description: "Filtering contracts based on Black-Scholes Greeks, implied volatility spikes, and predefined budget limits." },
+      { title: "Cyclical Temporal Encoding", description: "Encoding time features using sine and cosine transformations to help the model recognize repeating time-based patterns." }
     ],
 
     futureWork: [
-      { title: "Reinforcement Learning Agent", description: "Transitioning from prediction to active portfolio management via PPO agents." },
-      { title: "Multi-Asset Scaling", description: "Extending the architecture to Crypto and Global Equities (S&P 500)." },
-      { title: "LLM News Sentiment", description: "Integrating live Twitter/News feeds via a small BERT head for sentiment overlay." }
-    ],
-
-    testing: {
-      goals: ["Maximize Sharpe Ratio", "Minimize Max Drawdown", "Ensure real-time capability"],
-      metrics: [
-        { name: "Backtest Return", description: "Annualized return on historical test set", target: "+42%" }
-      ]
-    }
+      { title: "Delta Neutral Strategies", description: "Implementing strategies that hedge directional risk using paired options positions." },
+      { title: "Expanded Market Coverage", description: "Extending the system to trade additional indices such as BankNIFTY and FINNIFTY." },
+      { title: "Dynamic Budget Engine", description: "Developing a capital allocation system that adjusts lot sizes based on predicted volatility and model confidence." },
+      { title: "Aria Lab Continuous Learning", description: "Introducing automated retraining pipelines to periodically retrain the model using new market data." }
+    ]
   },
   'ux-globotel': {
     id: 'ux-globotel',
@@ -621,6 +678,44 @@ export const CASE_STUDIES: Record<string, CaseStudyContent> = {
       { category: 'Platforms', tools: ['Web Dashboard', 'Mobile App'] },
     ],
     uiGallery: [],
+  },
+  'ai-zia-image': {
+    id: 'ai-zia-image',
+    title: "ZIA-Image: Experimental Image Generation Model",
+    role: "AI Engineer",
+    overview: "A lightweight diffusion model setup optimized for specific hardware limits, focusing on latent patch refinement.",
+    context: "ZIA-Image was built to explore generative boundaries outside of the massive foundational model sphere, trying to compress and optimize the diffusion steps using targeted aesthetic gradients.",
+    techStack: [
+      { category: "Model", tools: ["PyTorch", "Diffusers"] },
+      { category: "Optimization", tools: ["Latent Distillation"] }
+    ],
+    aiStructure: {
+      problem: "Standard text-to-image models are too large to train or effectively fine-tune locally without massive compute.",
+      approach: "Implement a recursive latent patch painter and constrained training environment to distill aesthetic capabilities into a smaller footprint.",
+      architecture: "Custom Autoencoder with iterative state encodings in the diffusion UNet backbone.",
+      experiment: "Trained over several weeks with a highly curated aesthetic dataset, experimenting with progressive generation.",
+      results: "Capable of generating specific stylized assets at a fraction of the compute cost.",
+      whatFailed: "Struggles with high-frequency details leading to artifacting in complex textures."
+    }
+  },
+  'ai-driveai': {
+    id: 'ai-driveai',
+    title: "DriveAI: AI Automotive Assistant",
+    role: "Product Designer & UX Engineer",
+    overview: "A conversational interface for vehicles that minimizes cognitive load while providing rich AI interactions safely.",
+    context: "Interacting with infotainment systems causes dangerous driver distraction. DriveAI explores a low-friction, highly accurate voice-forward AI interface that understands deep context.",
+    techStack: [
+      { category: "System", tools: ["Conversational UI", "Speech-to-Text"] },
+      { category: "Design", tools: ["Figma", "ProtoPie"] }
+    ],
+    aiStructure: {
+      problem: "Automotive UX requires zero-distraction cognitive load, yet drivers increasingly want complex query capabilities.",
+      approach: "A voice-first proactive assistant that handles intent routing locally before cloud escalation.",
+      architecture: "Hybrid Local-Cloud NLP router with immediate acoustic feedback loops.",
+      experiment: "Simulated driving tests measuring glance-duration and task-completion time for complex tasks.",
+      results: "Significantly reduced screen-glance time by 40% compared to standard touch menus.",
+      whatFailed: "Ambient noise cancellation heavily disturbed local intent parsing in older acoustic cabins."
+    }
   }
 };
 

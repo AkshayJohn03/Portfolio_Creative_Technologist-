@@ -144,6 +144,15 @@ export interface InputParameter {
   details: string[];
 }
 
+export interface AIProjectStructure {
+  problem: string;
+  approach: string;
+  architecture: string;
+  experiment: string;
+  results: string;
+  whatFailed: string;
+}
+
 export interface CaseStudyContent {
   id: string;
   title: string;
@@ -174,6 +183,7 @@ export interface CaseStudyContent {
   // AI Project Specifics
   techStack?: TechStackItem[];
   modelArchitecture?: ModelArchitecture;
-  performanceMetrics?: PerformanceMetric[]; // New Section
-  inputParameters?: InputParameter[]; // New Section
+  performanceMetrics?: PerformanceMetric[];
+  inputParameters?: InputParameter[];
+  aiStructure?: AIProjectStructure;
 }

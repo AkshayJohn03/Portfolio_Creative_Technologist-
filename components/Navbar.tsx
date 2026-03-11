@@ -26,9 +26,10 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onHomeNavigate, isA
   }, []);
 
   const navLinks = [
-    { name: 'Work', href: '#work' },
+    { name: 'Featured Flagship Works', href: '#flagship' },
+    { name: 'Selected Works', href: '#work' },
+    { name: 'Tools & Systems', href: '#skills' },
     { name: 'About', href: '#about' },
-    { name: 'Chat', href: '#chat' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -42,7 +43,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onHomeNavigate, isA
       if (!isAtHome && onHomeNavigate) {
         onHomeNavigate();
       }
-      
+
       // Close mobile menu
       setMobileMenuOpen(false);
     } catch (error) {
@@ -58,8 +59,8 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onHomeNavigate, isA
   return (
     <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled || mobileMenuOpen ? 'bg-white/95 dark:bg-dark/95 backdrop-blur-md py-3 sm:py-4 border-b border-black/5 dark:border-white/10 shadow-sm' : 'bg-transparent py-5 sm:py-8'}`}>
       <div className="container mx-auto px-5 sm:px-8 flex justify-between items-center relative z-50">
-        <a 
-          href="#" 
+        <a
+          href="#"
           onClick={handleLinkClick}
           className="text-xl sm:text-2xl font-serif font-bold tracking-tighter hover:text-accent transition-colors text-gray-900 dark:text-white relative z-50 group"
         >
@@ -78,8 +79,8 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onHomeNavigate, isA
               {link.name}
             </a>
           ))}
-          
-          <button 
+
+          <button
             onClick={handleThemeToggle}
             className="p-2.5 rounded-full bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 transition-all active:scale-90"
             aria-label="Toggle Dark Mode"
@@ -90,13 +91,13 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onHomeNavigate, isA
 
         {/* Mobile Toggle Icons */}
         <div className="md:hidden flex items-center gap-2 relative z-50">
-          <button 
+          <button
             onClick={handleThemeToggle}
             className="p-3 rounded-full bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 active:scale-90 transition-transform"
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
-          <button 
+          <button
             className="text-gray-900 dark:text-white p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
@@ -121,8 +122,8 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onHomeNavigate, isA
             </a>
           ))}
           <div className={`pt-12 border-t border-black/5 dark:border-white/10 w-full transform ${mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`} style={{ transitionDelay: '400ms' }}>
-             <p className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-4">Let's Connect</p>
-             <a href="mailto:akshay3rishi@gmail.com" className="text-gray-900 dark:text-white font-medium hover:text-accent transition-colors">akshay3rishi@gmail.com</a>
+            <p className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-4">Let's Connect</p>
+            <a href="mailto:akshay3rishi@gmail.com" className="text-gray-900 dark:text-white font-medium hover:text-accent transition-colors">akshay3rishi@gmail.com</a>
           </div>
         </div>
       </div>

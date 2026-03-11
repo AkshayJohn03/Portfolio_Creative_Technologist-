@@ -163,6 +163,36 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, onOpenCaseStud
           </div>
         </header>
 
+        {/* AI Structural Content */}
+        {data.aiStructure && (
+          <RevealOnScroll delay={50}>
+            <section className="mb-32">
+              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900 dark:text-white mb-10 text-center flex items-center justify-center gap-3">
+                <Brain className="text-accent" /> Research Overview
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                {[
+                  { title: "Problem", content: data.aiStructure.problem, icon: <AlertTriangle size={20} className="text-red-400" /> },
+                  { title: "Approach", content: data.aiStructure.approach, icon: <Target size={20} className="text-blue-400" /> },
+                  { title: "Architecture", content: data.aiStructure.architecture, icon: <Layers size={20} className="text-purple-400" /> },
+                  { title: "Experiment", content: data.aiStructure.experiment, icon: <Monitor size={20} className="text-cyan-400" /> },
+                  { title: "Results", content: data.aiStructure.results, icon: <CheckCircle2 size={20} className="text-green-400" /> },
+                  { title: "What Failed", content: data.aiStructure.whatFailed, icon: <Lightbulb size={20} className="text-orange-400" /> }
+                ].map((item, idx) => (
+                  <div key={idx} className="bg-gray-50 dark:bg-white/5 p-8 rounded-3xl border border-gray-100 dark:border-white/10 hover:border-accent/30 transition-all shadow-sm">
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
+                      {item.icon} {item.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm sm:text-base font-light">
+                      {item.content}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </RevealOnScroll>
+        )}
+
         {/* Performance Metrics */}
         {data.performanceMetrics && (
           <RevealOnScroll>

@@ -9,10 +9,15 @@ import AIChat from './components/AIChat';
 import Contact from './components/Contact';
 import NeuralBackground from './components/NeuralBackground';
 import CaseStudy from './components/CaseStudy';
+import VisualWorks from './components/VisualWorks';
+import IdentityLayer from './components/IdentityLayer';
+import AIExperiments from './components/AIExperiments';
+import FlagshipSystems from './components/FlagshipSystems';
+import EvolutionTimeline from './components/EvolutionTimeline';
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-  const [activeView, setActiveView] = useState<'home' | 'case-study'>('home');
+  const [activeView, setActiveView] = useState<'home' | 'case-study' | 'visual-works'>('home');
   const [currentCaseStudyId, setCurrentCaseStudyId] = useState<string | null>(null);
 
   // Handle view switch and hash scrolling
@@ -56,6 +61,11 @@ const App: React.FC = () => {
     setCurrentCaseStudyId(null);
   };
 
+  const handleOpenVisualWorks = () => {
+    setActiveView('visual-works');
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className={`${theme}`}>
       <div className="bg-gray-50 dark:bg-dark min-h-screen text-gray-900 dark:text-white selection:bg-accent selection:text-white relative transition-all duration-500 ease-in-out">
@@ -72,17 +82,31 @@ const App: React.FC = () => {
           <div key="home-view" className="animate-fade-in-up">
             <main className="relative z-10">
               <Hero />
-              <PortfolioSection onOpenCaseStudy={handleOpenCaseStudy} />
+              <IdentityLayer />
+              <EvolutionTimeline />
+              <FlagshipSystems onOpenCaseStudy={handleOpenCaseStudy} />
+              <PortfolioSection
+                onOpenCaseStudy={handleOpenCaseStudy}
+                onOpenVisualWorks={handleOpenVisualWorks}
+              />
+              <AIExperiments />
               <Skills />
               <About />
               <AIChat />
             </main>
           </div>
-        ) : (
+        ) : activeView === 'case-study' ? (
           <main key="case-study-view" className="relative z-10 animate-fade-in-up">
             <CaseStudy
               onBack={handleBackToHome}
               projectId={currentCaseStudyId!}
+              onOpenCaseStudy={handleOpenCaseStudy}
+            />
+          </main>
+        ) : (
+          <main key="visual-works-view" className="relative z-10 animate-fade-in-up">
+            <VisualWorks
+              onBack={handleBackToHome}
               onOpenCaseStudy={handleOpenCaseStudy}
             />
           </main>
