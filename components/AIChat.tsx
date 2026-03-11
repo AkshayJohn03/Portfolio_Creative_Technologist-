@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Sparkles, Loader2, Bot, User } from 'lucide-react';
-import { generateChatResponse } from '../services/geminiService';
+import { generateLocalChatResponse } from '../services/localChatService';
 import { ChatMessage } from '../types';
 
 const AIChat: React.FC = () => {
@@ -46,8 +46,7 @@ const AIChat: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const history = messages.map(m => ({ role: m.role, text: m.text }));
-      const responseText = await generateChatResponse(userMsg.text, history);
+      const responseText = await generateLocalChatResponse(userMsg.text);
 
       const botMsg: ChatMessage = { role: 'model', text: responseText, timestamp: new Date() };
       setMessages(prev => [...prev, botMsg]);

@@ -27,12 +27,18 @@ const Contact: React.FC = () => {
     e.preventDefault();
     if (validate()) {
       setIsSubmitting(true);
+
+      // Trigger the local mail client using mailto directly
+      const subject = encodeURIComponent(`Portfolio Inquiry from ${formData.name}`);
+      const body = encodeURIComponent(`${formData.message}\n\nBest Regards,\n${formData.name}\n${formData.email}`);
+      window.location.href = `mailto:akshay3rishi@gmail.com?subject=${subject}&body=${body}`;
+
       setTimeout(() => {
         setIsSubmitting(false);
         setIsSent(true);
         setFormData({ name: '', email: '', message: '' });
         setTimeout(() => setIsSent(false), 3000);
-      }, 1500);
+      }, 1000);
     }
   };
 
