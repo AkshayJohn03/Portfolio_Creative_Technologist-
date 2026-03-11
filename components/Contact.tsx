@@ -23,22 +23,40 @@ const Contact: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validate()) {
-      setIsSubmitting(true);
+    if (!validate()) return;
+    setIsSubmitting(true);
 
-      // Trigger the local mail client using mailto directly
-      const subject = encodeURIComponent(`Portfolio Inquiry from ${formData.name}`);
-      const body = encodeURIComponent(`${formData.message}\n\nBest Regards,\n${formData.name}\n${formData.email}`);
-      window.location.href = `mailto:akshay3rishi@gmail.com?subject=${subject}&body=${body}`;
+    try {
+      // FormSpree endpoint — replace YOUR_FORM_ID with the one from formspree.io
+      const res = await fetch('https://formspree.io/f/xeoqwneg', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
 
-      setTimeout(() => {
-        setIsSubmitting(false);
+      if (res.ok) {
         setIsSent(true);
         setFormData({ name: '', email: '', message: '' });
-        setTimeout(() => setIsSent(false), 3000);
-      }, 1000);
+        setTimeout(() => setIsSent(false), 4000);
+      } else {
+        // Fallback: open mailto if FormSpree fails
+        const subject = encodeURIComponent(`Portfolio Inquiry from ${formData.name}`);
+        const body = encodeURIComponent(`${formData.message}\n\nFrom: ${formData.name} <${formData.email}>`);
+        window.open(`mailto:akshay3rishi@gmail.com?subject=${subject}&body=${body}`);
+      }
+    } catch {
+      // Network error fallback
+      const subject = encodeURIComponent(`Portfolio Inquiry from ${formData.name}`);
+      const body = encodeURIComponent(`${formData.message}\n\nFrom: ${formData.name} <${formData.email}>`);
+      window.open(`mailto:akshay3rishi@gmail.com?subject=${subject}&body=${body}`);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
