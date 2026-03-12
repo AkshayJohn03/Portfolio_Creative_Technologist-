@@ -1,68 +1,75 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 const TOTAL_FRAMES = 192;
+
+// Each phase occupies this many viewport-heights of scroll distance
+// 4 phases × 2.5vh each = 10 total screen heights of scroll before landing
+const VH_PER_PHASE = 2.5;
+const TOTAL_VH = VH_PER_PHASE * 4 + 1; // +1vh final buffer
+
 const FRAME_PATH = (n: number) =>
   `./Images/ezgif-frame-${String(n).padStart(3, '0')}.jpg`;
 
-const SplashScrollSequence: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+// Phase definitions: [startProgress, endProgress]
+const PHASES = [
+  { id: 0, start: 0.00, end: 0.25, title: 'Hey, I\'m Akshay 👋', sub: null },
+  { id: 1, start: 0.25, end: 0.50, title: 'Creative Technologist', sub: 'Engineering AI · Designing Interactions' },
+  { id: 2, start: 0.50, end: 0.75, title: 'AI Systems Builder', sub: 'LLMs · Physical AI · Quantitative Systems' },
+  { id: 3, start: 0.75, end: 1.00, title: 'Scroll to explore ↓', sub: 'Portfolio · Case Studies · Contact' },
+];
+
+const SplashScrollSequence: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
-  const currentFrameRef = useRef(0);
   const rafRef = useRef<number>(0);
-  const loadedRef = useRef(0);
-  const isCompleteRef = useRef(false);
+  const currentFrameRef = useRef(0);
+  const snapTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isSnappingRef = useRef(false);
 
   const [loadProgress, setLoadProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [showWipe, setShowWipe] = useState(false);
-  const [textPhase, setTextPhase] = useState(0); // 0 = hey, 1 = name, 2 = title 1, 3 = title 2
+  const [activePhase, setActivePhase] = useState(0);
+  const [textVisible, setTextVisible] = useState(true);
 
-  // Preload all images
+  // ─── Preload all frames ────────────────────────────────────────────────────
   useEffect(() => {
-    const imgs: HTMLImageElement[] = [];
     let loaded = 0;
-    for (let i = 1; i <= TOTAL_FRAMES; i++) {
+    const imgs: HTMLImageElement[] = Array.from({ length: TOTAL_FRAMES }, (_, i) => {
       const img = new Image();
-      img.src = FRAME_PATH(i);
+      img.src = FRAME_PATH(i + 1);
       img.onload = () => {
         loaded++;
-        loadedRef.current = loaded;
         setLoadProgress(Math.round((loaded / TOTAL_FRAMES) * 100));
         if (loaded === TOTAL_FRAMES) setIsLoaded(true);
       };
-      imgs.push(img);
-    }
+      return img;
+    });
     imagesRef.current = imgs;
   }, []);
 
+  // ─── Draw a single frame to canvas ────────────────────────────────────────
   const drawFrame = useCallback((index: number) => {
     const canvas = canvasRef.current;
-    const img = imagesRef.current[index];
-    if (!canvas || !img || !img.complete) return;
+    const img = imagesRef.current[Math.max(0, Math.min(index, TOTAL_FRAMES - 1))];
+    if (!canvas || !img?.complete || !img.naturalWidth) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-    // Cover fill — maintain aspect ratio, center crop
-    const cw = canvas.width;
-    const ch = canvas.height;
-    const iw = img.naturalWidth;
-    const ih = img.naturalHeight;
-    const scale = Math.max(cw / iw, ch / ih);
-    const nw = iw * scale;
-    const nh = ih * scale;
-    const ox = (cw - nw) / 2;
-    const oy = (ch - nh) / 2;
+    const { width: cw, height: ch } = canvas;
+    const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+    const nw = img.naturalWidth * scale;
+    const nh = img.naturalHeight * scale;
     ctx.clearRect(0, 0, cw, ch);
-    ctx.drawImage(img, ox, oy, nw, nh);
+    ctx.drawImage(img, (cw - nw) / 2, (ch - nh) / 2, nw, nh);
   }, []);
 
-  // Resize canvas
+  // ─── Resize canvas ─────────────────────────────────────────────────────────
   useEffect(() => {
     const resize = () => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const c = canvasRef.current;
+      if (!c) return;
+      c.width = window.innerWidth;
+      c.height = window.innerHeight;
       drawFrame(currentFrameRef.current);
     };
     resize();
@@ -70,138 +77,192 @@ const SplashScrollSequence: React.FC<{ onComplete: () => void }> = ({ onComplete
     return () => window.removeEventListener('resize', resize);
   }, [drawFrame]);
 
-  // Scroll handler
+  // ─── Scroll handler + Phase snap ──────────────────────────────────────────
   useEffect(() => {
     if (!isLoaded) return;
 
-    const onScroll = () => {
+    const getSectionProgress = (): number => {
       const section = sectionRef.current;
-      if (!section || isCompleteRef.current) return;
+      if (!section) return 0;
+      const { top, height } = section.getBoundingClientRect();
+      // Progress 0 → 1 as section scrolls past viewport
+      const scrollable = height - window.innerHeight;
+      const scrolled = -top;
+      return Math.min(Math.max(scrolled / scrollable, 0), 1);
+    };
 
-      const scrollTop = window.scrollY;
-      const sectionHeight = section.offsetHeight;
-      const progress = Math.min(Math.max(scrollTop / (sectionHeight - window.innerHeight), 0), 1);
+    const onScroll = () => {
+      const progress = getSectionProgress();
 
-      const frameIndex = Math.min(
-        Math.floor(progress * (TOTAL_FRAMES - 1)),
-        TOTAL_FRAMES - 1
-      );
-
+      // Frame rendering
+      const frameIndex = Math.floor(progress * (TOTAL_FRAMES - 1));
       if (frameIndex !== currentFrameRef.current) {
         cancelAnimationFrame(rafRef.current);
         rafRef.current = requestAnimationFrame(() => drawFrame(frameIndex));
         currentFrameRef.current = frameIndex;
       }
 
-      // Text phase based on progress
-      if (progress < 0.15) setTextPhase(0);
-      else if (progress < 0.35) setTextPhase(1);
-      else if (progress < 0.60) setTextPhase(2);
-      else setTextPhase(3);
+      // Active phase
+      const phase = PHASES.findIndex(p => progress >= p.start && progress < p.end);
+      setActivePhase(phase === -1 ? 3 : phase);
 
-      // Trigger wipe-up exit when sequence is 98% done
-      if (progress >= 0.98 && !isCompleteRef.current) {
-        isCompleteRef.current = true;
-        setShowWipe(true);
-        setTimeout(() => {
-          onComplete();
-        }, 800);
-      }
+      // ── Phase-snap logic ──────────────────────────────────────────────────
+      // Debounce: after the user stops scrolling for 250ms, snap to nearest
+      // phase boundary so each stop lands cleanly on a text milestone
+      if (snapTimerRef.current) clearTimeout(snapTimerRef.current);
+      if (isSnappingRef.current) return;
+
+      snapTimerRef.current = setTimeout(() => {
+        const section = sectionRef.current;
+        if (!section) return;
+
+        const currentProgress = getSectionProgress();
+        // Only snap if inside the section (not past it)
+        if (currentProgress >= 1) return;
+
+        // Find nearest phase target (middle of each phase dwell zone)
+        const targets = PHASES.map(p => (p.start + p.end) / 2);
+        // find nearest target to current progress
+        let nearest = targets[0];
+        let minDist = Math.abs(currentProgress - targets[0]);
+        for (const t of targets) {
+          const d = Math.abs(currentProgress - t);
+          if (d < minDist) { minDist = d; nearest = t; }
+        }
+
+        // Only snap if we're within 0.12 of a target (so rapid scrolling isn't interrupted)
+        if (minDist > 0.12) return;
+
+        isSnappingRef.current = true;
+        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+        const scrollable = section.offsetHeight - window.innerHeight;
+        const targetScrollY = sectionTop + nearest * scrollable;
+
+        // Flash text transition
+        setTextVisible(false);
+        setTimeout(() => setTextVisible(true), 300);
+
+        window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
+        setTimeout(() => { isSnappingRef.current = false; }, 700);
+      }, 250);
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
     drawFrame(0);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [isLoaded, drawFrame, onComplete]);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (snapTimerRef.current) clearTimeout(snapTimerRef.current);
+    };
+  }, [isLoaded, drawFrame]);
 
-  const textLines = [
-    { phase: 0, text: 'Hey 👋', sub: null },
-    { phase: 1, text: "I'm Akshay John.", sub: null },
-    { phase: 2, text: 'Creative Technologist', sub: 'Engineering AI · Designing Interactions' },
-    { phase: 3, text: 'AI Systems Builder', sub: 'Bridging Intelligence & Human Experience' },
-  ];
-
-  const active = textLines.find(t => t.phase === textPhase) ?? textLines[0];
+  const phase = PHASES[activePhase] ?? PHASES[0];
 
   return (
-    <div
-      ref={sectionRef}
-      className="relative"
-      style={{ height: `${TOTAL_FRAMES * 5}px` }} // scroll distance = frames × 5px
-    >
-      {/* Fixed viewport canvas layer */}
+    <>
+      {/* ── Scroll-pinned section ─────────────────────────────────────────── */}
       <div
-        className={`fixed inset-0 z-[100] transition-transform duration-700 ease-in-out ${showWipe ? '-translate-y-full' : 'translate-y-0'}`}
-        style={{ willChange: 'transform' }}
+        ref={sectionRef}
+        style={{ height: `${TOTAL_VH * 100}vh` }}
+        className="relative"
       >
-        {/* Loading screen */}
-        {!isLoaded && (
-          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black">
-            <div className="w-48 h-[2px] bg-white/10 rounded-full overflow-hidden mb-4">
-              <div
-                className="h-full bg-white transition-all duration-200"
-                style={{ width: `${loadProgress}%` }}
-              />
-            </div>
-            <p className="text-white/40 text-xs tracking-widest uppercase font-light">
-              Loading {loadProgress}%
-            </p>
-          </div>
-        )}
+        {/* Sticky viewport layer */}
+        <div className="sticky top-0 h-screen w-full overflow-hidden">
 
-        {/* Canvas */}
-        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-cover" />
-
-        {/* Dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/70 pointer-events-none" />
-
-        {/* Scroll indicator */}
-        {isLoaded && !showWipe && (
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-            <span className="text-white/40 text-[10px] tracking-widest uppercase font-light">Scroll to explore</span>
-            <div className="w-5 h-8 rounded-full border border-white/30 flex items-start justify-center pt-1">
-              <div className="w-1 h-2 bg-white/50 rounded-full animate-pulse" />
-            </div>
-          </div>
-        )}
-
-        {/* Text overlay */}
-        {isLoaded && (
-          <div className="absolute inset-0 flex flex-col items-start justify-end pb-24 sm:pb-32 px-8 sm:px-16 lg:px-24 pointer-events-none">
-            <div className="max-w-3xl">
-              <p
-                key={active.phase + '-main'}
-                className="text-4xl sm:text-6xl lg:text-8xl font-serif font-bold text-white leading-tight tracking-tight drop-shadow-2xl transition-all duration-500 ease-out"
-                style={{
-                  animation: 'fadeSlideUp 0.5s ease-out both',
-                }}
-              >
-                {active.text}
+          {/* Loading overlay */}
+          {!isLoaded && (
+            <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-black">
+              <div className="w-56 h-[2px] bg-white/10 rounded-full overflow-hidden mb-4">
+                <div
+                  className="h-full bg-white/80 transition-all duration-200"
+                  style={{ width: `${loadProgress}%` }}
+                />
+              </div>
+              <p className="text-white/40 text-[10px] tracking-[0.3em] uppercase">
+                Loading · {loadProgress}%
               </p>
-              {active.sub && (
-                <p
-                  key={active.phase + '-sub'}
-                  className="mt-3 text-base sm:text-xl text-white/60 font-light tracking-wide"
+            </div>
+          )}
+
+          {/* Canvas */}
+          <canvas
+            ref={canvasRef}
+            className="absolute inset-0 w-full h-full"
+            style={{ objectFit: 'cover' }}
+          />
+
+          {/* Gradient overlays */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/80 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent pointer-events-none" />
+
+          {/* ── Text overlay ─────────────────────────────────────────────── */}
+          {isLoaded && (
+            <div className="absolute inset-0 flex flex-col justify-end pb-24 sm:pb-32 px-8 sm:px-16 lg:px-24">
+              <div className="max-w-3xl">
+
+                {/* Phase dots */}
+                <div className="flex gap-2 mb-8">
+                  {PHASES.map((p, i) => (
+                    <div
+                      key={p.id}
+                      className="transition-all duration-500"
+                      style={{
+                        width: i === activePhase ? '2rem' : '0.4rem',
+                        height: '0.25rem',
+                        borderRadius: '9999px',
+                        background: i === activePhase ? 'white' : 'rgba(255,255,255,0.3)',
+                      }}
+                    />
+                  ))}
+                </div>
+
+                {/* Title */}
+                <div
+                  key={`title-${activePhase}`}
                   style={{
-                    animation: 'fadeSlideUp 0.5s 0.15s ease-out both',
+                    opacity: textVisible ? 1 : 0,
+                    transform: textVisible ? 'translateY(0)' : 'translateY(16px)',
+                    transition: 'opacity 0.45s ease, transform 0.45s ease',
                   }}
                 >
-                  {active.sub}
-                </p>
-              )}
+                  <p className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-serif font-bold text-white leading-tight tracking-tight drop-shadow-2xl">
+                    {phase.title}
+                  </p>
+                  {phase.sub && (
+                    <p
+                      className="mt-4 text-sm sm:text-lg text-white/55 font-light tracking-widest uppercase"
+                      style={{
+                        opacity: textVisible ? 1 : 0,
+                        transform: textVisible ? 'translateY(0)' : 'translateY(12px)',
+                        transition: 'opacity 0.45s 0.1s ease, transform 0.45s 0.1s ease',
+                      }}
+                    >
+                      {phase.sub}
+                    </p>
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+
+          {/* Scroll indicator (only on first phase) */}
+          {isLoaded && activePhase === 0 && (
+            <div className="absolute bottom-8 right-8 sm:right-12 flex flex-col items-center gap-2">
+              <div className="w-5 h-9 rounded-full border border-white/30 flex items-start justify-center pt-1.5">
+                <div className="w-1 h-2 bg-white/60 rounded-full animate-bounce" />
+              </div>
+              <span className="text-white/40 text-[9px] tracking-[0.25em] uppercase rotate-90 origin-center mt-4">
+                Scroll
+              </span>
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Keyframe styles */}
-      <style>{`
-        @keyframes fadeSlideUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
-    </div>
+      {/* ── Divider transition into main content ─────────────────────────── */}
+      <div className="h-0 relative z-10">
+        <div className="absolute -top-16 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-gray-50 dark:to-dark pointer-events-none" />
+      </div>
+    </>
   );
 };
 

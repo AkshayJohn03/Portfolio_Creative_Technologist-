@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useLayoutEffect, useCallback } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import PortfolioSection from './components/PortfolioSection';
@@ -18,14 +18,7 @@ import SplashScrollSequence from './components/SplashScrollSequence';
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-  const [splashDone, setSplashDone] = useState(false);
   const [activeView, setActiveView] = useState<'home' | 'case-study' | 'visual-works'>('home');
-
-  const handleSplashComplete = useCallback(() => {
-    setSplashDone(true);
-    // After wipe completes, scroll to top of main content
-    setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 50);
-  }, []);
   const [currentCaseStudyId, setCurrentCaseStudyId] = useState<string | null>(null);
 
   // Handle view switch and hash scrolling
@@ -76,8 +69,8 @@ const App: React.FC = () => {
 
   return (
     <div className={`${theme}`}>
-      {/* Splash scroll sequence — shown on first load */}
-      {!splashDone && <SplashScrollSequence onComplete={handleSplashComplete} />}
+      {/* Splash is always above — sticky scroll, re-enterable from main content */}
+      {activeView === 'home' && <SplashScrollSequence />}
 
       <div className="bg-gray-50 dark:bg-dark min-h-screen text-gray-900 dark:text-white selection:bg-accent selection:text-white relative transition-all duration-500 ease-in-out">
         <NeuralBackground theme={theme} />
