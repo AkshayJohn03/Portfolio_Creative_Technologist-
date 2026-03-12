@@ -80,6 +80,15 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #4F46E5;
     }
+
+    @keyframes nudge {
+      0%, 100% { transform: translateX(0); }
+      30% { transform: translateX(-30px); }
+      60% { transform: translateX(0); }
+    }
+    .nudge-horizontal {
+      animation: nudge 2s ease-in-out;
+    }
   </style>
 </head>
 

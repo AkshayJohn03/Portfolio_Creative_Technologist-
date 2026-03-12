@@ -42,7 +42,7 @@ const FlagshipSystems: React.FC<FlagshipSystemsProps> = ({ onOpenCaseStudy }) =>
 
             {/* Grid for desktop, horizontal scroll for mobile */}
             <div className="container mx-auto px-5 sm:px-8 max-w-7xl">
-                <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto sm:overflow-visible pb-10 sm:pb-0 px-4 sm:px-0 snap-x snap-mandatory no-scrollbar" style={{ scrollPaddingLeft: '1rem' }}>
+                <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto sm:overflow-visible pb-10 sm:pb-0 px-4 sm:px-0 snap-x snap-mandatory no-scrollbar nudge-horizontal" style={{ scrollPaddingLeft: '1rem' }}>
                     {flagshipProjects.map((project) => (
                         <button key={project.id} onClick={() => handleProjectClick(project)} className="snap-start shrink-0 w-[85vw] sm:w-auto h-full text-left group flex flex-col">
                             <div className="relative aspect-video w-full mb-5 rounded-2xl overflow-hidden bg-gray-100 dark:bg-[#111] border border-black/5 dark:border-white/5">

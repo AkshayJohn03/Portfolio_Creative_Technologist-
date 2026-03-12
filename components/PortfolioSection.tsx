@@ -151,7 +151,7 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onOpenCaseStudy, on
           </div>
         </div>
 
-        <div className={`flex sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 overflow-x-auto sm:overflow-visible pb-10 sm:pb-0 snap-x snap-mandatory no-scrollbar transition-all duration-500 ease-in-out ${isExiting ? 'opacity-0 translate-y-4 scale-[0.98]' : 'opacity-100 translate-y-0 scale-100'}`}>
+        <div className={`flex sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 overflow-x-auto sm:overflow-visible pb-10 sm:pb-0 snap-x snap-mandatory no-scrollbar transition-all duration-500 ease-in-out nudge-horizontal ${isExiting ? 'opacity-0 translate-y-4 scale-[0.98]' : 'opacity-100 translate-y-0 scale-100'}`}>
           {isLoading ? (
             Array(3).fill(0).map((_, i) => (
               <div key={i} className="snap-start shrink-0 w-[85vw] sm:w-auto">
