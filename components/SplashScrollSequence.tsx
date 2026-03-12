@@ -9,7 +9,10 @@ const CONFIG = {
   },
   desktop: {
     totalFrames: 480,
-    path: (n: number) => `./AnimatedImages/Sequence 0${String(n + 999).padStart(4, '0').slice(-4)}.jpg`,
+    // Low-res path for immediate loading
+    lowResPath: (n: number) => `./AnimatedImages_LowRes/Sequence 0${String(n + 999).padStart(4, '0').slice(-4)}.jpg`,
+    // High-res path for background enhancement
+    highResPath: (n: number) => `./AnimatedImages/Sequence 0${String(n + 999).padStart(4, '0').slice(-4)}.jpg`,
     vhPerPhase: 0.5,
   }
 };
@@ -24,7 +27,11 @@ const PHASES = [
 const SplashScrollSequence: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imagesRef = useRef<HTMLImageElement[]>([]);
+  
+  // Two layers of images for progressive enhancement
+  const lowResImagesRef = useRef<HTMLImageElement[]>([]);
+  const highResImagesRef = useRef<HTMLImageElement[]>([]);
+  
   const rafRef = useRef<number>(0);
   const currentFrameRef = useRef(0);
 
@@ -42,41 +49,33 @@ const SplashScrollSequence: React.FC = () => {
   const config = isMobile ? CONFIG.mobile : CONFIG.desktop;
   const totalVh = config.vhPerPhase * 4 + 1;
 
-  // ─── Preload all frames ────────────────────────────────────────────────────
-  useEffect(() => {
-    // We only want to start loading once we know if we're mobile or desktop
-    // However, to avoid a flash, we should ideally start loading immediately.
-    // Since we've already set isMobile in the first useEffect, we can use that.
-    
-    let loaded = 0;
-    const total = config.totalFrames;
-    const imgs: HTMLImageElement[] = [];
-
-    for (let i = 1; i <= total; i++) {
-      const img = new Image();
-      img.src = config.path(i);
-      img.onload = () => {
-        loaded++;
-        setLoadProgress(Math.round((loaded / total) * 100));
-        if (loaded === total) setIsLoaded(true);
-      };
-      imgs.push(img);
-    }
-    imagesRef.current = imgs;
-    
-    return () => {
-      // Clear images on unmount or dev reload
-      imagesRef.current = [];
-    };
-  }, [isMobile]); // Re-run if we switch (unlikely but safe)
-
   // ─── Draw a single frame to canvas ────────────────────────────────────────
   const drawFrame = useCallback((index: number) => {
     const canvas = canvasRef.current;
-    if (!imagesRef.current.length) return;
+    if (!canvas) return;
     
-    const img = imagesRef.current[Math.max(0, Math.min(index, config.totalFrames - 1))];
-    if (!canvas || !img?.complete || !img.naturalWidth) return;
+    const safeIndex = Math.max(0, Math.min(index, config.totalFrames - 1));
+    
+    // 1. Try to get high-res frame first (on desktop)
+    let img = highResImagesRef.current[safeIndex];
+    
+    // 2. Fallback to low-res frame (or mobile frame)
+    if (!img?.complete || !img.naturalWidth) {
+      img = lowResImagesRef.current[safeIndex];
+    }
+    
+    // 3. Last resort: Backtrack for the nearest loaded frame (any quality)
+    if (!img?.complete || !img.naturalWidth) {
+      for (let i = safeIndex; i >= 0; i--) {
+        const fallbackImg = highResImagesRef.current[i] || lowResImagesRef.current[i];
+        if (fallbackImg?.complete && fallbackImg.naturalWidth) {
+          img = fallbackImg;
+          break;
+        }
+      }
+    }
+
+    if (!img?.complete || !img.naturalWidth) return;
     
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -89,6 +88,68 @@ const SplashScrollSequence: React.FC = () => {
     ctx.clearRect(0, 0, cw, ch);
     ctx.drawImage(img, (cw - nw) / 2, (ch - nh) / 2, nw, nh);
   }, [config.totalFrames]);
+
+  // ─── Dual-Stage Progressive Loading ──────────────────────────────────────
+  useEffect(() => {
+    const total = config.totalFrames;
+    let lowResLoaded = 0;
+    const lowResImgs: HTMLImageElement[] = [];
+    const highResImgs: HTMLImageElement[] = [];
+
+    // Stage 1: Load Low-Res (or Mobile) images immediately
+    const startLowResLoading = () => {
+      for (let i = 1; i <= total; i++) {
+        const img = new Image();
+        const path = isMobile ? CONFIG.mobile.path(i) : CONFIG.desktop.lowResPath(i);
+        img.src = path;
+        img.onload = () => {
+          lowResLoaded++;
+          // Update progress only during the first critical load
+          if (!isLoaded) {
+            setLoadProgress(Math.round((lowResLoaded / total) * 100));
+          }
+          
+          // Once all low-res are ready, unlock the site
+          if (lowResLoaded === total && !isLoaded) {
+            setIsLoaded(true);
+            drawFrame(currentFrameRef.current);
+          }
+        };
+        lowResImgs.push(img);
+      }
+      lowResImagesRef.current = lowResImgs;
+    };
+
+    // Stage 2: Load High-Res images in background (Desktop only)
+    const startHighResLoading = () => {
+      if (isMobile) return;
+      
+      for (let i = 1; i <= total; i++) {
+        const img = new Image();
+        img.src = CONFIG.desktop.highResPath(i);
+        img.onload = () => {
+          // No progress update for high-res background load to keep UI clean
+          // Just draw the frame if we're currently looking at it
+          if (currentFrameRef.current === i - 1) {
+            drawFrame(currentFrameRef.current);
+          }
+        };
+        highResImgs.push(img);
+      }
+      highResImagesRef.current = highResImgs;
+    };
+
+    startLowResLoading();
+    
+    // Delay high-res loading slightly to give low-res priority
+    const timer = setTimeout(startHighResLoading, 1000);
+    
+    return () => {
+      clearTimeout(timer);
+      lowResImagesRef.current = [];
+      highResImagesRef.current = [];
+    };
+  }, [isMobile, config, drawFrame, isLoaded]);
 
   // ─── Resize canvas ─────────────────────────────────────────────────────────
   useEffect(() => {
@@ -107,9 +168,6 @@ const SplashScrollSequence: React.FC = () => {
   // ─── Scroll handler ──────────────────────────────────────────
   useEffect(() => {
     if (!isLoaded) return;
-
-    // Immediately draw first frame when loaded
-    drawFrame(0);
 
     const onScroll = () => {
       const section = sectionRef.current;
@@ -154,7 +212,7 @@ const SplashScrollSequence: React.FC = () => {
               <div className="w-56 h-[2px] bg-white/10 rounded-full overflow-hidden mb-4">
                 <div className="h-full bg-white/80 transition-all duration-200" style={{ width: `${loadProgress}%` }} />
               </div>
-              <p className="text-white/40 text-[10px] tracking-[0.3em] uppercase">Loading Visuals · {loadProgress}%</p>
+              <p className="text-white/40 text-[10px] tracking-[0.3em] uppercase">Initialising Experience · {loadProgress}%</p>
             </div>
           )}
           <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" style={{ objectFit: 'cover' }} />
