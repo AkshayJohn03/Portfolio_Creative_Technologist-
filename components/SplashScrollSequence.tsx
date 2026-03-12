@@ -1,21 +1,12 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 
-// Configuration for both versions
-const CONFIG = {
-  mobile: {
-    totalFrames: 240,
-    path: (n: number) => `./Images/ezgif-frame-${String(n).padStart(3, '0')}.jpg`,
-    vhPerPhase: 0.5,
-  },
-  desktop: {
-    totalFrames: 480,
-    // Low-res path for immediate loading
-    lowResPath: (n: number) => `./AnimatedImages_LowRes/Sequence 0${String(n + 999).padStart(4, '0').slice(-4)}.jpg`,
-    // High-res path for background enhancement
-    highResPath: (n: number) => `./AnimatedImages/Sequence 0${String(n + 999).padStart(4, '0').slice(-4)}.jpg`,
-    vhPerPhase: 0.5,
-  }
-};
+// Unified configuration for all devices
+const TOTAL_FRAMES = 480;
+const VH_PER_PHASE = 0.5;
+const TOTAL_VH = VH_PER_PHASE * 4 + 1;
+
+const FRAME_PATH = (n: number) => 
+  `./AnimatedImages/Sequence 0${String(n + 999).padStart(4, '0').slice(-4)}.jpg`;
 
 const PHASES = [
   { id: 0, start: 0.00, end: 0.25, title: 'Hey, I\'m Akshay 👋', sub: null },
@@ -27,53 +18,49 @@ const PHASES = [
 const SplashScrollSequence: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  
-  // Two layers of images for progressive enhancement
-  const lowResImagesRef = useRef<HTMLImageElement[]>([]);
-  const highResImagesRef = useRef<HTMLImageElement[]>([]);
-  
+  const imagesRef = useRef<HTMLImageElement[]>([]);
   const rafRef = useRef<number>(0);
   const currentFrameRef = useRef(0);
 
-  const [isMobile, setIsMobile] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [activePhase, setActivePhase] = useState(0);
   const [textVisible, setTextVisible] = useState(true);
 
-  // Detect device once
+  // ─── Parallel Preloading ──────────────────────────────────────────────────
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-  }, []);
+    let loadedCount = 0;
+    const imgs: HTMLImageElement[] = [];
 
-  const config = isMobile ? CONFIG.mobile : CONFIG.desktop;
-  const totalVh = config.vhPerPhase * 4 + 1;
+    for (let i = 1; i <= TOTAL_FRAMES; i++) {
+      const img = new Image();
+      img.src = FRAME_PATH(i);
+      img.onload = () => {
+        loadedCount++;
+        setLoadProgress(Math.round((loadedCount / TOTAL_FRAMES) * 100));
+        
+        // Once all frames are ready, show the page
+        if (loadedCount === TOTAL_FRAMES) {
+          setIsLoaded(true);
+        }
+      };
+      imgs.push(img);
+    }
+    
+    imagesRef.current = imgs;
+    
+    return () => {
+      imagesRef.current = [];
+    };
+  }, []);
 
   // ─── Draw a single frame to canvas ────────────────────────────────────────
   const drawFrame = useCallback((index: number) => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || !imagesRef.current.length) return;
     
-    const safeIndex = Math.max(0, Math.min(index, config.totalFrames - 1));
-    
-    // 1. Try to get high-res frame first (on desktop)
-    let img = highResImagesRef.current[safeIndex];
-    
-    // 2. Fallback to low-res frame (or mobile frame)
-    if (!img?.complete || !img.naturalWidth) {
-      img = lowResImagesRef.current[safeIndex];
-    }
-    
-    // 3. Last resort: Backtrack for the nearest loaded frame (any quality)
-    if (!img?.complete || !img.naturalWidth) {
-      for (let i = safeIndex; i >= 0; i--) {
-        const fallbackImg = highResImagesRef.current[i] || lowResImagesRef.current[i];
-        if (fallbackImg?.complete && fallbackImg.naturalWidth) {
-          img = fallbackImg;
-          break;
-        }
-      }
-    }
+    const safeIndex = Math.max(0, Math.min(index, TOTAL_FRAMES - 1));
+    const img = imagesRef.current[safeIndex];
 
     if (!img?.complete || !img.naturalWidth) return;
     
@@ -87,69 +74,7 @@ const SplashScrollSequence: React.FC = () => {
     
     ctx.clearRect(0, 0, cw, ch);
     ctx.drawImage(img, (cw - nw) / 2, (ch - nh) / 2, nw, nh);
-  }, [config.totalFrames]);
-
-  // ─── Dual-Stage Progressive Loading ──────────────────────────────────────
-  useEffect(() => {
-    const total = config.totalFrames;
-    let lowResLoaded = 0;
-    const lowResImgs: HTMLImageElement[] = [];
-    const highResImgs: HTMLImageElement[] = [];
-
-    // Stage 1: Load Low-Res (or Mobile) images immediately
-    const startLowResLoading = () => {
-      for (let i = 1; i <= total; i++) {
-        const img = new Image();
-        const path = isMobile ? CONFIG.mobile.path(i) : CONFIG.desktop.lowResPath(i);
-        img.src = path;
-        img.onload = () => {
-          lowResLoaded++;
-          // Update progress only during the first critical load
-          if (!isLoaded) {
-            setLoadProgress(Math.round((lowResLoaded / total) * 100));
-          }
-          
-          // Once all low-res are ready, unlock the site
-          if (lowResLoaded === total && !isLoaded) {
-            setIsLoaded(true);
-            drawFrame(currentFrameRef.current);
-          }
-        };
-        lowResImgs.push(img);
-      }
-      lowResImagesRef.current = lowResImgs;
-    };
-
-    // Stage 2: Load High-Res images in background (Desktop only)
-    const startHighResLoading = () => {
-      if (isMobile) return;
-      
-      for (let i = 1; i <= total; i++) {
-        const img = new Image();
-        img.src = CONFIG.desktop.highResPath(i);
-        img.onload = () => {
-          // No progress update for high-res background load to keep UI clean
-          // Just draw the frame if we're currently looking at it
-          if (currentFrameRef.current === i - 1) {
-            drawFrame(currentFrameRef.current);
-          }
-        };
-        highResImgs.push(img);
-      }
-      highResImagesRef.current = highResImgs;
-    };
-
-    startLowResLoading();
-    
-    // Delay high-res loading slightly to give low-res priority
-    const timer = setTimeout(startHighResLoading, 1000);
-    
-    return () => {
-      clearTimeout(timer);
-      lowResImagesRef.current = [];
-      highResImagesRef.current = [];
-    };
-  }, [isMobile, config, drawFrame, isLoaded]);
+  }, []);
 
   // ─── Resize canvas ─────────────────────────────────────────────────────────
   useEffect(() => {
@@ -169,6 +94,9 @@ const SplashScrollSequence: React.FC = () => {
   useEffect(() => {
     if (!isLoaded) return;
 
+    // Draw initial frame immediately
+    drawFrame(0);
+
     const onScroll = () => {
       const section = sectionRef.current;
       if (!section) return;
@@ -177,7 +105,7 @@ const SplashScrollSequence: React.FC = () => {
       const scrolled = -top;
       const progress = Math.min(Math.max(scrolled / scrollable, 0), 1);
 
-      const frameIndex = Math.floor(progress * (config.totalFrames - 1));
+      const frameIndex = Math.floor(progress * (TOTAL_FRAMES - 1));
       if (frameIndex !== currentFrameRef.current) {
         cancelAnimationFrame(rafRef.current);
         rafRef.current = requestAnimationFrame(() => drawFrame(frameIndex));
@@ -199,20 +127,20 @@ const SplashScrollSequence: React.FC = () => {
       window.removeEventListener('scroll', onScroll);
       cancelAnimationFrame(rafRef.current);
     };
-  }, [isLoaded, drawFrame, activePhase, config.totalFrames]);
+  }, [isLoaded, drawFrame, activePhase]);
 
   const phase = PHASES[activePhase] ?? PHASES[0];
 
   return (
     <>
-      <div ref={sectionRef} style={{ height: `${totalVh * 100}vh` }} className="relative">
+      <div ref={sectionRef} style={{ height: `${TOTAL_VH * 100}vh` }} className="relative">
         <div className="sticky top-0 h-screen w-full overflow-hidden bg-black">
           {!isLoaded && (
             <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-black">
               <div className="w-56 h-[2px] bg-white/10 rounded-full overflow-hidden mb-4">
                 <div className="h-full bg-white/80 transition-all duration-200" style={{ width: `${loadProgress}%` }} />
               </div>
-              <p className="text-white/40 text-[10px] tracking-[0.3em] uppercase">Initialising Experience · {loadProgress}%</p>
+              <p className="text-white/40 text-[10px] tracking-[0.3em] uppercase">Loading Visuals · {loadProgress}%</p>
             </div>
           )}
           <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" style={{ objectFit: 'cover' }} />
