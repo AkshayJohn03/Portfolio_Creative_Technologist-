@@ -36,18 +36,26 @@ const AIChat: React.FC = () => {
     ));
   };
 
-  const handleSend = async (e?: React.FormEvent) => {
-    e?.preventDefault();
-    if (!input.trim() || isLoading) return;
+  const suggestedQuestions = [
+    "Who is Akshay John?",
+    "What are his core skills in AI?",
+    "Tell me about Project RIFT.",
+    "What did he do at Wipro?",
+    "What is ZIA: LLM From Scratch?",
+    "How does he bridge design and AI?",
+    "What is his experience at Akkodis?",
+    "How can I contact him?"
+  ];
 
-    const userMsg: ChatMessage = { role: 'user', text: input, timestamp: new Date() };
+  const handleSend = async (question: string) => {
+    if (isLoading) return;
+
+    const userMsg: ChatMessage = { role: 'user', text: question, timestamp: new Date() };
     setMessages(prev => [...prev, userMsg]);
-    setInput('');
     setIsLoading(true);
 
     try {
       const responseText = await generateLocalChatResponse(userMsg.text);
-
       const botMsg: ChatMessage = { role: 'model', text: responseText, timestamp: new Date() };
       setMessages(prev => [...prev, botMsg]);
     } catch (error) {
@@ -69,16 +77,16 @@ const AIChat: React.FC = () => {
             <span className="text-[10px] font-bold uppercase tracking-wider">Interactive Agent</span>
           </div>
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif font-bold mb-6 text-gray-900 dark:text-white">Ask Anything</h2>
-          <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg max-w-2xl mx-auto font-light">
-            Need specifics on a tool or project? My AI portfolio twin is ready to answer questions about my background and process.
+          <p className="text-gray-50 dark:text-gray-400 text-base sm:text-lg max-w-2xl mx-auto font-light">
+            My AI portfolio twin is ready to answer questions about my background and process. Choose a suggestion below to start.
           </p>
         </div>
 
-        <div className="bg-white dark:bg-[#111] border border-black/5 dark:border-white/10 rounded-3xl overflow-hidden backdrop-blur-xl shadow-2xl flex flex-col h-[550px] sm:h-[650px] transition-all">
+        <div className="bg-white dark:bg-[#111] border border-black/5 dark:border-white/10 rounded-3xl overflow-hidden backdrop-blur-xl shadow-2xl flex flex-col h-[600px] sm:h-[700px] transition-all">
           {/* Chat Window */}
           <div className="flex-1 p-5 sm:p-8 overflow-y-auto space-y-6 sm:space-y-8 scrollbar-thin scrollbar-thumb-gray-200 dark:scrollbar-thumb-gray-800 scrollbar-track-transparent">
             {messages.map((msg, idx) => (
-              <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in-up`}>
                 <div className={`flex gap-3 sm:gap-4 max-w-[90%] sm:max-w-[80%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
                   <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center flex-shrink-0 shadow-md ${msg.role === 'user' ? 'bg-gray-900 dark:bg-white text-white dark:text-black' : 'bg-accent text-white'}`}>
                     {msg.role === 'user' ? <User size={16} /> : <Bot size={18} />}
@@ -108,28 +116,21 @@ const AIChat: React.FC = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input Area */}
+          {/* Suggestions Area */}
           <div className="p-4 sm:p-6 bg-gray-50/50 dark:bg-black/40 border-t border-black/5 dark:border-white/5">
-            <form onSubmit={handleSend} className="flex gap-3 sm:gap-4">
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="e.g., Tell me about your work at Akkodis"
-                className="flex-1 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl px-5 py-4 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition-all text-sm sm:text-base"
-                disabled={isLoading}
-              />
-              <button
-                type="submit"
-                disabled={isLoading || !input.trim()}
-                className={`p-4 sm:px-6 rounded-2xl transition-all duration-300 flex items-center justify-center shadow-lg ${isLoading || !input.trim()
-                    ? 'bg-gray-200 dark:bg-white/5 text-gray-400 cursor-not-allowed'
-                    : 'bg-accent text-white hover:bg-indigo-500 hover:scale-105 active:scale-95'
-                  }`}
-              >
-                <Send size={20} className={isLoading ? 'opacity-0' : 'opacity-100'} />
-              </button>
-            </form>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4 px-2">Suggestions</p>
+            <div className="flex flex-wrap gap-2 sm:gap-3">
+              {suggestedQuestions.map((q, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleSend(q)}
+                  disabled={isLoading}
+                  className="px-4 py-2 bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-full text-[11px] sm:text-sm text-gray-700 dark:text-gray-300 hover:bg-accent hover:text-white dark:hover:bg-accent dark:hover:text-white hover:border-accent transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-left sm:text-center"
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>

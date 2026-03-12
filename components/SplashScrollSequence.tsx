@@ -11,7 +11,7 @@ const FRAME_PATH = (n: number) =>
 const PHASES = [
   { id: 0, start: 0.00, end: 0.25, title: 'Hey, I\'m Akshay 👋', sub: null },
   { id: 1, start: 0.25, end: 0.50, title: 'Creative Technologist', sub: 'Engineering AI · Designing Interactions' },
-  { id: 2, start: 0.50, end: 0.75, title: 'AI Systems Builder', sub: 'LLMs · Physical AI · Quantitative Systems' },
+  { id: 2, start: 0.50, end: 0.75, title: 'AI Proof of Concepts', sub: 'LLM Research · Physical Intelligence · System Research' },
   { id: 3, start: 0.75, end: 1.00, title: 'Scroll to explore ↓', sub: 'Portfolio · Case Studies · Contact' },
 ];
 

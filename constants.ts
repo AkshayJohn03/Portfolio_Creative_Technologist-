@@ -11,7 +11,9 @@ INSTRUCTIONS:
 2. Format responses cleanly. Use **bold** for key terms, tools, and metrics. Use proper paragraph spacing instead of excessive symbols or bullet points.
 
 SUMMARY:
-Creative Technologist and Visual Design professional with 7+ years of experience delivering user-centered digital and visual solutions. Actively explores AI-assisted prototyping, no-code/low-code tooling, and lightweight interactive utilities to streamline creative production and demonstrate new workflow possibilities. Bridges creative vision, technical feasibility, and program delivery.
+Creative Technologist and Senior Product Designer with 7+ years of experience crafting user-centered digital products, visual systems, and motion-driven experiences. My work bridges design leadership with AI system development, translating complex machine intelligence into intuitive product interfaces.
+
+I operate at the intersection of design, engineering, and artificial intelligence, building scalable experiences that combine human insight with advanced technology. From enterprise product design to experimental AI systems, I focus on creating solutions where usability, intelligence, and innovation converge.
 
 AI & ML SKILLS:
 - Generative AI, LLM Fine-Tuning, Transformers, PyTorch, NLP, Embodied AI, Agent Simulation, Reinforcement Learning (basic), Explainable AI, AI Evaluation
@@ -198,7 +200,8 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
     description: [
       "Led UX and visual design initiatives for enterprise applications, collaborating with stakeholders for user-centered digital solutions.",
       "Created high-fidelity prototypes, dashboards, and interaction flows to support decision-making and validate concepts.",
-      "Contributed to AI-assisted interface explorations and conversational UX concepts via rapid prototyping."
+      "Contributed to AI-assisted interface explorations and conversational UX concepts via rapid prototyping.",
+      "Experimenting with generative AI, workflows and similar fancy concepts required for creative technologist."
     ]
   },
   {
@@ -209,8 +212,10 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
     period: "Nov 2020 – Nov 2023",
     description: [
       "Delivered 200+ digital and print creative assets across enterprise campaigns, ensuring brand and timeline requirements.",
-      "Mentored junior designers and supported onboarding processes.",
-      "Participated in process improvement and collaborative planning in cross-functional projects."
+      "Trained or mentored juniors and supported onboarding processes.",
+      "Awarded twice for Best Performance (Top Achiever).",
+      "Served as Subject Matter Expert (SME) in visual design processes.",
+      "Led service blueprinting, stakeholder management, client handling, and collaborative planning in cross-functional projects on requirements."
     ]
   },
   {
@@ -222,7 +227,7 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
     description: [
       "Led design efforts and collaborated on social media strategies, resulting in a 40% surge in online engagement.",
       "Developed content including posters, illustrations, videos, and UX/UI designs.",
-      "Collaborated with product and growth teams to build scalable UI systems."
+      "Collaborated with product and growth teams to build scalable UI systems and Design Systems."
     ]
   },
   {
@@ -240,7 +245,6 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
 
 export const SOCIAL_LINKS = [
   { name: 'Behance', url: 'https://www.behance.net/akshayjohn2' },
-  { name: 'Wix Portfolio', url: 'https://akshay3rishi.wixsite.com/portfolio' },
   { name: 'GitHub', url: 'https://github.com/AkshayJohn03' },
   { name: 'LinkedIn', url: 'https://www.linkedin.com/in/akshay-john/' },
   { name: 'Email', url: 'mailto:akshay3rishi@gmail.com' }

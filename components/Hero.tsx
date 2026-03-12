@@ -17,7 +17,7 @@ const Hero: React.FC = () => {
       <div className="z-10 text-center max-w-6xl mx-auto w-full pt-20 md:pt-0">
         <div className="mb-6 sm:mb-8 inline-block px-4 py-2 rounded-full border border-black/5 dark:border-white/10 bg-white/40 dark:bg-white/5 backdrop-blur-sm animate-fade-in-up">
           <p className="text-accent font-bold tracking-[0.25em] text-[10px] sm:text-xs lg:text-sm uppercase">
-            Creative Technologist • AI Systems Builder • Experimental Engineer
+            Creative Technologist • AI Proof of Concepts • Experimental Engineer
           </p>
         </div>
 

@@ -81,13 +81,26 @@
       background: #4F46E5;
     }
 
-    @keyframes nudge {
-      0%, 100% { transform: translateX(0); }
-      30% { transform: translateX(-30px); }
-      60% { transform: translateX(0); }
-    }
     .nudge-horizontal {
       animation: nudge 2s ease-in-out;
+    }
+
+    /* Horizontal Scrollbar for Mobile */
+    @media (max-width: 640px) {
+      .scrollbar-mobile {
+        scrollbar-width: thin;
+        scrollbar-color: #4F46E5 transparent;
+      }
+      .scrollbar-mobile::-webkit-scrollbar {
+        height: 3px;
+      }
+      .scrollbar-mobile::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .scrollbar-mobile::-webkit-scrollbar-thumb {
+        background: #4F46E5;
+        border-radius: 10px;
+      }
     }
   </style>
 </head>

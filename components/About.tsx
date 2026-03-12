@@ -23,13 +23,13 @@ const About: React.FC = () => {
 
             <div className="px-2">
               <h3 className="text-2xl sm:text-3xl font-serif font-bold mb-2 text-gray-900 dark:text-white">Akshay John</h3>
-              <p className="text-accent font-bold tracking-[0.2em] uppercase text-xs sm:text-sm mb-6">Senior Product & Visual Designer</p>
+              <p className="text-accent font-bold tracking-[0.2em] uppercase text-xs sm:text-sm mb-6">Creative Technologist Ai, Lead Product Designer</p>
 
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-base sm:text-lg mb-6 font-light">
-                Multidisciplinary Product Designer with 7+ years of experience creating digital experiences, brand identities, and motion visuals that connect users to products with emotion and clarity.
+                Creative Technologist and Senior Product Designer with 7+ years of experience crafting user-centered digital products, visual systems, and motion-driven experiences. My work bridges design leadership with AI system development, translating complex machine intelligence into intuitive product interfaces.
               </p>
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-base sm:text-lg font-light">
-                Expert at bridging human-centered design with deep technical innovation in AI, I merge creativity with usability to craft high-impact solutions for enterprise scale.
+                I operate at the intersection of design, engineering, and artificial intelligence, building scalable experiences that combine human insight with advanced technology. From enterprise product design to experimental AI systems, I focus on creating solutions where usability, intelligence, and innovation converge.
               </p>
             </div>
           </div>

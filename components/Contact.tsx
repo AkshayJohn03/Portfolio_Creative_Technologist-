@@ -30,7 +30,7 @@ const Contact: React.FC = () => {
 
     try {
       // FormSpree endpoint — replace YOUR_FORM_ID with the one from formspree.io
-      const res = await fetch('https://formspree.io/f/xeoqwneg', {
+      const res = await fetch('https://formspree.io/f/mreykyro', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({

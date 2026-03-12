@@ -88,13 +88,11 @@ export default function RadialOrbitalTimeline({
 
     useEffect(() => {
         let rotationTimer: ReturnType<typeof setInterval>;
+        const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
-        if (autoRotate && viewMode === "orbital") {
+        if (autoRotate && viewMode === "orbital" && !isMobile) {
             rotationTimer = setInterval(() => {
-                setRotationAngle((prev) => {
-                    const newAngle = (prev + 0.3) % 360;
-                    return Number(newAngle.toFixed(3));
-                });
+                setRotationAngle((prev) => (prev + 0.3) % 360);
             }, 50);
         }
 
@@ -117,7 +115,8 @@ export default function RadialOrbitalTimeline({
 
     const calculateNodePosition = (index: number, total: number) => {
         const angle = ((index / total) * 360 + rotationAngle) % 360;
-        const radius = typeof window !== 'undefined' && window.innerWidth < 768 ? 180 : 310;
+        const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+        const radius = isMobile ? 180 : 310;
         const radian = (angle * Math.PI) / 180;
 
         const x = radius * Math.cos(radian) + centerOffset.x;
