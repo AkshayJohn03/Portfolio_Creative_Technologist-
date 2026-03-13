@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Akshay John | UX/UI & Visual Designer</title>
+  <title>Akshay John | Creative Technologist</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,14 +88,17 @@
     /* Horizontal Scrollbar for Mobile */
     @media (max-width: 640px) {
       .scrollbar-mobile {
-        scrollbar-width: thin;
-        scrollbar-color: #4F46E5 transparent;
+        scrollbar-width: auto;
+        scrollbar-color: #4F46E5 #f1f1f1;
+        -webkit-overflow-scrolling: touch;
       }
       .scrollbar-mobile::-webkit-scrollbar {
-        height: 3px;
+        height: 6px;
+        display: block !important;
       }
       .scrollbar-mobile::-webkit-scrollbar-track {
-        background: transparent;
+        background: #f1f1f1;
+        border-radius: 10px;
       }
       .scrollbar-mobile::-webkit-scrollbar-thumb {
         background: #4F46E5;
