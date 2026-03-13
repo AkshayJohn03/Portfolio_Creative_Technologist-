@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://AkshayJohn03.github.io/Portfolio_Creative_Technologist-",
+  "homepage": "https://akshayjohn.xyz",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
