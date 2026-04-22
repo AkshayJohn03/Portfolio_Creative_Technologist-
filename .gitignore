@@ -7,18 +7,60 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+# Build artifacts - keep local only
 dist
 dist-ssr
+dist_*/
+dist-*/
+
+# Dependencies
+node_modules
 *.local
+
+# Large media files - keep local only
 *.psd
 *.ai
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.wmv
+thumbnails.psd
+Gemini_Generated_Image_*.png
+P_setting_xxx_0_90_end_692.png
+IMG_4407.MP4
+Video_Generation_Panning_Camera_Shot*.mp4
+
+# Documents - keep local only
+*.docx
+*.doc
+*.pdf
+
+# Log and temp files
+deploy_log.txt
+git_err.log
+push.log
+puppeteer_logs*.txt
+build_*.log
+check-errors.cjs
+errors.log
+ts_err.log
+
+# Backup files
+*.bak
+index.tsx.bak
+
+# Folders to keep local only
+.claude/
+Portfolio -*/
+storyboard/
 
 # Environment variables — NEVER commit API keys
 .env
 .env.*
 !.env.example
 .env.local
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

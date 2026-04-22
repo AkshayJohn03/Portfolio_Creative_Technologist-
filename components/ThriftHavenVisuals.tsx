@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { ExternalLink, ShoppingBag, Eye, Shield, Leaf, TrendingUp, Users, Heart, Zap, Globe, Package, ChevronRight, BarChart2, CheckCircle2, Search, Filter, MessageSquare, Menu, BookOpen, X, AlertTriangle, CheckCircle, Target, Star, Map } from 'lucide-react';
+import { ExternalLink, ShoppingBag, Eye, Shield, Leaf, TrendingUp, Users, Heart, Zap, Globe, Package, ChevronRight, BarChart2, CheckCircle2, Search, Filter, MessageSquare, Menu, BookOpen, X, AlertTriangle, CheckCircle, Target, Star, Map, ShieldCheck } from 'lucide-react';
 
 /* ─── Survey data ─────────────────────────────────────────────────────────── */
 const SURVEY_DATA = {
