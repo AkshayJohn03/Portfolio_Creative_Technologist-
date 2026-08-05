@@ -27,28 +27,37 @@ const NeuralBackground: React.FC<NeuralBackgroundProps> = ({ theme = 'dark' }) =
     }
 
     const particles: Particle[] = [];
-    const particleCount = width < 768 ? 40 : 80;
+    const particleCount = width < 768 ? 20 : 35;
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        size: Math.random() * 1.8 + 1,
       });
     }
 
-    const animate = () => {
+    let lastTime = 0;
+    const fpsInterval = 1000 / 30; // Cap at 30fps for smooth low-CPU performance
+
+    const animate = (currentTime: number) => {
+      animationId = requestAnimationFrame(animate);
+
+      const elapsed = currentTime - lastTime;
+      if (elapsed < fpsInterval) return;
+      lastTime = currentTime - (elapsed % fpsInterval);
+
       ctx.clearRect(0, 0, width, height);
-      
-      // Adjust colors based on theme
+
       const isDark = theme === 'dark';
-      const particleFill = isDark ? 'rgba(79, 70, 229, 0.3)' : 'rgba(79, 70, 229, 0.6)';
-      const lineBaseColor = isDark ? 'rgba(79, 70, 229,' : 'rgba(79, 70, 229,';
-      
-      // Draw particles and connections
-      particles.forEach((p, index) => {
+      const particleFill = isDark ? 'rgba(79, 70, 229, 0.4)' : 'rgba(79, 70, 229, 0.6)';
+      const maxDistSq = 140 * 140;
+
+      // Draw all particles first
+      ctx.fillStyle = particleFill;
+      particles.forEach((p) => {
         p.x += p.vx;
         p.y += p.vy;
 
@@ -57,32 +66,32 @@ const NeuralBackground: React.FC<NeuralBackgroundProps> = ({ theme = 'dark' }) =
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = particleFill;
         ctx.fill();
+      });
 
-        // Connect nearby particles
-        for (let j = index + 1; j < particles.length; j++) {
+      // Draw connecting lines in batched stroke
+      ctx.lineWidth = 0.8;
+      for (let i = 0; i < particles.length; i++) {
+        const p1 = particles[i];
+        for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
-          const dx = p.x - p2.x;
-          const dy = p.y - p2.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          const distSq = dx * dx + dy * dy;
 
-          if (distance < 150) {
+          if (distSq < maxDistSq) {
+            const alpha = 0.15 * (1 - distSq / maxDistSq);
             ctx.beginPath();
-            const alpha = Math.max(0, (0.15 - distance / 1000));
-            ctx.strokeStyle = `${lineBaseColor} ${alpha})`;
-            ctx.lineWidth = 1;
-            ctx.moveTo(p.x, p.y);
+            ctx.strokeStyle = isDark ? `rgba(99, 102, 241, ${alpha})` : `rgba(79, 70, 229, ${alpha})`;
+            ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.stroke();
           }
         }
-      });
-
-      requestAnimationFrame(animate);
+      }
     };
 
-    const animationId = requestAnimationFrame(animate);
+    let animationId = requestAnimationFrame(animate);
 
     const handleResize = () => {
       width = window.innerWidth;

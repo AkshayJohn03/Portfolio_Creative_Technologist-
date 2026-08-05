@@ -165,25 +165,36 @@ export const NeuropodsVisuals: React.FC = () => {
                 {activeScreen === 'splash' && (
                     <div className="space-y-6">
                         <div className="relative rounded-3xl overflow-hidden border border-purple-500/20 bg-[#0a0e27] shadow-2xl shadow-purple-900/20 group">
-                            <img src="./neuropods/splash.jpg" alt="NeuroPods Splash Screen" className="w-full h-auto object-cover rounded-3xl" />
-                            {/* Video overlay button */}
-                            <div className="absolute inset-0 flex items-end justify-center pb-8">
-                                <button onClick={toggleVideo}
-                                    className="flex items-center gap-2 px-6 py-3 bg-purple-600/80 backdrop-blur-sm text-white font-bold rounded-xl hover:bg-purple-600 transition-all border border-purple-400/30 text-sm">
-                                    {videoPlaying ? <Pause size={16} /> : <Play size={16} />}
-                                    {videoPlaying ? 'Pause Animation' : '▶ Play Splash Animation (MP4)'}
-                                </button>
-                            </div>
+                            {videoPlaying ? (
+                                <div className="relative">
+                                    <video
+                                        ref={videoRef}
+                                        src="./neuropods/splash.mp4"
+                                        autoPlay
+                                        controls
+                                        className="w-full h-auto object-cover rounded-3xl"
+                                        onEnded={() => setVideoPlaying(false)}
+                                    />
+                                    <button
+                                        onClick={toggleVideo}
+                                        className="absolute top-4 right-4 bg-purple-600/80 hover:bg-purple-600 text-white font-bold text-xs px-3 py-1.5 rounded-lg border border-purple-400/30 backdrop-blur-sm z-10"
+                                    >
+                                        Back to Image
+                                    </button>
+                                </div>
+                            ) : (
+                                <>
+                                    <img src="./neuropods/splash.jpg" alt="NeuroPods Splash Screen" className="w-full h-auto object-cover rounded-3xl" />
+                                    {/* Video overlay button */}
+                                    <div className="absolute inset-0 flex items-end justify-center pb-8">
+                                        <button onClick={toggleVideo}
+                                            className="flex items-center gap-2 px-6 py-3 bg-purple-600/80 backdrop-blur-sm text-white font-bold rounded-xl hover:bg-purple-600 transition-all border border-purple-400/30 text-sm shadow-xl">
+                                            <Play size={16} /> ▶ Play Splash Animation (MP4)
+                                        </button>
+                                    </div>
+                                </>
+                            )}
                         </div>
-                        {/* Hidden video — plays when button is clicked */}
-                        <video ref={videoRef} src="./neuropods/splash.mp4" className="w-full rounded-3xl border border-purple-500/20 hidden"
-                            onEnded={() => setVideoPlaying(false)} />
-                        {videoPlaying && (
-                            <div className="relative rounded-3xl overflow-hidden border border-purple-500/20 bg-[#0a0e27] shadow-2xl shadow-purple-900/20">
-                                <video ref={videoRef} src="./neuropods/splash.mp4" autoPlay className="w-full h-auto"
-                                    onEnded={() => setVideoPlaying(false)} />
-                            </div>
-                        )}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             {[
                                 { icon: "🧠", title: "Tool as Persona", desc: "The tool itself is the AI persona — welcoming the team with 'Connecting to emotional intelligence', setting a mindful tone before any data is shown." },

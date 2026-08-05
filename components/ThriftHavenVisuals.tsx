@@ -166,81 +166,94 @@ const MiniPie: React.FC<{ data: { label: string; value: number; color: string }[
 };
 
 /* ─── Survey Modal ────────────────────────────────────────────────────────── */
-const SurveyModal: React.FC<{ onClose: () => void }> = ({ onClose }) => (
-    <div
-        className="fixed inset-0 z-[9999] flex items-start justify-center p-4 pt-16"
-        onClick={onClose}
-    >
-        <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+const SurveyModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+    React.useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') onClose();
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [onClose]);
+
+    if (typeof document === 'undefined') return null;
+
+    return createPortal(
         <div
-            className="relative bg-white dark:bg-[#0d1117] rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-black/10 dark:border-white/10"
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6"
+            onClick={onClose}
         >
-            {/* Header */}
-            <div className="sticky top-0 bg-white dark:bg-[#0d1117] border-b border-black/5 dark:border-white/10 px-8 py-6 flex items-center justify-between z-10">
-                <div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#1C5D99] block mb-1">Primary Research · N={SURVEY_DATA.respondents} Respondents</span>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">{SURVEY_DATA.title}</h3>
+            <div className="absolute inset-0 bg-black/75 backdrop-blur-md" />
+            <div
+                className="relative bg-white dark:bg-[#0d1117] rounded-3xl max-w-4xl w-full max-h-[85vh] overflow-y-auto shadow-2xl border border-black/10 dark:border-white/10 z-10"
+                onClick={(e) => e.stopPropagation()}
+            >
+                {/* Header */}
+                <div className="sticky top-0 bg-white dark:bg-[#0d1117] border-b border-black/5 dark:border-white/10 px-6 sm:px-8 py-5 sm:py-6 flex items-center justify-between z-10">
+                    <div>
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#1C5D99] block mb-1">Primary Research · N={SURVEY_DATA.respondents} Respondents</span>
+                        <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">{SURVEY_DATA.title}</h3>
+                    </div>
+                    <div className="flex items-center gap-3">
+                        <a
+                            href={SURVEY_DATA.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs font-bold text-[#1C5D99] border border-[#1C5D99]/30 px-3 sm:px-4 py-2 rounded-xl hover:bg-[#1C5D99]/10 transition-colors flex items-center gap-2"
+                        >
+                            <ExternalLink size={12} /> View Live Form
+                        </a>
+                        <button onClick={onClose} className="p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-white/10 transition-colors text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                            <X size={20} />
+                        </button>
+                    </div>
                 </div>
-                <div className="flex items-center gap-3">
-                    <a
-                        href={SURVEY_DATA.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs font-bold text-[#1C5D99] border border-[#1C5D99]/30 px-4 py-2 rounded-xl hover:bg-[#1C5D99]/10 transition-colors flex items-center gap-2"
-                    >
-                        <ExternalLink size={12} /> View Live Form
-                    </a>
-                    <button onClick={onClose} className="p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
-                        <X size={20} />
-                    </button>
-                </div>
-            </div>
 
-            {/* Questions */}
-            <div className="p-8 space-y-10">
-                {SURVEY_DATA.questions.map((q, i) => (
-                    <div key={i} className="bg-gray-50 dark:bg-white/5 rounded-2xl p-6 border border-black/5 dark:border-white/10">
-                        <div className="flex items-start gap-3 mb-5">
-                            <div className="w-7 h-7 rounded-full bg-[#1C5D99] text-white flex items-center justify-center text-xs font-bold flex-shrink-0">Q{i + 1}</div>
-                            <h4 className="font-bold text-gray-900 dark:text-white text-base leading-snug">{q.question}</h4>
-                        </div>
-
-                        {q.type === "pie" && q.data && (
-                            <MiniPie data={q.data as { label: string; value: number; color: string }[]} />
-                        )}
-                        {q.type === "bar" && q.data && (
-                            <div className="mt-2">
-                                {q.data.map((d, j) => (
-                                    <MiniBar key={j} label={d.label} value={d.value} />
-                                ))}
+                {/* Questions */}
+                <div className="p-6 sm:p-8 space-y-8 sm:space-y-10">
+                    {SURVEY_DATA.questions.map((q, i) => (
+                        <div key={i} className="bg-gray-50 dark:bg-white/5 rounded-2xl p-5 sm:p-6 border border-black/5 dark:border-white/10">
+                            <div className="flex items-start gap-3 mb-5">
+                                <div className="w-7 h-7 rounded-full bg-[#1C5D99] text-white flex items-center justify-center text-xs font-bold flex-shrink-0">Q{i + 1}</div>
+                                <h4 className="font-bold text-gray-900 dark:text-white text-base leading-snug">{q.question}</h4>
                             </div>
-                        )}
 
-                        <div className="mt-4 flex items-start gap-2 bg-[#1C5D99]/10 rounded-xl p-4 border border-[#1C5D99]/20">
-                            <CheckCircle size={14} className="text-[#1C5D99] mt-0.5 flex-shrink-0" />
-                            <p className="text-xs text-[#1C5D99] font-medium leading-relaxed">{q.insight}</p>
+                            {q.type === "pie" && q.data && (
+                                <MiniPie data={q.data as { label: string; value: number; color: string }[]} />
+                            )}
+                            {q.type === "bar" && q.data && (
+                                <div className="mt-2">
+                                    {q.data.map((d, j) => (
+                                        <MiniBar key={j} label={d.label} value={d.value} />
+                                    ))}
+                                </div>
+                            )}
+
+                            <div className="mt-4 flex items-start gap-2 bg-[#1C5D99]/10 rounded-xl p-4 border border-[#1C5D99]/20">
+                                <CheckCircle size={14} className="text-[#1C5D99] mt-0.5 flex-shrink-0" />
+                                <p className="text-xs text-[#1C5D99] font-medium leading-relaxed">{q.insight}</p>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
 
-                {/* Secondary research note */}
-                <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-2xl p-6">
-                    <div className="flex items-center gap-2 mb-3">
-                        <BookOpen size={16} className="text-amber-600" />
-                        <span className="font-bold text-amber-800 dark:text-amber-300 text-sm uppercase tracking-widest">Secondary Research Findings</span>
+                    {/* Secondary research note */}
+                    <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 rounded-2xl p-6">
+                        <div className="flex items-center gap-2 mb-3">
+                            <BookOpen size={16} className="text-amber-600" />
+                            <span className="font-bold text-amber-800 dark:text-amber-300 text-sm uppercase tracking-widest">Secondary Research Findings</span>
+                        </div>
+                        <ul className="space-y-2 text-sm text-amber-800 dark:text-amber-300">
+                            <li className="flex items-start gap-2"><ChevronRight size={14} className="mt-0.5 flex-shrink-0" /> India's second-hand market is projected to grow significantly, driven by the rise of eco-conscious Gen Z consumers.</li>
+                            <li className="flex items-start gap-2"><ChevronRight size={14} className="mt-0.5 flex-shrink-0" /> Platforms like OLX, Quikr, and Meesho dominate, but they lack specialist quality guarantees for clothing and books.</li>
+                            <li className="flex items-start gap-2"><ChevronRight size={14} className="mt-0.5 flex-shrink-0" /> Vehicle re-selling platforms have the highest dispute rate and were excluded from ThriftHaven's MVP scope based on this data.</li>
+                            <li className="flex items-start gap-2"><ChevronRight size={14} className="mt-0.5 flex-shrink-0" /> NGO-mediated exchange models have shown higher buyer trust scores compared to pure P2P models.</li>
+                        </ul>
                     </div>
-                    <ul className="space-y-2 text-sm text-amber-800 dark:text-amber-300">
-                        <li className="flex items-start gap-2"><ChevronRight size={14} className="mt-0.5 flex-shrink-0" /> India's second-hand market is projected to grow significantly, driven by the rise of eco-conscious Gen Z consumers.</li>
-                        <li className="flex items-start gap-2"><ChevronRight size={14} className="mt-0.5 flex-shrink-0" /> Platforms like OLX, Quikr, and Meesho dominate, but they lack specialist quality guarantees for clothing and books.</li>
-                        <li className="flex items-start gap-2"><ChevronRight size={14} className="mt-0.5 flex-shrink-0" /> Vehicle re-selling platforms have the highest dispute rate and were excluded from ThriftHaven's MVP scope based on this data.</li>
-                        <li className="flex items-start gap-2"><ChevronRight size={14} className="mt-0.5 flex-shrink-0" /> NGO-mediated exchange models have shown higher buyer trust scores compared to pure P2P models.</li>
-                    </ul>
                 </div>
             </div>
-        </div>
-    </div>
-);
+        </div>,
+        document.body
+    );
+};
 
 /* ─── Main Component ──────────────────────────────────────────────────────── */
 export const ThriftHavenVisuals: React.FC = () => {

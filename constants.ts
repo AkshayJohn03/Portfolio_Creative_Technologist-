@@ -77,17 +77,7 @@ export const PROJECTS: Project[] = [
     tags: ['Trading', 'PyTorch', 'TimeSeries', 'Deep Learning'],
     hasInternalPage: true
   },
-  {
-    id: 'ai-zia-image',
-    title: "ZIA-Image",
-    category: ProjectCategory.AI_ML,
-    description: 'Experimental Image Generation Model built on custom diffusion paths.',
-    fullDescription: 'Focusing on recursive latent patch painting and constrained generative paths for optimized image generation.',
-    imageUrl: './thumb_ziaimage.png',
-    link: '#',
-    tags: ['Generative AI', 'Diffusion', 'PyTorch'],
-    hasInternalPage: true
-  },
+
   {
     id: 'ai-driveai',
     title: "DriveAI",
@@ -683,25 +673,7 @@ export const CASE_STUDIES: Record<string, CaseStudyContent> = {
     ],
     uiGallery: [],
   },
-  'ai-zia-image': {
-    id: 'ai-zia-image',
-    title: "ZIA-Image: Experimental Image Generation Model",
-    role: "AI Engineer",
-    overview: "A lightweight diffusion model setup optimized for specific hardware limits, focusing on latent patch refinement.",
-    context: "ZIA-Image was built to explore generative boundaries outside of the massive foundational model sphere, trying to compress and optimize the diffusion steps using targeted aesthetic gradients.",
-    techStack: [
-      { category: "Model", tools: ["PyTorch", "Diffusers"] },
-      { category: "Optimization", tools: ["Latent Distillation"] }
-    ],
-    aiStructure: {
-      problem: "Standard text-to-image models are too large to train or effectively fine-tune locally without massive compute.",
-      approach: "Implement a recursive latent patch painter and constrained training environment to distill aesthetic capabilities into a smaller footprint.",
-      architecture: "Custom Autoencoder with iterative state encodings in the diffusion UNet backbone.",
-      experiment: "Trained over several weeks with a highly curated aesthetic dataset, experimenting with progressive generation.",
-      results: "Capable of generating specific stylized assets at a fraction of the compute cost.",
-      whatFailed: "Struggles with high-frequency details leading to artifacting in complex textures."
-    }
-  },
+
   'ai-driveai': {
     id: 'ai-driveai',
     title: "DriveAI: AI Automotive Assistant",

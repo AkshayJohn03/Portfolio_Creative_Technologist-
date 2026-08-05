@@ -164,7 +164,6 @@ export const GlobotelVisuals: React.FC = () => {
                             <Globe className="text-blue-300" size={32} />
                             <div>
                                 <h2 className="text-3xl sm:text-4xl font-serif font-bold text-white">GloboTel</h2>
-                                <p className="text-blue-300 text-sm font-bold uppercase tracking-widest">Service Blueprint V1.0</p>
                             </div>
                         </div>
                         <p className="text-white/80 max-w-xl text-sm leading-relaxed mb-6">
@@ -187,7 +186,7 @@ export const GlobotelVisuals: React.FC = () => {
                         </a>
                         <div className="px-6 py-3 bg-white/10 border border-white/20 rounded-xl text-center">
                             <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Engagement</p>
-                            <p className="text-sm font-bold text-white">EY · Senior Staff Designer</p>
+                            <p className="text-sm font-bold text-white">Senior Staff Designer</p>
                         </div>
                     </div>
                 </div>

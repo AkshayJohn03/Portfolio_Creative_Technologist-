@@ -346,31 +346,7 @@ const CaseStudy: React.FC<CaseStudyProps> = ({ onBack, projectId, onOpenCaseStud
           </RevealOnScroll>
         )}
 
-        {/* Gallery - Only show if there are images left */}
-        {data.uiGallery && data.uiGallery.length > 0 && (
-          <RevealOnScroll delay={300}>
-            <section className="mb-32">
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900 dark:text-white mb-10 text-center">Visual Benchmarks</h2>
-              <div className="flex gap-6 overflow-x-auto pb-10 snap-x scrollbar-none px-4 -mx-4">
-                {data.uiGallery.map((item, idx) => (
-                  <div key={idx} className="min-w-[320px] sm:min-w-[400px] snap-center group">
-                    <div className="bg-gray-100 dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl border border-black/5 dark:border-white/5 aspect-video relative mb-6 transition-all duration-500 hover:-translate-y-2">
-                      <img
-                        src={item.imageUrl}
-                        alt={item.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    </div>
-                    <div className="px-2">
-                      <h4 className="text-lg font-bold text-accent mb-2">{item.title}</h4>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 font-light leading-relaxed">{item.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </RevealOnScroll>
-        )}
+
 
         {/* Future Work */}
         {data.futureWork && (

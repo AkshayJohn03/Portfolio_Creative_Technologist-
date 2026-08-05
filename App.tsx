@@ -13,7 +13,7 @@ import VisualWorks from './components/VisualWorks';
 import IdentityLayer from './components/IdentityLayer';
 import AIExperiments from './components/AIExperiments';
 import FlagshipSystems from './components/FlagshipSystems';
-import EvolutionTimeline from './components/EvolutionTimeline';
+
 
 
 const App: React.FC = () => {
@@ -86,14 +86,13 @@ const App: React.FC = () => {
             <main className="relative z-10">
               <Hero />
               <IdentityLayer />
-              <EvolutionTimeline />
+              <Skills />
               <FlagshipSystems onOpenCaseStudy={handleOpenCaseStudy} />
               <PortfolioSection
                 onOpenCaseStudy={handleOpenCaseStudy}
                 onOpenVisualWorks={handleOpenVisualWorks}
               />
               <AIExperiments />
-              <Skills />
               <About />
               <AIChat />
             </main>
