@@ -14,7 +14,7 @@ import IdentityLayer from './components/IdentityLayer';
 import AIExperiments from './components/AIExperiments';
 import FlagshipSystems from './components/FlagshipSystems';
 import EvolutionTimeline from './components/EvolutionTimeline';
-import SplashScrollSequence from './components/SplashScrollSequence';
+
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
@@ -69,8 +69,7 @@ const App: React.FC = () => {
 
   return (
     <div className={`${theme}`}>
-      {/* Splash is always above — sticky scroll, re-enterable from main content */}
-      {activeView === 'home' && <SplashScrollSequence />}
+
 
       <div className="bg-gray-50 dark:bg-dark min-h-screen text-gray-900 dark:text-white selection:bg-accent selection:text-white relative transition-all duration-500 ease-in-out">
         <NeuralBackground theme={theme} />
