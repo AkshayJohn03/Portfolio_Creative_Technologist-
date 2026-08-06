@@ -120,9 +120,14 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onOpenCaseStudy, on
       <div className="container mx-auto px-5 sm:px-8 max-w-7xl">
         <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end mb-12 sm:mb-20 gap-8">
           <div className="max-w-xl">
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif font-bold mb-4 sm:mb-6 text-gray-900 dark:text-white leading-tight">
-              Selected Works
-            </h2>
+            <div className="flex items-center gap-3 mb-4 sm:mb-6 flex-wrap">
+              <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif font-bold text-gray-900 dark:text-white leading-tight">
+                Selected Works
+              </h2>
+              <span className="px-2.5 py-1 text-xs font-semibold rounded-md border border-purple-500/30 bg-purple-500/10 text-purple-400 uppercase tracking-wider">
+                Functional
+              </span>
+            </div>
             <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg">
               A fusion of strategic visual storytelling, pixel-perfect digital interaction, and AI innovation.
             </p>

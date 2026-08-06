@@ -5,9 +5,9 @@ import { Brain, Code, Cpu, Sparkles, UserCheck } from 'lucide-react';
 const IdentityLayer: React.FC = () => {
     const cards = [
         {
-            title: 'AI Systems',
-            description: 'Building custom small language models, trading algorithms, and evaluating foundation models for specific operational constraints.',
-            icon: <Brain size={24} className="mb-4 text-purple-400" />,
+            title: 'Human–AI Interaction',
+            description: 'Designing conversational systems, latent interfaces, and workflows that gracefully bridge complex AI capabilities with human intuition.',
+            icon: <UserCheck size={24} className="mb-4 text-green-400" />,
             link: '#work'
         },
         {
@@ -17,21 +17,27 @@ const IdentityLayer: React.FC = () => {
             link: '#work'
         },
         {
-            title: 'Quantitative & R&D',
-            description: 'Developing data-driven models for intraday forecasting and researching embodied intelligence and geometric physics engines.',
-            icon: <Cpu size={24} className="mb-4 text-cyan-400" />,
-            link: '#work'
-        },
-        {
-            title: 'Human–AI Interaction',
-            description: 'Designing conversational systems, latent interfaces, and workflows that gracefully bridge complex AI capabilities with human intuition.',
-            icon: <UserCheck size={24} className="mb-4 text-green-400" />,
+            title: 'End-to-End Product Design',
+            description: 'Architecting comprehensive product experiences from early UX research and wireframing to high-fidelity design systems and scalable frontend handoffs.',
+            icon: <Code size={24} className="mb-4 text-blue-400" />,
             link: '#work'
         },
         {
             title: 'Generative Media',
             description: 'Leveraging diffusion models, prompt engineering, and visual latent spaces for generating functional assets and storyboards.',
-            icon: <Code size={24} className="mb-4 text-pink-400" />,
+            icon: <Sparkles size={24} className="mb-4 text-pink-400" />,
+            link: '#work'
+        },
+        {
+            title: 'Quantitative R&D',
+            description: 'Developing data-driven models for intraday forecasting and researching embodied intelligence and geometric physics engines.',
+            icon: <Cpu size={24} className="mb-4 text-cyan-400" />,
+            link: '#work'
+        },
+        {
+            title: 'AI Systems',
+            description: 'Building custom small language models, trading algorithms, and evaluating foundation models for specific operational constraints.',
+            icon: <Brain size={24} className="mb-4 text-purple-400" />,
             link: '#work'
         }
     ];

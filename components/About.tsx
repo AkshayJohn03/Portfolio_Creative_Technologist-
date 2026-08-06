@@ -26,7 +26,7 @@ const About: React.FC = () => {
               <p className="text-accent font-bold tracking-[0.2em] uppercase text-xs sm:text-sm mb-6">Creative Technologist Ai, Lead Product Designer</p>
 
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-base sm:text-lg mb-6 font-light">
-                Creative Technologist and Senior Product Designer with 7+ years of experience crafting user-centered digital products, visual systems, and motion-driven experiences. My work bridges design leadership with AI system development, translating complex machine intelligence into intuitive product interfaces.
+                Creative Technologist and Senior Product Designer with 8+ years of experience crafting user-centered digital products, visual systems, and motion-driven experiences. My work bridges design leadership with AI system development, translating complex machine intelligence into intuitive product interfaces.
               </p>
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-base sm:text-lg font-light">
                 I operate at the intersection of design, engineering, and artificial intelligence, building scalable experiences that combine human insight with advanced technology. From enterprise product design to experimental AI systems, I focus on creating solutions where usability, intelligence, and innovation converge.

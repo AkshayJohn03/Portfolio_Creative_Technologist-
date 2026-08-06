@@ -33,6 +33,9 @@ const FlagshipSystems: React.FC<FlagshipSystemsProps> = ({ onOpenCaseStudy }) =>
                         <h2 className="text-3xl sm:text-5xl font-serif font-bold text-gray-900 dark:text-white">
                             Flagship Systems
                         </h2>
+                        <span className="px-2.5 py-1 text-xs font-semibold rounded-md border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 uppercase tracking-wider">
+                            Technical
+                        </span>
                     </div>
                     <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg font-light leading-relaxed">
                         Major architectural experiments and fully-engineered AI models. Complex full-stack engineering meets advanced cognitive design.

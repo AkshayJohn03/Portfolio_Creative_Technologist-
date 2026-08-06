@@ -14,25 +14,25 @@ const Hero: React.FC = () => {
       <div className="absolute top-[10%] left-[5%] sm:left-[10%] w-64 sm:w-96 h-64 sm:h-96 bg-purple-500/10 dark:bg-purple-900/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[80px] sm:blur-[120px] animate-pulse pointer-events-none"></div>
       <div className="absolute bottom-[10%] right-[5%] sm:right-[10%] w-64 sm:w-96 h-64 sm:h-96 bg-indigo-500/10 dark:bg-indigo-900/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[80px] sm:blur-[120px] animate-pulse animation-delay-2000 pointer-events-none"></div>
 
-      <div className="z-10 text-center max-w-6xl mx-auto w-full pt-20 md:pt-0">
-        <div className="mb-6 sm:mb-8 inline-block px-4 py-2 rounded-full border border-black/5 dark:border-white/10 bg-white/40 dark:bg-white/5 backdrop-blur-sm animate-fade-in-up">
+      <div className="z-10 text-center max-w-6xl mx-auto w-full pt-20 md:pt-0 pointer-events-none">
+        <div className="mb-6 sm:mb-8 inline-block px-4 py-2 rounded-full border border-black/5 dark:border-white/10 bg-white/40 dark:bg-white/5 backdrop-blur-sm animate-fade-in-up pointer-events-auto">
           <p className="text-accent font-bold tracking-[0.25em] text-[10px] sm:text-xs lg:text-sm uppercase">
-            Creative Technologist • AI Proof of Concepts • Experimental Engineer
+            Creative Technologist • Senior Product Designer
           </p>
         </div>
 
         <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-serif font-bold leading-[1.1] sm:leading-tight mb-6 sm:mb-10 text-gray-900 dark:text-white transition-all duration-500 tracking-tighter">
-          Bridging Intelligence <br className="hidden sm:block" />
+          <span className="text-gray-900 dark:text-white">Akshay John</span> <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-br from-gray-700 via-gray-900 to-black dark:from-white dark:via-gray-400 dark:to-gray-600">
-            & Human Design.
+            Bridging Intelligence & Human Design.
           </span>
         </h1>
 
-        <p className="text-gray-600 dark:text-gray-400 text-base sm:text-lg md:text-xl lg:text-2xl max-w-2xl lg:max-w-3xl mx-auto mb-10 sm:mb-14 leading-relaxed font-light px-4 sm:px-0">
+        <p className="text-gray-600 dark:text-gray-400 text-base sm:text-lg md:text-xl lg:text-2xl max-w-2xl lg:max-w-3xl mx-auto mb-10 sm:mb-14 leading-relaxed font-light px-4 sm:px-0 pointer-events-auto">
           Bridging creative vision, technical feasibility, and AI innovation. Where aesthetic precision meets functional clarity.
         </p>
 
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-5 sm:gap-8 w-full max-w-[280px] sm:max-w-none mx-auto px-2 sm:px-0">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-5 sm:gap-8 w-full max-w-[280px] sm:max-w-none mx-auto px-2 sm:px-0 pointer-events-auto">
           <a
             href="#work"
             className="w-full sm:w-auto px-12 py-5 sm:px-14 sm:py-6 bg-gray-900 dark:bg-white text-white dark:text-dark font-bold rounded-full hover:bg-gray-700 dark:hover:bg-gray-200 hover:scale-[1.03] active:scale-95 transition-all duration-300 text-center shadow-lg dark:shadow-white/10 min-w-[220px] sm:min-w-[240px]"

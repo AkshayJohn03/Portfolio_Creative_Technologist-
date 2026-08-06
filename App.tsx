@@ -16,6 +16,8 @@ import FlagshipSystems from './components/FlagshipSystems';
 
 
 
+import KeyAchievements from './components/KeyAchievements';
+
 const App: React.FC = () => {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [activeView, setActiveView] = useState<'home' | 'case-study' | 'visual-works'>('home');
@@ -86,6 +88,7 @@ const App: React.FC = () => {
             <main className="relative z-10">
               <Hero />
               <IdentityLayer />
+              <KeyAchievements />
               <Skills />
               <FlagshipSystems onOpenCaseStudy={handleOpenCaseStudy} />
               <PortfolioSection
