@@ -11,7 +11,7 @@ interface FlagshipSystemsProps {
 const FlagshipSystems: React.FC<FlagshipSystemsProps> = ({ onOpenCaseStudy }) => {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-    const flagshipIds = ['ai-zia', 'ai-rift', 'ai-1'];
+    const flagshipIds = ['ai-zia', 'ai-rift', 'ai-1', 'brandmorph-studio', 'quorum'];
     const flagshipProjects = flagshipIds
         .map(id => PROJECTS.find(p => p.id === id))
         .filter((p): p is Project => p !== undefined);
@@ -52,11 +52,16 @@ const FlagshipSystems: React.FC<FlagshipSystemsProps> = ({ onOpenCaseStudy }) =>
                                 <img
                                     src={project.imageUrl || 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=600&auto=format&fit=crop'}
                                     alt={project.title}
+                                    onError={(e) => {
+                                        (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop';
+                                    }}
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                                 <div className="absolute top-3 right-3 bg-black/80 dark:bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-black/20 dark:border-white/10 opacity-0 group-hover:opacity-100 transition-opacity z-20">
-                                    <span className="text-[10px] text-white font-bold tracking-widest uppercase">Tech Doc</span>
+                                    <span className="text-[10px] text-white font-bold tracking-widest uppercase">
+                                        {project.hasInternalPage ? 'Tech Doc' : (project.link?.includes('github.com') ? 'GitHub' : 'Project')}
+                                    </span>
                                 </div>
                             </div>
                             <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white flex items-center justify-between group-hover:text-accent transition-colors">

@@ -111,7 +111,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose, o
                   onClick={handleViewCaseStudy}
                   className="inline-flex items-center gap-3 bg-gray-900 dark:bg-white text-white dark:text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-700 dark:hover:bg-gray-200 hover:scale-[1.02] transition-all duration-300 w-full justify-center group"
                 >
-                  {project.hasInternalPage ? 'Open Case Study' : 'View External Project'}
+                  {project.hasInternalPage ? 'Open Case Study' : (project.link?.includes('github.com') ? 'View on GitHub' : 'View External Project')}
                   {project.hasInternalPage ? (
                     <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                   ) : (

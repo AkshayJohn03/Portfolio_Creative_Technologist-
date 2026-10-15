@@ -39,7 +39,7 @@ EXPERIENCE:
 PROJECTS (AI & Design):
 - Project RIFT: Embodied Intelligence Research - exploring anticipation and geometric commitment.
 - ZIA: Custom Lightweight LLM / SLM trained on consumer grade graphic card.
-- Aria-X: AI Intraday Trading System visualization and AI dashboards.
+- Aria-XaT: AI Intraday Trading System visualization and AI dashboards.
 - DriveAI: Voice-Enabled AI Assistant with conversational UX flows.
 `;
 
@@ -48,7 +48,7 @@ export const PROJECTS: Project[] = [
     id: 'ai-zia',
     title: "ZIA: LLM From Scratch",
     category: ProjectCategory.AI_ML,
-    description: 'A 60M parameter Small Language Model (SLM) engineered from the ground up on consumer hardware.',
+    description: '37.4M parameter Small Language Model (SLM) with a custom 60k BPE tokenizer, engineered from scratch on consumer hardware.',
     fullDescription: 'Training a custom transformer locally to understand the end-to-end mechanics of LLMs. From custom BPE tokenizers to mixed-training regimes, ZIA explores how small models learn knowledge vs grammar.',
     imageUrl: './thumb_Ziallm.jpg',
     link: '#',
@@ -68,7 +68,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'ai-1',
-    title: "Aria-X6T: AI Trading System",
+    title: "Aria-XaT: AI Trading System",
     category: ProjectCategory.AI_ML,
     description: 'An AI-powered options trading platform for NIFTY50, utilizing Deep Learning.',
     fullDescription: 'Hybrid Deep Learning: Conv1D layers for localized micro-trends, Stacked LSTM for long-term sequential dependencies.',
@@ -76,6 +76,28 @@ export const PROJECTS: Project[] = [
     link: '#',
     tags: ['Trading', 'PyTorch', 'TimeSeries', 'Deep Learning'],
     hasInternalPage: true
+  },
+  {
+    id: 'brandmorph-studio',
+    title: "BrandMorph Studio",
+    category: ProjectCategory.AI_ML,
+    description: "Enterprise Deck-to-Design-System Platform. Decompiles legacy PowerPoint decks (.pptx) into a W3C DTCG design-token AST and interactive React 19 + Tailwind v4 studio.",
+    fullDescription: "Enterprise Deck-to-Design-System Platform. Decompiles legacy PowerPoint decks (.pptx) into a W3C DTCG design-token AST and interactive React 19 + Tailwind v4 studio.",
+    imageUrl: './thumb_brandmorph.svg',
+    link: 'https://github.com/AkshayJohn03/ChangeMy_powerpoint',
+    tags: ['Design Tokens', 'AST Parsing', 'React 19', 'Tailwind v4', 'PowerPoint Compiler'],
+    hasInternalPage: false
+  },
+  {
+    id: 'quorum',
+    title: "Quorum",
+    category: ProjectCategory.AI_ML,
+    description: "Agentic Focus Group in a Box (Qloo Hackathon). Multi-agent product validation interface grounded in Qloo's 250M-entity taste graph issuing GO / PIVOT / NO-GO verdicts.",
+    fullDescription: "Agentic Focus Group in a Box (Qloo Hackathon). Multi-agent product validation interface grounded in Qloo's 250M-entity taste graph issuing GO / PIVOT / NO-GO verdicts.",
+    imageUrl: './thumb_quorum.svg',
+    link: 'https://github.com/AkshayJohn03/QuorumApp',
+    tags: ['Multi-Agent AI', 'Qloo Taste Graph', 'Product Validation', 'Autonomous LLMs'],
+    hasInternalPage: false
   },
 
   {
@@ -188,10 +210,10 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
     location: "Bangalore, India",
     period: "Nov 2023 – Present",
     description: [
+      "Lead product and visual design for North American and European Fortune 500 pursuits, reporting to the VP of Sales. Redesigned real-time IoT fleet telematics dashboards for Phillips Connect (supporting 5x faster response times and 3x faster device onboarding), formulated POS modernization and logistics flows for Home Depot and Nordstrom, architected a student portal framework for 15,000+ active users, and pioneered an AI-assisted Figma-to-React prototyping pipeline using Cursor IDE, Claude, and Figma MCP that reduced handoff cycles by 3x.",
       "Led UX and visual design initiatives for enterprise applications, collaborating with stakeholders for user-centered digital solutions.",
       "Created high-fidelity prototypes, dashboards, and interaction flows to support decision-making and validate concepts.",
-      "Contributed to AI-assisted interface explorations and conversational UX concepts via rapid prototyping.",
-      "Experimenting with generative AI, workflows and similar fancy concepts required for creative technologist."
+      "Contributed to AI-assisted interface explorations and conversational UX concepts via rapid prototyping."
     ]
   },
   {
@@ -250,7 +272,7 @@ export const CASE_STUDIES: Record<string, CaseStudyContent> = {
 
     aiStructure: {
       problem: "Heavy reliance on pre-trained models limits fundamental understanding of LLM architecture mechanics and their baseline behavior before instruction tuning.",
-      approach: "Engineer a lightweight 60M parameter SLM from scratch on a completely local environment using consumer-grade hardware (GTX 1050 Ti), manually implementing tokenization, model blocks, and training loops.",
+      approach: "Engineer a lightweight 37.4M parameter Small Language Model (SLM) with a custom 60k BPE tokenizer, engineered from scratch on consumer hardware (GTX 1050 Ti), manually implementing tokenization, model blocks, and training loops.",
       architecture: "37.4M parameter decoder-only Transformer with 8 layers, 384 d_model dimension, and 6 heads. Weight tying enabled between Embedding and LM head. Custom 60k BPE tokenizer.",
       experiment: "Trained using 15M samples (Wikipedia, FineWeb, ShareGPT) over 400+ hours. Implemented progressive context scaling using RoPE embeddings from 4k to 16k context windows.",
       results: "Achieved validation loss of 1.34 at 4k context and 1.61 at 16k context. Successfully learned syntactic structures and proper grammar formatting.",

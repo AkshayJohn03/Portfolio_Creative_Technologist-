@@ -27,7 +27,7 @@ export const intentData = [
   {
     intent: "akkodis_role",
     keywords: ["akkodis", "current role", "current job", "what do you do now", "present position"],
-    response: "I currently serve as a Lead Executive in Product & Visual Design at Akkodis. My role involves leading UX and visual design initiatives for major enterprise applications, creating high-fidelity prototypes and dashboards, and actively contributing to AI-assisted interface explorations. I work directly with stakeholders to ensure our digital solutions are highly effective and user-centered."
+    response: "At Akkodis, I lead product and visual design for North American and European Fortune 500 pursuits, reporting directly to the VP of Sales. My key achievements include redesigning real-time IoT fleet telematics dashboards for Phillips Connect (5x faster response times, 3x faster device onboarding), formulating POS modernization and logistics flows for Home Depot and Nordstrom, architecting a student portal framework for 15,000+ active users, and pioneering an AI-assisted Figma-to-React prototyping pipeline using Cursor IDE, Claude, and Figma MCP that reduced handoff cycles by 3x."
   },
   {
     intent: "wipro_role",
@@ -37,7 +37,7 @@ export const intentData = [
   {
     intent: "zia_project",
     keywords: ["zia", "llm from scratch", "slm", "custom model", "language model"],
-    response: "ZIA is a passion project where I built a 60M parameter Small Language Model (SLM) entirely from scratch on consumer hardware. Instead of just calling an API, I wanted to understand the absolute fundamentals—from writing custom BPE tokenizers to managing multi-stage dense training loops. It proves my deep foundational grasp of how transformers actually learn."
+    response: "ZIA is a passion project where I built a 37.4M parameter Small Language Model (SLM) with a custom 60k BPE tokenizer, engineered from scratch on consumer hardware. Instead of just calling an API, I wanted to understand the absolute fundamentals—from writing custom BPE tokenizers to managing multi-stage dense training loops. It proves my deep foundational grasp of how transformers actually learn."
   },
   {
     intent: "rift_project",
@@ -46,8 +46,18 @@ export const intentData = [
   },
   {
     intent: "aria_project",
-    keywords: ["aria", "aria-x", "aria-x6t", "trading", "nifty50", "finance", "options"],
+    keywords: ["aria", "aria-x", "aria-xat", "aria-x6t", "trading", "nifty50", "finance", "options"],
     response: "Aria-XaT is an AI-powered options trading platform I designed for NIFTY50. It uses a sophisticated hybrid deep learning architecture, combining Conv1D layers for localized micro-trends and Stacked LSTMs with Attention Mechanisms to predict short-term price levels and dictate optimal option strikes."
+  },
+  {
+    intent: "brandmorph_project",
+    keywords: ["brandmorph", "brandmorph studio", "powerpoint", "pptx", "design system", "dtcg", "tokens"],
+    response: "BrandMorph Studio is an Enterprise Deck-to-Design-System Platform. It decompiles legacy PowerPoint decks (.pptx) into a W3C DTCG design-token AST and interactive React 19 + Tailwind v4 studio, eliminating design-token debt and automating enterprise theme transitions."
+  },
+  {
+    intent: "quorum_project",
+    keywords: ["quorum", "focus group", "qloo", "hackathon", "taste graph", "validation"],
+    response: "Quorum is an Agentic Focus Group in a Box built for the Qloo Hackathon. It is a multi-agent product validation interface grounded in Qloo's 250M-entity taste graph that issues high-confidence GO / PIVOT / NO-GO verdicts on products and features before launch."
   },
   {
     intent: "driveai_project",
